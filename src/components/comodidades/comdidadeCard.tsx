@@ -42,7 +42,7 @@ export function ComodidadeCardComponent() {
         />
         <h1 className="absolute w-full text-2xl text-black top-[2.6rem] left-8">COMODIDADES</h1>
       </div>
-      <div className="flex mt-8 gap-x-5">
+      <div className="flex mt-8 gap-x-5 flex-1">
         <div className="space-y-3">
           <ItemCardComponent
             title="Wifi"
