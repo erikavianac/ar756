@@ -6,7 +6,7 @@ import { ImageComponent } from "../utils/image";
 export function HomeHeaderComponent() {
   const { replace } = useRouter();
   return (
-    <header className="absolute left-0 flex justify-center">
+    <header className="z-40 absolute  flex items-center justify-center w-full px-3 py-1 md:justify-start md:py-3 lg:px-14">
       <ImageComponent
         alt={"logo"}
         h={"h-[6.25rem] md:h-[9.375tem]"}

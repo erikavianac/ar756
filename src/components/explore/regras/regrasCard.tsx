@@ -44,9 +44,9 @@ export function RegrasCardComponent({
 
   return (
     <div
-      className="overflow-hidden  md:max-w-[600px] md:min-w-[600px] min-w-[380px]  md:max-h-[95%] md:min-h-[95%]
-    relative rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
-    bg-white 
+      className="overflow-hidden max-w-screen min-w-screen min-h-screen  md:max-w-[600px] rounded-md w-full   md:max-h-[95%] md:min-h-[95%]
+      relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
+      bg-white 
    "
     >
       <CloseButtonComponent handleCloseModal={handleCloseRegrasModal} />
@@ -92,7 +92,7 @@ export function RegrasCardComponent({
         >
           <Scrollbars
             style={{
-              width: isSmallScreen ? "90%" : "100%",
+              width: "100%",
               height: isSmallScreen ? 550 : 600,
               gap: 20,
             }}
@@ -131,7 +131,7 @@ export function RegrasCardComponent({
       {ar756ModalMode.includes("REGRAS") && (
         <Scrollbars
           style={{
-            width: isSmallScreen ? "90%" : "100%",
+            width: "100%",
             height: 500,
             gap: 20,
           }}
