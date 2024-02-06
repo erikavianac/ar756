@@ -13,7 +13,7 @@ export function MobileCarroucelComopnent() {
   return (
     <motion.div
       ref={caroucel}
-      className="flex flex-col gap-y-4  my-10"
+      className="flex flex-col gap-y-4  my-10 overflow-hidden"
     >
       <motion.div
         initial={{
