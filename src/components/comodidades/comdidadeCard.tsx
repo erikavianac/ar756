@@ -34,10 +34,6 @@ export function ComodidadeCardComponent() {
           />
         </div>
         <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: '100%' }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true, amount: 'some' }}
           className="border-[1px] border-black  h-0 "
         />
         <h1 className="absolute w-full text-2xl text-black top-[2.6rem] left-8">COMODIDADES</h1>
