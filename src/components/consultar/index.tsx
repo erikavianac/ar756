@@ -76,7 +76,7 @@ export function ConsultarFormComponent({
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
       encType="multipart/form-data"
-      className="overflow-hidden mx-w-screen min-w-screen min-h-screen rounded-none md:max-w-[600px] max-w-[390px] w-full   md:max-h-[95%] md:min-h-[95%]
+      className="overflow-hidden mx-w-[95%] min-w-[95%] min-h-[95%] rounded-md md:max-w-[600px] max-w-[390px] w-full   md:max-h-[95%] md:min-h-[95%]
         relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
         bg-white z-50"
     >
