@@ -23,8 +23,8 @@ export function VideobgComponent() {
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
       <video
-           className="max-h-full min-h-screen min-w-screen object-cover z-0"
-          src={"https://d2tb61r1ltgmn5.cloudfront.net/videoBgMobile.mp4"}
+           className=" min-h-screen min-w-screen object-fill z-0"
+          src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_v01 (1).mp4"}
           autoPlay
           loop
           muted

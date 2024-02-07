@@ -24,7 +24,7 @@ export function CardComponent({ className, w, h, children }: CardProps) {
   };
 
   return (
-    <AnimatedVerticalComponent
+    <div
       className={`bg-white w-[430px] min-h-[200px] ${w} ${h}  flex flex-col pt-7 pb-10   justify-start items-center gap-y-10 z-30
       ${className}
     `}
@@ -53,6 +53,6 @@ export function CardComponent({ className, w, h, children }: CardProps) {
       >
         CONSULTAR
       </motion.button> */}
-    </AnimatedVerticalComponent>
+    </div>
   );
 }
