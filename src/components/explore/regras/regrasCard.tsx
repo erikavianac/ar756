@@ -44,7 +44,7 @@ export function RegrasCardComponent({
 
   return (
     <div
-      className="overflow-hidden max-w-screen min-w-screen min-h-screen  md:max-w-[600px] rounded-md w-full   md:max-h-[95%] md:min-h-[95%]
+      className="overflow-hidden max-w-[97%] min-w-[97%] min-h-[97%] overflow-y-auto   md:max-w-[600px] rounded-md w-full   md:max-h-[95%] md:min-h-[95%]
       relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
       bg-white 
    "

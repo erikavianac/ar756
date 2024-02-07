@@ -14,7 +14,7 @@ interface FaqProps {
 export default function FaqComponent({ handleCloseFaqModal,questionList }: FaqProps) {
   const [questionFIlter, setQuestionFIlter] = useState<string>("");
   return (
-    <div className="bg-white  w-screen h-full   relative  rounded-md   md:rounded-md py-2 px-5 flex flex-col gap-y-3  z-30  md:mt-2">
+    <div className="bg-white  max-w-[97%] min-w-[97%] min-h-[97%]  overflow-y-auto   relative  rounded-md   md:rounded-md py-2 px-5 flex flex-col gap-y-3  z-30  md:mt-2">
       <div className="flex items-center justify-center w-full">
         <ImageComponent
           alt={"logo"}
