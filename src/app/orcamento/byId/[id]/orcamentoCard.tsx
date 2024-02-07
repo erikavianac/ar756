@@ -24,6 +24,9 @@ import { opacityHidde, opacityShow, shakeAnimation } from "@/constants";
 import { ImageComponent } from "@/components/utils/image";
 import Link from "next/link";
 import { updateOrcamentoActionServer } from "@/action/updateOrcamento";
+import infoOrcamentoinfo from "./inforcamentoinfo";
+import InfoOrcamentoinfo from "./inforcamentoinfo";
+import LoadingOrcamentoComponent from "./loadingOrcamento";
 
 interface OrcamentoCardProps {
   orcamentoByid: BugdetType | undefined;
@@ -122,9 +125,11 @@ export default function OrcamentoCardComponent({
   const aprovadoWatch = watch("aprovadoCliente");
 
   useEffect(() => {
+    setIsLoading(true)
     if (orcamentoByid?.id) {
       setValue("orcamentoId", orcamentoByid?.id);
     }
+    setIsLoading(false)
   }, [orcamentoByid?.id, setValue]);
 
   useEffect(() => {
@@ -158,6 +163,8 @@ export default function OrcamentoCardComponent({
       setduracaoFesta(() => date2.diff(date1, "hours"));
     }
   }, [orcamentoByid]);
+
+  
 
   return (
     <motion.div
@@ -211,52 +218,11 @@ export default function OrcamentoCardComponent({
             </p>
           </div>
         </div>
-        <div className="flex flex-col flex-1 mt-10 gap-y-2">
-          <div className="flex items-center justify-between w-full gap-x-3 ">
-            <p className="text-[14px] md:text-[18px] ">Valor base:</p>
-            <CurrencyFormat
-              value={orcamentoByid?.valorBase}
-              displayType={"text"}
-              thousandSeparator={"."}
-              decimalSeparator={","}
-              prefix={"R$ "}
-            />
-          </div>
-          {orcamentoByid?.qtdHorasExtras ? (
-            <div className="flex items-center justify-between w-full gap-x-3 ">
-              <p className="text-[14px] md:text-[18px] ">
-                Horas extras ({orcamentoByid?.qtdHorasExtras}hrs):
-              </p>
-              <CurrencyFormat
-                value={
-                  orcamentoByid?.valorHoraExtra * orcamentoByid?.qtdHorasExtras
-                }
-                displayType={"text"}
-                thousandSeparator={"."}
-                decimalSeparator={","}
-                prefix={"R$ "}
-              />
-            </div>
-          ) : null}
-          {orcamentoByid?.seguranca && (
-            <div className="flex items-center justify-between w-full gap-x-3 ">
-              <p className="text-[14px] md:text-[18px] ">Seguranca</p>
-              <FcCheckmark />
-            </div>
-          )}
-          {orcamentoByid?.recepcionista && (
-            <div className="flex items-center justify-between w-full gap-x-3 ">
-              <p className="text-[14px] md:text-[18px] ">Recepcionista</p>
-              <FcCheckmark />
-            </div>
-          )}
-          {orcamentoByid?.limpeza && (
-            <div className="flex items-center justify-between w-full gap-x-3 ">
-              <p className="text-[14px] md:text-[18px] ">Limpeza</p>
-              <FcCheckmark />
-            </div>
-          )}
-        </div>
+        {
+          orcamentoByid ? 
+          <InfoOrcamentoinfo orcamentoById={orcamentoByid} /> :
+          <LoadingOrcamentoComponent />
+        }
         <div className="flex items-center justify-between w-full mt-10 gap-x-3 ">
           <p>Total:</p>
           <div className="flex space-x-1">
