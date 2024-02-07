@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { BugdetType } from "@/types";
-import  { format } from 'date-fns';
+import { format } from "date-fns";
 import moment from "moment";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import { BiMailSend, BiTrash } from "react-icons/bi";
@@ -96,22 +96,23 @@ export default function OrcamentoCardComponent({
   async function handleOnSubmit(data: CreateAprovaOrcamentoFormData) {
     setIsLoading(true);
     if (data.aprovadoCliente && orcamentoByid) {
-      const aprovarOrcamneto : BugdetType = await updateOrcamentoActionServer({
+      const aprovarOrcamneto: BugdetType = await updateOrcamentoActionServer({
         ...orcamentoByid,
         aprovadoCliente: true,
       });
       if (aprovarOrcamneto.id) {
-        console.log("aprovado")
+        console.log("aprovado");
         seIsSendEmailOrcamentoAprovadoClienteSuccess(true);
       }
     }
     if (data.feedback && orcamentoByid) {
-      const updateFeedbackOrcamento : BugdetType = await updateOrcamentoActionServer({
-        ...orcamentoByid, 
-        feedback: data.feedback,
-      });
+      const updateFeedbackOrcamento: BugdetType =
+        await updateOrcamentoActionServer({
+          ...orcamentoByid,
+          feedback: data.feedback,
+        });
       if (updateFeedbackOrcamento.id) {
-        console.log("feedback")
+        console.log("feedback");
         seIsSendFeedbackEmailSuccess(true);
       }
     }
@@ -150,14 +151,14 @@ export default function OrcamentoCardComponent({
     controlsSuccess,
   ]);
 
-useEffect(() => {
+  useEffect(() => {
     if (orcamentoByid) {
       const date1 = moment(orcamentoByid?.dataInicio);
       const date2 = moment(orcamentoByid.dataFim);
       setduracaoFesta(() => date2.diff(date1, "hours"));
     }
-  }, [orcamentoByid]); 
-  
+  }, [orcamentoByid]);
+
   return (
     <motion.div
       initial={{
@@ -196,7 +197,12 @@ useEffect(() => {
           </div>
           <div className="flex items-center justify-center gap-x-2">
             <AiOutlineClockCircle size={20} />
-            <p className="text-[12px] md:text-sm">{`${orcamentoByid?.dataInicio && format(orcamentoByid?.dataInicio, 'HH:mm')} - ${orcamentoByid?.dataFim && format(orcamentoByid?.dataFim, 'HH:mm')} (${duracaoFesta}hrs)`}</p>
+            <p className="text-[12px] md:text-sm">{`${
+              orcamentoByid?.dataInicio &&
+              format(orcamentoByid?.dataInicio, "HH:mm")
+            } - ${
+              orcamentoByid?.dataFim && format(orcamentoByid?.dataFim, "HH:mm")
+            } (${duracaoFesta}hrs)`}</p>
           </div>
           <div className="flex items-center justify-center gap-x-2">
             <AiOutlineCalendar size={20} />
@@ -393,9 +399,7 @@ useEffect(() => {
                         `}
           />
           <ButtonComponent
-            title={
-              isLoading ? "ENVIANDO" : "ENVIAR" 
-            }
+            title={isLoading ? "ENVIANDO" : "ENVIAR"}
             icon={<BiMailSend size={20} />}
             type="submit"
             onClick={async () => {
@@ -465,7 +469,7 @@ useEffect(() => {
                     `}
           />
           <ButtonComponent
-            title={isLoading ? "ENVIANDO" : "ENVIAR" }
+            title={isLoading ? "ENVIANDO" : "ENVIAR"}
             icon={<BiMailSend size={20} />}
             type="submit"
             onClick={async () => {
@@ -507,7 +511,9 @@ useEffect(() => {
           alt={"logo"}
           h={"h-[130px] md:h-[300px] "}
           w={"w-[180px] md:w-[400px]"}
-          src={"https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"}
+          src={
+            "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"
+          }
           containerClassname={"z-20"}
         />
         <p className="text-[14px] md:text-[20px] font-semibold text-center w-[430px] ">

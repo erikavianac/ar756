@@ -78,7 +78,7 @@ export function ConsultarFormComponent({
       encType="multipart/form-data"
       className="overflow-hidden min-w-[97%] min-h-[97%] rounded-md md:max-w-[600px] max-w-[390px] w-full   md:max-h-[95%] md:min-h-[95%]
         relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
-        bg-white z-50"
+        bg-white z-40"
     >
       <CloseButtonComponent handleCloseModal={handleCloseReservaModal} />
       <h1 className="md:text-[21px] w-full  text-[18px] text-center py-5 ">
