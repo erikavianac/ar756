@@ -28,7 +28,7 @@ export  function ServicosComponents() {
         />
       </div>
       <div className="w-screen h-screen">
-        <video className="h-[613px] w-[100%] object-cover" src={"/assets/video/videoServicos.mp4"} autoPlay loop muted/>
+        <video className="h-[613px] w-[100%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa03_v01.mp4"} autoPlay loop muted/>
       </div>
       <CardComponent
         h="md:h-[413px]"

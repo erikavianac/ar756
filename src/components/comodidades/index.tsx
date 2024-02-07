@@ -20,7 +20,7 @@ export  function ComodidadeComponent() {
   return (
     <SectionComponent>
       <div className="w-screen h-screen">
-        <video className="max-h-[85%] w-[70%] object-cover" src={"/assets/video/videoComodidades.mp4"} autoPlay loop muted/>
+        <video className="max-h-[85%] w-[70%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa02_v01.mp4"} autoPlay loop muted/>
       </div>
       <CardComponent
         h="md:h-[500px]"

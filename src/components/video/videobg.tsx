@@ -15,7 +15,7 @@ export function VideobgComponent() {
       <ShowOnlyOnMobileComponent>
         <video
           className="max-h-full min-h-screen min-w-screen object-cover z-0"
-          src={"/assets/video/videoBg.mp4"}
+          src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_vertical_v01.mp4"}
           autoPlay
           loop
           muted
@@ -23,8 +23,8 @@ export function VideobgComponent() {
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
       <video
-          className="max-h-full min-h-screen min-w-screen object-cover z-0"
-          src={"/assets/video/videoBg.mp4"}
+           className="max-h-full min-h-screen min-w-screen object-cover z-0"
+          src={"https://d2tb61r1ltgmn5.cloudfront.net/videoBgMobile.mp4"}
           autoPlay
           loop
           muted
