@@ -88,7 +88,15 @@ export function ExploreComponent({
         <div className="w-[97%] md:w-[80%] mx-auto flex md:gap-x-10 text-white justify-center items-center flex-col md:flex-row gap-y-4 md:gap-y-0">
           {cardImageList && (
             <>
-              <div onClick={handleOpenRegrasModal}>
+              <div
+                onClick={() => {
+                  if (isSmallScreen) {
+                    push("/regras");
+                  } else {
+                    handleOpenRegrasModal();
+                  }
+                }}
+              >
                 <ExploreCardComponent
                   alt="foto"
                   containerClassname="z-20"
