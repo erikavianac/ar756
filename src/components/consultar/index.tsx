@@ -80,7 +80,7 @@ export function ConsultarFormComponent({
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
       encType="multipart/form-data"
-      className="overflow-hidden shadow-lg rounded-md md:max-w-[600px] max-w-[390px] w-full  my-10  md:max-h-[95%] md:min-h-[95%]
+      className="overflow-hidden rounded-md md:max-w-[600px] max-w-[390px] w-full  my-10  md:max-h-[95%] md:min-h-[95%]
         relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
         bg-white z-40"
     >
