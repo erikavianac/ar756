@@ -9,7 +9,7 @@ export default function FaqItemList({ item }: FaqItemListProps) {
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
   const answerRef = useRef<any>(null);
   const answerHeight = `h-[${answerRef && answerRef?.current?.offsetHeight}px]`;
-  console.log(answerHeight)
+
   return (
     <div
       className={`shadow-lg border-[0.5px]  border-black/25 rounded-md py-2 px-2 flex flex-col gap-y-2 space-x-2 w-full ${isQuestionOpen ? " h-auto" :  " h-[60px] md:h-[40px]"} duration-300`}

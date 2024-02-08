@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageType, QuestionType, TextType } from "@/types";
 import { ExploreCardComponent } from "./card";
 
@@ -8,6 +8,7 @@ import { ModalComponent } from "../utils/modal";
 import { GaleriaCardComponent } from "./galeria/galeriaCard";
 import FaqComponent from "./faq";
 import { RegrasCardComponent } from "./regras/regrasCard";
+import { useRouter } from "next/navigation";
 
 interface ExploreProps {
   imageList: ImageType[];
@@ -54,6 +55,26 @@ export function ExploreComponent({
     setRegrasModal(true);
   }
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const {push} = useRouter()
+  // Função para verificar se a tela é pequena ou grande
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
+  };
+
+  // Executa a função ao montar o componente
+  useEffect(() => {
+    checkScreenSize();
+
+    // Adiciona um listener para verificar quando a tela for redimensionada
+    window.addEventListener("resize", checkScreenSize);
+
+    // Remove o listener ao desmontar o componente para evitar vazamentos de memória
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
   return (
     <>
       <div className=" text-[#555D2D] w-full h-full flex flex-col  justify-center pb-5 items-start gap-y-8 pt-8  md:gap-y-16  md:-mt-16">
@@ -75,7 +96,13 @@ export function ExploreComponent({
                   title="SOBRE E REGRAS"
                 />
               </div>
-              <div onClick={handleOpenFaqModal}>
+              <div onClick={() => {
+                if(isSmallScreen){
+                  push("/faq")
+                }else{
+                  handleOpenFaqModal()
+                }
+              }}>
                 <ExploreCardComponent
                   alt="foto"
                   containerClassname="z-20"
