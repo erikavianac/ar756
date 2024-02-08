@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import CloseButtonComponent from "../utils/closeButton";
@@ -15,9 +16,10 @@ import { BiMailSend } from "react-icons/bi";
 import { timesVisitAvailabel } from "@/constants/horarioLista";
 import { ImageComponent } from "../utils/image";
 import { ImageType } from "@/types";
+import { useRouter } from "next/navigation";
 
 interface ConsultarFromProps {
-  handleCloseReservaModal: () => void;
+  handleCloseReservaModal?: () => void;
 }
 
 export function ConsultarFormComponent({
@@ -49,6 +51,8 @@ export function ConsultarFormComponent({
   const [formMode, setformMode] = useState<"Pessoais" | "Evento" | "Success">(
     "Pessoais"
   );
+
+  const {replace} = useRouter()
   const [imageList, setImageList] = useState<ImageType[] | null>(null);
   const eventoForm = formMode.includes("Evento");
   const pessoaisForm = formMode.includes("Pessoais");
@@ -76,11 +80,13 @@ export function ConsultarFormComponent({
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
       encType="multipart/form-data"
-      className="overflow-hidden min-w-[97%] min-h-[97%] rounded-md md:max-w-[600px] max-w-[390px] w-full   md:max-h-[95%] md:min-h-[95%]
+      className="overflow-hidden shadow-lg rounded-md md:max-w-[600px] max-w-[390px] w-full  my-10  md:max-h-[95%] md:min-h-[95%]
         relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
         bg-white z-40"
     >
+      {handleCloseReservaModal &&
       <CloseButtonComponent handleCloseModal={handleCloseReservaModal} />
+      }
       <h1 className="md:text-[21px] w-full  text-[18px] text-center py-5 ">
         {isSendMailSuccess ? "" : "CONSULTAR ORCAMENTO"}
       </h1>

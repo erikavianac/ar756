@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ValueType } from "@/types";
 import { ButtonComponent } from "../utils/button";
 import { SectionComponent } from "../utils/section";
@@ -7,9 +7,29 @@ import { ModalComponent } from "../utils/modal";
 import { ConsultarFormComponent } from "../consultar";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { ShowOnlyOnWebComponent } from "../utils/showOnlyOnWeb";
+import { useRouter } from "next/navigation";
 
 export function VideobgComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const {replace,push} = useRouter()
+  // Função para verificar se a tela é pequena ou grande
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
+  };
+
+  // Executa a função ao montar o componente
+  useEffect(() => {
+    checkScreenSize();
+
+    // Adiciona um listener para verificar quando a tela for redimensionada
+    window.addEventListener("resize", checkScreenSize);
+
+    // Remove o listener ao desmontar o componente para evitar vazamentos de memória
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
@@ -43,7 +63,13 @@ export function VideobgComponent() {
            tracking-[0.30rem] text-white rounded-md bg-black/50
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
           `}
-        onClick={() => setisModalOpen(true)}
+        onClick={() => {
+          if(isSmallScreen){
+            push("/consultar")
+          }else{
+            setisModalOpen(true)
+          }
+        }}
       />
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
