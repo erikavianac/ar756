@@ -6,7 +6,7 @@ import { ImageType, TextType } from "@/types";
 import Scrollbars from "react-custom-scrollbars";
 
 interface RegrasProps {
-  handleCloseRegrasModal: () => void;
+  handleCloseRegrasModal?: () => void;
   textRegrasList: TextType[];
   textSobreList: TextType[];
   imageSobreList: ImageType[];
@@ -49,18 +49,22 @@ export function RegrasCardComponent({
       bg-white 
    "
     >
-      <CloseButtonComponent handleCloseModal={handleCloseRegrasModal} />
-      <div className="flex items-center justify-center w-full">
-        <ImageComponent
-          alt={"logo"}
-          h={"h-[130px] md:h-[180px]"}
-          w={"w-[150px] md:w-[250px]"}
-          src={
-            "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"
-          }
-          containerClassname={"z-20 rounded-md -ml-2  "}
-        />
-      </div>
+      {handleCloseRegrasModal && (
+        <>
+          <div className="flex items-center justify-center w-full">
+            <ImageComponent
+              alt={"logo"}
+              h={"h-[130px] md:h-[180px]"}
+              w={"w-[150px] md:w-[250px]"}
+              src={
+                "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"
+              }
+              containerClassname={"z-20 rounded-md -ml-2"}
+            />
+          </div>
+          <CloseButtonComponent handleCloseModal={handleCloseRegrasModal} />
+        </>
+      )}
       <div className="flex gap-x-5 font-semibold text-[12px] md:text-[14px]  relative">
         <p
           className={`relative cursor-pointer tracking-[0.10rem] ${

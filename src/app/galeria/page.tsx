@@ -11,7 +11,9 @@ export default async function Galeria() {
 
   return (
     <div className="flex justify-center items-center pt-20">
-      <GaleriaCardComponent imageList={imageList} />
+      <div className="flex-1 mt-10">
+        <GaleriaCardComponent imageList={imageList} />
+      </div>
     </div>
   );
 }
