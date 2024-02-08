@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { ButtonComponent } from '../utils/button';
 import { ModalComponent } from '../utils/modal';
 import { ConsultarFormComponent } from '../consultar';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export function ServicoCardComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
