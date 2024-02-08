@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import GaleriaListComponent from "./galeriaList";
 import { ImageComponent } from "@/components/utils/image";
@@ -30,6 +31,7 @@ export function GaleriaCardComponent({
           containerClassname={"z-20 rounded-md -ml-2"}
         />
       </div>
+      <span></span>
       {handleCloseGaleriaModa && (
         <>
           <div className="flex items-center justify-center w-full">
