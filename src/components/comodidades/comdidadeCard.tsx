@@ -12,10 +12,30 @@ import { ItemCardComponent } from '../card/itemCard';
 import { ButtonComponent } from '../utils/button';
 import { ModalComponent } from '../utils/modal';
 import { ConsultarFormComponent } from '../consultar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export function ComodidadeCardComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { push } = useRouter();
+  // Função para verificar se a tela é pequena ou grande
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
+  };
+
+  // Executa a função ao montar o componente
+  useEffect(() => {
+    checkScreenSize();
+
+    // Adiciona um listener para verificar quando a tela for redimensionada
+    window.addEventListener("resize", checkScreenSize);
+
+    // Remove o listener ao desmontar o componente para evitar vazamentos de memória
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
   return (
     <CardComponent
       h=" h-full md:h-[500px]"
@@ -99,7 +119,13 @@ export function ComodidadeCardComponent() {
            tracking-[0.30rem] text-white rounded-md bg-black
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
           `}
-        onClick={() => setisModalOpen(true)}
+          onClick={() => {
+            if(isSmallScreen){
+              push("/consultar")
+            }else{
+              setisModalOpen(true)
+            }
+          }}
       />
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
