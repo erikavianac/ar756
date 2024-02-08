@@ -25,7 +25,7 @@ export function ExploreComponent({
   questionList,
   textRegrasList,
   textSobreList,
-  imageSobreList
+  imageSobreList,
 }: ExploreProps) {
   const [galeriaModal, setGaleriaModal] = useState(false);
   const [regrasModal, setRegrasModal] = useState(false);
@@ -56,7 +56,7 @@ export function ExploreComponent({
   }
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const {push} = useRouter()
+  const { push } = useRouter();
   // Função para verificar se a tela é pequena ou grande
   const checkScreenSize = () => {
     setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
@@ -96,13 +96,15 @@ export function ExploreComponent({
                   title="SOBRE E REGRAS"
                 />
               </div>
-              <div onClick={() => {
-                if(isSmallScreen){
-                  push("/faq")
-                }else{
-                  handleOpenFaqModal()
-                }
-              }}>
+              <div
+                onClick={() => {
+                  if (isSmallScreen) {
+                    push("/faq");
+                  } else {
+                    handleOpenFaqModal();
+                  }
+                }}
+              >
                 <ExploreCardComponent
                   alt="foto"
                   containerClassname="z-20"
@@ -110,7 +112,15 @@ export function ExploreComponent({
                   title="FAQ"
                 />
               </div>
-              <div onClick={handleOpenGaleriaModa}>
+              <div
+                onClick={() => {
+                  if (isSmallScreen) {
+                    push("/galeria");
+                  } else {
+                    handleOpenGaleriaModa();
+                  }
+                }}
+              >
                 <ExploreCardComponent
                   alt="foto"
                   containerClassname="z-20"
