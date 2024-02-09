@@ -33,21 +33,21 @@ export function VideobgComponent() {
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
-      {/*   <video
+        <video
           className="max-h-full min-h-screen min-w-screen object-cover z-0"
           src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_vertical_v01.mp4"}
           autoPlay
           loop
           muted
-        /> */}
-        <CldVideoPlayer
+        />
+        {/*      <CldVideoPlayer
           width={1080}
           height={644}
           src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_vertical_v01.mp4"}
           autoPlay
           loop
           muted
-        />
+        /> */}
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
         <video
