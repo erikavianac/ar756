@@ -18,9 +18,9 @@ export function WelcomeHeaderComponent() {
   return (
     <>
       <div className="flex justify-start items-center gap-x-3 relative ">
-        <div className='w-[25%] md:w-[41%]'>
+        <div className='w-[27%] md:w-[30%] lg:w-[38%] xl:w-[41%]'>
           <motion.hr
-            className="h-[2px] bg-black border-black "
+            className="h-[1px] md:h-[2px] bg-black border-black "
             initial={'offscreen'}
             whileInView={'onscreen'}
             transition={{ duration: 1 }}
@@ -30,10 +30,10 @@ export function WelcomeHeaderComponent() {
         </div>
         <AnimatedTitleComponent
           title="BEM-VINDO A VILA"
-          className={`text-start text-[12px]  md:text-[25px] tracking-[0.25rem]  md:w-[55%] `}
+          className={`text-start text-[14px]  md:text-[25px] tracking-[0.25rem]  md:w-[55%] `}
         />
       </div>
-      <AnimatedVerticalComponent className="flex justify-center items-center md:items-end md:justify-end  w-full md:w-[58%] ">
+      <AnimatedVerticalComponent className="flex justify-center items-center md:items-end lg:justify-end  w-full lg:w-[68%] xl:w-[58%] ">
         <ImageComponent
           alt={'logo AR756'}
           h={'h-[80px] md:h-[100px] '}

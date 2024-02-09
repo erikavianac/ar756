@@ -69,7 +69,7 @@ export default async function Home() {
   });
 
   return (
-    <main className="bg-faixada flex flex-col flex-1 bg-gray-300">
+    <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
       <VideobgComponent />
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>

@@ -6,11 +6,11 @@ import { ImageComponent } from "../utils/image";
 export function HomeHeaderComponent() {
   const { replace } = useRouter();
   return (
-    <header className="z-10 absolute  flex items-center justify-center w-full px-3 py-1 md:justify-start md:py-3 lg:px-14">
+    <header className="z-10 absolute  flex items-center justify-center w-full px-3 py-1 lg:justify-start lg:py-3 lg:px-14">
       <ImageComponent
         alt={"logo"}
-        h={"h-[6.25rem] md:h-[9.375tem]"}
-        w={"w-[15.625rem] md:w-[18.75rem]"}
+        h={"h-[6.25rem] lg:h-[9.375tem]"}
+        w={"w-[15.625rem] lg:w-[18.75rem]"}
         src={
           "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"
         }

@@ -77,18 +77,19 @@ export function ExploreComponent({
 
   return (
     <>
-      <div className=" text-[#555D2D] w-full h-full flex flex-col  justify-center pb-5 items-start gap-y-8 pt-8  md:gap-y-16  md:-mt-16">
-        <div className="flex items-center justify-center w-full h-full gap-x-3">
+      <div className=" text-[#555D2D] w-full h-full flex flex-col  justify-center pb-5 items-center gap-y-8 pt-8 px-2 mx-auto  lg:gap-y-16  lg:-mt-16">
+        <div className="flex items-center justify-center w-full h-full">
           <p
-            className={`text-center text-black text-20 md:text-3xl tracking-[0.25rem] font-semibold`}
+            className={`text-center text-black text-20 lg:text-2xl tracking-[0.25rem] font-semibold`}
           >
-            MAIS INFORMACOES
+            MAIS INFORMACÕES
           </p>
         </div>
-        <div className="w-[97%] md:w-[80%] mx-auto flex md:gap-x-10 text-white justify-center items-center flex-col md:flex-row gap-y-4 md:gap-y-0">
+        <div className="w-full  lg:w-[80%] flex lg:gap-x-10 text-white justify-center items-center flex-col lg:flex-row gap-y-4 lg:gap-y-0">
           {cardImageList && (
             <>
               <div
+                className="w-full"
                 onClick={() => {
                   if (isSmallScreen) {
                     push("/regras");
@@ -105,6 +106,7 @@ export function ExploreComponent({
                 />
               </div>
               <div
+                className="w-full"
                 onClick={() => {
                   if (isSmallScreen) {
                     push("/faq");
@@ -121,6 +123,7 @@ export function ExploreComponent({
                 />
               </div>
               <div
+                className="w-full"
                 onClick={() => {
                   if (isSmallScreen) {
                     push("/galeria");

@@ -19,14 +19,13 @@ export  function ComodidadeComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   return (
     <SectionComponent>
-      <div className="w-screen h-screen">
-        <video className="max-h-[85%] w-[70%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa02_v01.mp4"} autoPlay loop muted/>
-      </div>
+      <div className="w-screen h-screen relative ">
+        <video className="lg:h-[65%] 2xl:h-[85%] w-[80%] 2xl:w-[70%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa02_v01.mp4"} autoPlay loop muted/>
       <CardComponent
         h="md:h-[500px]"
         w={'w-[98%] m-auto md:w-[450px]'}
         className="absolute  text-black  flex 
-            rounded-md shadow-lg md:bottom-[4.5rem] md:right-[18%] mb-5 md:mb-10"
+            rounded-md shadow-lg lg:bottom-[25rem] 2xl:bottom-[4.5rem]  lg:right-[1rem] xl:right-[4rem] 2xl:right-[18%] mb-5 2xl:mb-10"
       >
         <div className="flex items-center justify-end w-full space-x-3">
           <div className="flex items-center justify-end w-[140px] ">
@@ -107,6 +106,7 @@ export  function ComodidadeComponent() {
         </ModalComponent>
       )}
       </CardComponent>
+      </div>
     </SectionComponent>
   );
 }

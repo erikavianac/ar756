@@ -23,9 +23,9 @@ export function ExploreCardComponent({
   return (
     <div
       ref={imgDivRef}
-      className="opacity-[1.5] relative w-full min-w-[390px] max-w-[95%] w-max-[600px] h-[400px] md:w-[400px] md:h-[400px] 
-    flex justify-center items-center text-[24px]  tracking-[0.25rem] md:hover:scale-105 duration-300 md:brightness-75 
-    active:scale-95 hover:brightness-110  cursor-pointer rounded-md overflow-hidden"
+      className="opacity-[1.5] relative h-[400px] lg:w-[400px] lg:h-[400px] 2xl:w-[500px] 2xl:h-[500px]
+    flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
+    active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden"
     >
       <div className="bg-black/30 w-full h-full absolute z-30 " />
       <ImageComponent
@@ -35,7 +35,7 @@ export function ExploreCardComponent({
         src={`${src}`}
         containerClassname={containerClassname}
       />
-      <p className="absolute inset-0 z-30 flex items-center justify-center text-[18px] md:text-[20px] w-[80%] mx-auto text-center brightness-110">
+      <p className="absolute inset-0 z-30 flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110">
         {title}
       </p>
     </div>

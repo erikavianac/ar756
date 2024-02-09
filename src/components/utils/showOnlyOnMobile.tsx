@@ -4,5 +4,5 @@ interface ShowOnlyOnMobileProps {
   children: ReactNode;
 }
 export function ShowOnlyOnMobileComponent({ children }: ShowOnlyOnMobileProps) {
-  return <span className="block md:hidden">{children}</span>;
+  return <span className="block lg:hidden">{children}</span>;
 }

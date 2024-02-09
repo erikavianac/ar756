@@ -27,14 +27,13 @@ export  function ServicosComponents() {
           containerClassname="z-20"
         />
       </div>
-      <div className="w-screen h-screen">
+      <div className="w-screen h-screen relative">
         <video className="h-[613px] w-[100%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa03_v01.mp4"} autoPlay loop muted/>
-      </div>
       <CardComponent
         h="md:h-[413px]"
         w={'w-[98%] m-auto md:w-[450px]'}
         className="absolute  text-black  flex  
-rounded-md shadow-lg bottom-[10.5rem] inset-x-0 "
+rounded-md shadow-lg lg:bottom-[14rem]  2xl:bottom-[10.5rem] inset-x-0 "
       >
         <div className="flex items-center justify-end w-full space-x-3">
           <div className="border-[1px] border-black flex-1 h-0 " />
@@ -100,6 +99,7 @@ rounded-md shadow-lg bottom-[10.5rem] inset-x-0 "
         </ModalComponent>
       )}
       </CardComponent>
+      </div>
     </SectionComponent>
   );
 }

@@ -17,7 +17,7 @@ export async function WelcomeTextsComponent() {
         return (
           <AnimatedVerticalComponent
             key={text.id}
-            className="w-[80%] mx-auto text-justify text-sm md:text-[14px] md:w-[30%] md:text-center"
+            className="w-[80%] mx-auto text-justify text-sm md:text-[14px] xl:w-[30%] md:text-center"
           >
             <p>{text.text}</p>
           </AnimatedVerticalComponent>
