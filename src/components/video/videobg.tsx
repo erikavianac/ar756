@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ValueType } from "@/types";
+import { CldVideoPlayer } from "next-cloudinary";
 import { ButtonComponent } from "../utils/button";
 import { SectionComponent } from "../utils/section";
 import { ModalComponent } from "../utils/modal";
@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 export function VideobgComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const {replace,push} = useRouter()
+  const { replace, push } = useRouter();
   // Função para verificar se a tela é pequena ou grande
   const checkScreenSize = () => {
     setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
@@ -33,8 +33,16 @@ export function VideobgComponent() {
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
-        <video
+      {/*   <video
           className="max-h-full min-h-screen min-w-screen object-cover z-0"
+          src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_vertical_v01.mp4"}
+          autoPlay
+          loop
+          muted
+        /> */}
+        <CldVideoPlayer
+          width={1080}
+          height={644}
           src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_vertical_v01.mp4"}
           autoPlay
           loop
@@ -42,8 +50,8 @@ export function VideobgComponent() {
         />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
-      <video
-           className=" min-h-screen min-w-screen object-fill z-0"
+        <video
+          className=" min-h-screen min-w-screen object-fill z-0"
           src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_v01 (1).mp4"}
           autoPlay
           loop
@@ -64,10 +72,10 @@ export function VideobgComponent() {
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
           `}
         onClick={() => {
-          if(isSmallScreen){
-            push("/consultar")
-          }else{
-            setisModalOpen(true)
+          if (isSmallScreen) {
+            push("/consultar");
+          } else {
+            setisModalOpen(true);
           }
         }}
       />
