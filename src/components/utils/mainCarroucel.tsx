@@ -13,16 +13,16 @@ export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
     if (mobileCarroucelmageList) {
       const intervalId = setInterval(() => {
         setCurr((curr) => (curr + 1) % mobileCarroucelmageList.length);
-      }, 2000); // intervalo de 4 segundos
+      }, 3000); // intervalo de 4 segundos
       return () => clearInterval(intervalId);
     }
   }, [mobileCarroucelmageList]);
 
   return (
     <div className="flex">
-      <AnimatePresence>
+      <AnimatePresence mode="popLayout">
         <motion.img
-          className="max-h-screen min-h-screen h-full w-full flex"
+          className="max-h-screen min-h-screen h-full w-full"
           key={
             mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
           }
@@ -30,20 +30,20 @@ export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
             mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
           }
           initial={{
-            x: 200,
+            x: "100vh",
           }}
           exit={{
-            x: -400,
+            x: "-100vh",
             transition: {
-              duration: 0.8, // Aumente a duração da transição para garantir que a imagem tenha tempo suficiente para sair da tela
-              type: "tween", // Alterado para 'tween' para uma transição suave
+              duration: 0.5,
+              type: "linear",
             },
           }}
           animate={{
             x: 0,
             transition: {
-              duration: 1.5,
-              type: "tween", // Alterado para 'tween' para uma transição suave
+              duration: 0.2,
+              type: "linear",
             },
           }}
         />
