@@ -8,8 +8,14 @@ import { ConsultarFormComponent } from "../consultar";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { ShowOnlyOnWebComponent } from "../utils/showOnlyOnWeb";
 import { useRouter } from "next/navigation";
+import { ImageType } from "@/types";
+import { MainCarroucel } from "../utils/mainCarroucel";
 
-export function VideobgComponent() {
+interface VideobgProps{
+  mobileCarroucelmageList: ImageType[]
+}
+
+export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { replace, push } = useRouter();
@@ -33,21 +39,7 @@ export function VideobgComponent() {
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
-        <video
-          className="max-h-full min-h-screen min-w-screen object-cover z-0"
-          src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_vertical_v01.mp4"}
-          autoPlay
-          loop
-          muted
-        />
-        {/*      <CldVideoPlayer
-          width={1080}
-          height={644}
-          src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_vertical_v01.mp4"}
-          autoPlay
-          loop
-          muted
-        /> */}
+      <MainCarroucel mobileCarroucelmageList={mobileCarroucelmageList} />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
         <video
