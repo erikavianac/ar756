@@ -43,7 +43,7 @@ export default async function sendOrcamentoEmail(
                               <h1 style="color: #333; width: 100%; text-align: center; margin-top: 10px;">Olá ${data.nome}, recebemos a sua mensagem!</h1>
                               <p style="font-size: 14px; width: 60%; margin: 10px auto; text-align: center;">Agradecemos o seu interesse em conhecer a AR756. Simulamos um orçamento para seu evento, por gentileza clique no botão abaixo para ver a proposta.</p>
                               <div style="width: 100%; text-align: center;margin-top: 40px;">
-                              <a href="https://ar756-khaki.vercel.app/orcamento/byId/${novoOrcamento.id}" style="text-decoration: none;">
+                              <a href="https://ar756.com/orcamento/byId/${novoOrcamento.id}" style="text-decoration: none;">
                                   <button style="background-color: black; color: white; font-size: 20px; padding: 10px 20px; border-radius: 5px; display: inline-block;">Orçamento</button>
                               </a>
                               </div>

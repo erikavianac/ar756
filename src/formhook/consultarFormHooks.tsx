@@ -149,7 +149,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
     setValue("horarioInicio", e.target.value);
     trigger("horarioInicio");
 
-    const addHour = parseInt(hour) + 8;
+    const addHour = parseInt(hour) + 6;
     const hourToSet = addHour < 22 ? addHour : 22;
     const minutesToSet = addHour >= 22 ? "00" : minutes;
     setValue("horarioFim", `${hourToSet}:${minutesToSet}`);
