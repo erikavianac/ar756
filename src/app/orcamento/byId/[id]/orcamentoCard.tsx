@@ -164,7 +164,7 @@ export default function OrcamentoCardComponent({
     }
   }, [orcamentoByid]);
 
-  
+  console.log(orcamentoByid)
 
   return (
     <motion.div
