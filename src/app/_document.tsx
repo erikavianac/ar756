@@ -4,6 +4,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 export default class MyDocument extends Document {
   render() {
     let GMT_ID = process.env.NEXT_PUBLIC_GTM_ID;
+    console.log(GMT_ID)
     return (
       <Html>
         <Head>
@@ -19,7 +20,7 @@ export default class MyDocument extends Document {
               gtag('config', '${GMT_ID}', {
                 page_path: window.location.pathname
               });`,
-              
+
             }}
           />
         </Head>
