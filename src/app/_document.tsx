@@ -15,7 +15,7 @@ export default class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `window.dataLayer = window.dataLayer || [];
-              function: gtaeg(){dataLayer.push(arguments);}
+              function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', '${GMT_ID}', {
                 page_path: window.location.pathname
