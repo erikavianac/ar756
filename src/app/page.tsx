@@ -18,7 +18,6 @@ export default async function Home() {
     `${process.env.BASE_URL}/image/getByTag/Card/Web`,
     {
       method: "GET",
-      cache: "no-cache",
     }
   ).then(async (resp) => {
     return await resp.json();
@@ -28,7 +27,15 @@ export default async function Home() {
     `${process.env.BASE_URL}/image/getByTag/MainCarroucel/Mobile`,
     {
       method: "GET",
-      cache: "no-cache",
+    }
+  ).then(async (resp) => {
+    return await resp.json();
+  });
+
+  const webCarroucelmageList = await fetch(
+    `${process.env.BASE_URL}/image/getByTag/MainCarroucel/Web`,
+    {
+      method: "GET",
     }
   ).then(async (resp) => {
     return await resp.json();
@@ -36,21 +43,18 @@ export default async function Home() {
 
   const imageList = await fetch(`${process.env.BASE_URL}/image/list`, {
     method: "GET",
-    cache: "no-cache",
   }).then(async (resp) => {
     return await resp.json();
   });
 
   const imageSobreList = await fetch(`${process.env.BASE_URL}/image/getByTag/Sobre/Web`, {
     method: "GET",
-    cache: "no-cache",
   }).then(async (resp) => {
     return await resp.json();
   });
 
   const questionList = await fetch(`${process.env.BASE_URL}/question/list`, {
     method: "GET",
-    cache: "no-cache",
   }).then(async (resp) => {
     return await resp.json();
   });
@@ -59,7 +63,6 @@ export default async function Home() {
     `${process.env.BASE_URL}/text/getByArea/regras`,
     {
       method: "GET",
-      cache: "no-cache",
     }
   ).then(async (resp) => {
     return await resp.json();
@@ -69,7 +72,6 @@ export default async function Home() {
     `${process.env.BASE_URL}/text/getByArea/sobre`,
     {
       method: "GET",
-      cache: "no-cache",
     }
   ).then(async (resp) => {
     return await resp.json();
@@ -77,7 +79,7 @@ export default async function Home() {
 
   return (
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
-      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList}/>
+      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} webCarroucelmageList={webCarroucelmageList}/>
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>
         <MobileCarroucelComopnent />
