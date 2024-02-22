@@ -20,7 +20,14 @@ export  function ComodidadeComponent() {
   return (
     <SectionComponent>
       <div className="w-screen h-screen relative ">
-        <video className="lg:h-[65%] 2xl:h-[85%] w-[80%] 2xl:w-[70%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa02_v01.mp4"} autoPlay loop muted/>
+      <ImageComponent
+          alt={'logo-branco'}
+          h={'lg:h-[65%] 2xl:h-[85%]'}
+          w={'w-[80%] 2xl:w-[70%]'}
+          src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704735969/zeg2fskyckm34ekhujqm.jpg'}
+          containerClassname="z-20"
+        />
+       {/*  <video className="lg:h-[65%] 2xl:h-[85%] w-[80%] 2xl:w-[70%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa02_v01.mp4"} autoPlay loop muted/> */}
       <CardComponent
         h="md:h-[500px]"
         w={'w-[98%] m-auto md:w-[450px]'}

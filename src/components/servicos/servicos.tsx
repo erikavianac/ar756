@@ -28,7 +28,14 @@ export  function ServicosComponents() {
         />
       </div>
       <div className="w-screen h-screen relative">
-        <video className="h-[613px] w-[100%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa03_v01.mp4"} autoPlay loop muted/>
+      <ImageComponent
+          alt={'logo-branco'}
+          h={'h-[613px]'}
+          w={'w-[100%]'}
+          src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704736008/yzp7gvs0ekodg00bz7zr.jpg'}
+          containerClassname="z-20"
+        />
+        {/* <video className="h-[613px] w-[100%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa03_v01.mp4"} autoPlay loop muted/> */}
       <CardComponent
         h="md:h-[413px]"
         w={'w-[98%] m-auto md:w-[450px]'}
