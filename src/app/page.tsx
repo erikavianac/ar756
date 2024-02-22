@@ -32,15 +32,6 @@ export default async function Home() {
     return await resp.json();
   });
 
-  const webCarroucelmageList = await fetch(
-    `${process.env.BASE_URL}/image/getByTag/MainCarroucel/Web`,
-    {
-      method: "GET",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
-
   const imageList = await fetch(`${process.env.BASE_URL}/image/list`, {
     method: "GET",
   }).then(async (resp) => {
@@ -79,7 +70,7 @@ export default async function Home() {
 
   return (
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
-      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} webCarroucelmageList={webCarroucelmageList}/>
+      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList}/>
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>
         <MobileCarroucelComopnent />

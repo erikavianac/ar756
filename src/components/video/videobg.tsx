@@ -13,10 +13,9 @@ import { MainCarroucel } from "../utils/mainCarroucel";
 
 interface VideobgProps{
   mobileCarroucelmageList: ImageType[]
-  webCarroucelmageList: ImageType[]
 }
 
-export function VideobgComponent({mobileCarroucelmageList,webCarroucelmageList}:VideobgProps) {
+export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { replace, push } = useRouter();
@@ -43,14 +42,13 @@ export function VideobgComponent({mobileCarroucelmageList,webCarroucelmageList}:
       <MainCarroucel mobileCarroucelmageList={mobileCarroucelmageList} />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
-       {/*  <video
+       <video
           className=" min-h-screen min-w-screen object-fill z-0"
           src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_v01 (1).mp4"}
           autoPlay
           loop
           muted
-        /> */}
-        <MainCarroucel mobileCarroucelmageList={webCarroucelmageList} />
+        /> 
       </ShowOnlyOnWebComponent>
       <ButtonComponent
         title="CONSULTAR"
