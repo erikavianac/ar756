@@ -42,13 +42,14 @@ export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
       <MainCarroucel mobileCarroucelmageList={mobileCarroucelmageList} />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
-        <video
+       {/*  <video
           className=" min-h-screen min-w-screen object-fill z-0"
           src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_v01 (1).mp4"}
           autoPlay
           loop
           muted
-        />
+        /> */}
+        <MainCarroucel mobileCarroucelmageList={mobileCarroucelmageList} />
       </ShowOnlyOnWebComponent>
       <ButtonComponent
         title="CONSULTAR"
