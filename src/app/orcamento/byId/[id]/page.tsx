@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import OrcamentoCardComponent from "./orcamentoCard";
 
 interface OrcamentoByiDPageProps {
@@ -5,6 +6,10 @@ interface OrcamentoByiDPageProps {
     id: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: "Orcamento"
+};
 
 export default async function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
   

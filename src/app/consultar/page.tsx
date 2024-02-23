@@ -1,4 +1,9 @@
 import { ConsultarFormComponent } from "@/components/consultar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Consultar Orcamento"
+};
 
 export default function ConsultarPage() {
   return (

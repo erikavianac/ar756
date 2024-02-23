@@ -1,4 +1,9 @@
 import FaqComponent from "@/components/explore/faq";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FAQ"
+};
 
 export default async function Faq() {
   const questionList = await fetch(`${process.env.BASE_URL}/question/list`, {
