@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import OrcamentoCardComponent from "./orcamentoCard";
+import { BugdetType } from "@/types";
 
 interface OrcamentoByiDPageProps {
   params: {
@@ -7,9 +8,22 @@ interface OrcamentoByiDPageProps {
   };
 }
 
-export const metadata: Metadata = {
-  title: "Orçamento"
-};
+export async function generateMetadata({params} : OrcamentoByiDPageProps):Promise<Metadata>{
+  const orcamentoByID : BugdetType = await fetch(
+    `${process.env.BASE_URL}/orcamento/getById/${params.id}`,
+    {
+      method: "GET",
+      cache: "no-cache",
+    }
+  ).then(async (resp) => {
+    return await resp.json();
+  })
+
+  return {
+    title: orcamentoByID.nome,
+  }
+}
+
 
 export default async function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
   
