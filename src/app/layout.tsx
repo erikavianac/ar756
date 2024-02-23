@@ -10,11 +10,13 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title:{
     default:  "AR756",
-    template: "AR756 - %s"
+    template: "%s - AR756"
   },
-  description: "Um oásis em São Paulo",
+  description: "Um oásis em São Paulo.",
   twitter:{
-    card: "summary_large_image"
+    card: "summary_large_image",
+    title: "AR756",
+    description: "Um oásis em São Paulo.",
   },
 };
 

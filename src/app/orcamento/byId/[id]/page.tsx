@@ -8,7 +8,7 @@ interface OrcamentoByiDPageProps {
 }
 
 export const metadata: Metadata = {
-  title: "Orcamento"
+  title: "Orçamento"
 };
 
 export default async function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
