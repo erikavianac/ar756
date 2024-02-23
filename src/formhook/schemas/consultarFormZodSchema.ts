@@ -55,8 +55,8 @@ export const consultarFormSchema = z.object({
     .string()
     .nonempty('Este campo e obrigatorio!')
     .transform((val) => parseInt(val))
-    .refine((val) => val <= 100, {
-      message: 'O número de convidados não pode ser maior que 100',
+    .refine((val) => val <= 150, {
+      message: 'O número de convidados não pode ser maior que 150',
     })
     .refine((val) => val > 0, {
       message: 'O número de convidados não pode 0',
