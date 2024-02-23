@@ -33,7 +33,7 @@ export function WelcomeHeaderComponent() {
           className={`text-start text-[14px]  md:text-[25px] tracking-[0.25rem]  md:w-[55%] `}
         />
       </div>
-      <AnimatedVerticalComponent className="flex justify-center items-center md:items-end lg:justify-end  w-full lg:w-[68%] xl:w-[58%] ">
+      <AnimatedVerticalComponent className="flex justify-center items-center w-full">
         <ImageComponent
           alt={'logo AR756'}
           h={'h-[80px] md:h-[100px] '}

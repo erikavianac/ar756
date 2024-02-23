@@ -89,7 +89,7 @@ export function ExploreComponent({
           {cardImageList && (
             <>
               <div
-                className="w-full"
+                className="w-full "
                 onClick={() => {
                   if (isSmallScreen) {
                     push("/regras");

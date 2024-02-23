@@ -24,7 +24,7 @@ export  function ServicosComponents() {
           h={'h-[188px]'}
           w={'w-[529px]'}
           src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png'}
-          containerClassname="z-20"
+          containerClassname="z-30"
         />
       </div>
       <div className="w-screen h-screen relative">

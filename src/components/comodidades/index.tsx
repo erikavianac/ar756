@@ -32,7 +32,7 @@ export  function ComodidadeComponent() {
         h="md:h-[500px]"
         w={'w-[98%] m-auto md:w-[450px]'}
         className="absolute  text-black  flex 
-            rounded-md shadow-lg lg:bottom-[25rem] 2xl:bottom-[4.5rem]  lg:right-[1rem] xl:right-[4rem] 2xl:right-[18%] mb-5 2xl:mb-10"
+            rounded-md shadow-lg lg:bottom-[2rem] xl:bottom-[10rem] 2xl:bottom-[4.5rem]  lg:right-[1rem] xl:right-[4rem] 2xl:right-[18%] mb-5 2xl:mb-10"
       >
         <div className="flex items-center justify-end w-full space-x-3">
           <div className="flex items-center justify-end w-[140px] ">
