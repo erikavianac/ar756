@@ -8,6 +8,19 @@ interface OrcamentoByiDPageProps {
   };
 }
 
+export async function generateStaticParams(){
+  const orcamentoList : BugdetType[] = await fetch(
+    `${process.env.BASE_URL}/orcamento/list`,
+    {
+      method: "GET",
+    }
+  ).then(async (resp) => {
+    return await resp.json();
+  })
+
+  return orcamentoList.map(({id}) => id)
+}
+
 export async function generateMetadata({params} : OrcamentoByiDPageProps):Promise<Metadata>{
   const orcamentoByID : BugdetType = await fetch(
     `${process.env.BASE_URL}/orcamento/getById/${params.id}`,
