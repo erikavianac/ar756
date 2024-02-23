@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import OrcamentoCardComponent from "./orcamentoCard";
 import { BugdetType } from "@/types";
+import { notFound } from "next/navigation";
 
 interface OrcamentoByiDPageProps {
   params: {
@@ -22,7 +23,7 @@ export async function generateStaticParams(){
 }
 
 export async function generateMetadata({params} : OrcamentoByiDPageProps):Promise<Metadata>{
-  const orcamentoByID : BugdetType = await fetch(
+  const orcamentoByID  = await fetch(
     `${process.env.BASE_URL}/orcamento/getById/${params.id}`,
     {
       method: "GET",
@@ -32,7 +33,7 @@ export async function generateMetadata({params} : OrcamentoByiDPageProps):Promis
   })
 
   return {
-    title: `Orçamento ${orcamentoByID.nome}`,
+    title: `Orçamento ${orcamentoByID?.nome ? orcamentoByID.nome : "não encontrado"}`,
   }
 }
 
@@ -47,6 +48,10 @@ export default async function OrcamentoPage({ params }: OrcamentoByiDPageProps) 
   ).then(async (resp) => {
     return await resp.json();
   });
+
+  if(!orcamentoByID?.id){
+    notFound()
+  }
 
   return (
     <div className={`flex items-center justify-center w-full min-h-screen px-2 bg-faixada flex-1 h-screen`}>
