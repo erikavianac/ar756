@@ -104,7 +104,7 @@ export default function OrcamentoCardComponent({
         aprovadoCliente: true,
       });
       if (aprovarOrcamneto.id) {
-        console.log("aprovado");
+   
         seIsSendEmailOrcamentoAprovadoClienteSuccess(true);
       }
     }
@@ -115,7 +115,7 @@ export default function OrcamentoCardComponent({
           feedback: data.feedback,
         });
       if (updateFeedbackOrcamento.id) {
-        console.log("feedback");
+     
         seIsSendFeedbackEmailSuccess(true);
       }
     }
@@ -164,7 +164,6 @@ export default function OrcamentoCardComponent({
     }
   }, [orcamentoByid]);
 
-  console.log(orcamentoByid)
 
   return (
     <motion.div

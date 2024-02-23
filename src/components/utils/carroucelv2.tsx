@@ -15,7 +15,7 @@ export  default function CarouselComponent({imageList}:CarouselProps) {
   useEffect(() => {
     setWidth(() => caroucel.current.scrollWidth - caroucel.current.offsetWidth + 100);
   }, [caroucel?.current?.scrollWidth, imageList, caroucel]);
-  console.log(width)
+
   return (
     <motion.div
       ref={caroucel}

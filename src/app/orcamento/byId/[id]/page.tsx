@@ -13,7 +13,6 @@ export async function generateMetadata({params} : OrcamentoByiDPageProps):Promis
     `${process.env.BASE_URL}/orcamento/getById/${params.id}`,
     {
       method: "GET",
-      cache: "no-cache",
     }
   ).then(async (resp) => {
     return await resp.json();
@@ -31,7 +30,6 @@ export default async function OrcamentoPage({ params }: OrcamentoByiDPageProps) 
     `${process.env.BASE_URL}/orcamento/getById/${params.id}`,
     {
       method: "GET",
-      cache: "no-cache",
     }
   ).then(async (resp) => {
     return await resp.json();
