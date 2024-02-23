@@ -98,7 +98,7 @@ export  function ComodidadeComponent() {
         className={`
           z-30
           px-10 py-4
-          text-[15px]  md:text-[20px]
+          text-[15px]  xl:text-[20px]
           hover:bg-zinc-900
            tracking-[0.30rem] text-white rounded-md bg-black
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
