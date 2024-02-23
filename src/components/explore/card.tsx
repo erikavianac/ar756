@@ -23,7 +23,7 @@ export function ExploreCardComponent({
   return (
     <div
       ref={imgDivRef}
-      className="opacity-[1.5] relative h-[400px] lg:w-[300px] lg:h-[300px] xl:w-[400px] xl:h-[400px] 2xl:w-[600px] 2xl:h-[600px]
+      className="opacity-[1.5] relative h-[400px] lg:w-[300px] lg:h-[300px] xl:w-[400px] xl:h-[400px] 2xl:w-[500px] 2xl:h-[500px]
     flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
     active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden"
     >

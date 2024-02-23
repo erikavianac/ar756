@@ -80,12 +80,12 @@ export function ExploreComponent({
       <div className=" text-[#555D2D] w-full h-full flex flex-col  justify-center pb-5 items-center gap-y-8 pt-8 px-2 mx-auto  lg:gap-y-16  lg:-mt-16">
         <div className="flex items-center justify-center w-full h-full">
           <p
-            className={`text-center text-black text-20 lg:text-2xl tracking-[0.25rem] font-semibold`}
+            className={`text-center text-black text- lg:text-[18px] xl:text-2xl tracking-[0.25rem] font-semibold`}
           >
             MAIS INFORMACÕES
           </p>
         </div>
-        <div className="w-full  lg:w-[80%] flex lg:gap-x-10 text-white justify-center items-center flex-col lg:flex-row gap-y-4 lg:gap-y-0">
+        <div className="w-full  lg:w-[80%]   flex lg:gap-x-10 text-white justify-center items-center flex-col lg:flex-row gap-y-4 lg:gap-y-0">
           {cardImageList && (
             <>
               <div
