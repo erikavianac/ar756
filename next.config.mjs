@@ -9,6 +9,9 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    metadataBase: 'https://www.ar756.com/', // Defina a URL base do seu site aqui
+  },
   reactStrictMode: true,
     async headers() {
       return [
