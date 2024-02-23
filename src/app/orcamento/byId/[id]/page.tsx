@@ -20,7 +20,7 @@ export async function generateMetadata({params} : OrcamentoByiDPageProps):Promis
   })
 
   return {
-    title: orcamentoByID.nome,
+    title: `Orçamento ${orcamentoByID.nome}`,
   }
 }
 
