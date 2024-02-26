@@ -94,7 +94,7 @@ export function HomeHeaderComponent() {
                   replace("/regras");
                 }}
               >
-                Sobre nos
+               Sobre nós
               </p>
               <p
                 onClick={() => {
@@ -102,7 +102,7 @@ export function HomeHeaderComponent() {
                   replace("/consultar");
                 }}
               >
-                Consultar Preco
+               Faça seu orçamento
               </p>
             </motion.div>
             <motion.div
