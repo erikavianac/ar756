@@ -6,6 +6,7 @@ interface ImageComponentProps {
   h: string;
   src: string;
   alt: string;
+  priority?:boolean;
   onclik?: () => void;
   imageClassname?: string;
   containerClassname?: string;
@@ -17,6 +18,7 @@ export function ImageComponent({
   src,
   alt,
   onclik,
+  priority,
   imageClassname,
   containerClassname,
 }: ImageComponentProps) {
@@ -24,7 +26,7 @@ export function ImageComponent({
     <div className={`${w} ${h} relative ${containerClassname}`}>
       <Image
         src={src}
-        priority
+        priority={priority}
         alt={alt}
         layout="fill"
         objectFit={'cover'}

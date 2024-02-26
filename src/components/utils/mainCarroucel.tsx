@@ -52,6 +52,7 @@ export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
           }
           alt="foto"
           fill
+          priority
           />
           
         </motion.div>

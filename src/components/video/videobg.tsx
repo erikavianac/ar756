@@ -18,6 +18,7 @@ interface VideobgProps{
 export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [screenSizeChecked, setScreenSizeChecked] = useState(false);
   const { replace, push } = useRouter();
   // Função para verificar se a tela é pequena ou grande
   const checkScreenSize = () => {
@@ -30,18 +31,22 @@ export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
 
     // Adiciona um listener para verificar quando a tela for redimensionada
     window.addEventListener("resize", checkScreenSize);
+    setScreenSizeChecked(true); //
 
     // Remove o listener ao desmontar o componente para evitar vazamentos de memória
     return () => {
       window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
+  
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
       <MainCarroucel mobileCarroucelmageList={mobileCarroucelmageList} />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
+        {
+          !isSmallScreen && screenSizeChecked &&
        <video
           className=" min-h-screen min-w-screen object-fill z-0"
           src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_v01 (1).mp4"}
@@ -49,6 +54,7 @@ export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
           loop
           muted
         /> 
+        }
       </ShowOnlyOnWebComponent>
       <ButtonComponent
         title="CONSULTAR"
