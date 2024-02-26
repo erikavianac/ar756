@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react"
 import { HomeHeaderComponent } from "@/components/header";
 import { FooterComponent } from "@/components/footer";
 import { GoogleTagManager } from "@next/third-parties/google";
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} w-full min-h-screen relative`}>
+      <Analytics/>
         <div id="modal-root" />
         <HomeHeaderComponent />
         {children}

@@ -16,6 +16,7 @@
     "@types/react-currency-format": "^1.0.4",
     "@types/react-custom-scrollbars": "^4.0.13",
     "@types/react-gtm-module": "^2.0.3",
+    "@vercel/analytics": "^1.2.2",
     "date-fns": "^3.3.1",
     "framer-motion": "^10.18.0",
     "leaflet": "^1.9.4",
