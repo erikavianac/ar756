@@ -8,59 +8,25 @@ import { VideobgComponent } from "@/components/video/videobg";
 import { WelcomeComponent } from "@/components/welcome";
 
 export default async function Home() {
-  const cardImageList = await fetch(
-    `${process.env.BASE_URL}/image/getByTag/Card/Web`,
-    {
-      method: "GET",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
 
-  const mobileCarroucelmageList = await fetch(
-    `${process.env.BASE_URL}/image/getByTag/MainCarroucel/Mobile`,
-    {
-      method: "GET",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
+  const [
+    cardImageList,
+    mobileCarroucelmageList,
+    imageList,
+    imageSobreList,
+    questionList,
+    textRegrasList,
+    textSobreList
+  ] = await Promise.all([
+    fetch(`${process.env.BASE_URL}/image/getByTag/Card/Web`).then(resp => resp.json()),
+    fetch(`${process.env.BASE_URL}/image/getByTag/MainCarroucel/Mobile`).then(resp => resp.json()),
+    fetch(`${process.env.BASE_URL}/image/list`).then(resp => resp.json()),
+    fetch(`${process.env.BASE_URL}/image/getByTag/Sobre/Web`).then(resp => resp.json()),
+    fetch(`${process.env.BASE_URL}/question/list`).then(resp => resp.json()),
+    fetch(`${process.env.BASE_URL}/text/getByArea/regras`).then(resp => resp.json()),
+    fetch(`${process.env.BASE_URL}/text/getByArea/sobre`).then(resp => resp.json())
+  ]);
 
-  const imageList = await fetch(`${process.env.BASE_URL}/image/list`, {
-    method: "GET",
-  }).then(async (resp) => {
-    return await resp.json();
-  });
-
-  const imageSobreList = await fetch(`${process.env.BASE_URL}/image/getByTag/Sobre/Web`, {
-    method: "GET",
-  }).then(async (resp) => {
-    return await resp.json();
-  });
-
-  const questionList = await fetch(`${process.env.BASE_URL}/question/list`, {
-    method: "GET",
-  }).then(async (resp) => {
-    return await resp.json();
-  });
-
-  const textRegrasList = await fetch(
-    `${process.env.BASE_URL}/text/getByArea/regras`,
-    {
-      method: "GET",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
-
-  const textSobreList = await fetch(
-    `${process.env.BASE_URL}/text/getByArea/sobre`,
-    {
-      method: "GET",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
 
   return (
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
