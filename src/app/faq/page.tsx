@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Faq() {
-  const questionList = await fetch(`${process.env.BASE_URL}/question/list`, {
+  const questionList = await fetch(`${process.env.SERVER_URL}/question/list`, {
     method: "GET",
     cache: "no-cache",
   }).then(async (resp) => {

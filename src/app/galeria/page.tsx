@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Galeria() {
-  const imageList = await fetch(`${process.env.BASE_URL}/image/list`, {
+  const imageList = await fetch(`${process.env.SERVER_URL}/image/list`, {
     method: "GET",
     cache: "no-cache",
   }).then(async (resp) => {

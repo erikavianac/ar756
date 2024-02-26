@@ -2,32 +2,21 @@ import React from "react";
 import { RegrasCardComponent } from "@/components/explore/regras/regrasCard";
 
 export default async function Regras() {
-  const textRegrasList = await fetch(
-    `${process.env.BASE_URL}/text/getByArea/regras`,
-    {
+  const [
+    textRegrasList,
+    textSobreList,
+    imageSobreList
+  ] = await Promise.all([
+    fetch(`${process.env.SERVER_URL}/text/getByArea/regras`, {
       method: "GET",
-      cache: "no-cache",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
-
-  const textSobreList = await fetch(
-    `${process.env.BASE_URL}/text/getByArea/sobre`,
-    {
+    }).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/text/getByArea/sobre`, {
       method: "GET",
-      cache: "no-cache",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
-
-  const imageSobreList = await fetch(`${process.env.BASE_URL}/image/getByTag/Sobre/Web`, {
-    method: "GET",
-    cache: "no-cache",
-  }).then(async (resp) => {
-    return await resp.json();
-  });
+    }).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/image/getByTag/Sobre/Web`, {
+      method: "GET",
+    }).then(resp => resp.json())
+  ]);
 
   return (
     <div className="flex justify-center items-center pt-20">

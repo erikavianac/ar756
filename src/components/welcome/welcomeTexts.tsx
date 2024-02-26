@@ -4,7 +4,7 @@ import { TextType } from '@/types';
 
 export async function WelcomeTextsComponent() {
   const welcomeTexts: TextType[] = await fetch(
-    `${process.env.BASE_URL}/text/getByArea/Welcome`,
+    `${process.env.SERVER_URL}/text/getByArea/Welcome`,
     {
       method: 'GET',
       cache: 'no-cache',

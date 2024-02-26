@@ -6,7 +6,7 @@ export default async function sendOrcamentoEmail(
   data: CreateOrcamentoReqBody
 ) {
   const novoOrcamento = await fetch(
-    `${process.env.BASE_URL}/orcamento/create`,
+    `${process.env.SERVER_URL}/orcamento/create`,
     {
       method: "POST",
       cache: "no-cache",

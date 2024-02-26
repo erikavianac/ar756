@@ -18,13 +18,13 @@ export default async function Home() {
     textRegrasList,
     textSobreList
   ] = await Promise.all([
-    fetch(`${process.env.BASE_URL}/image/getByTag/Card/Web`).then(resp => resp.json()),
-    fetch(`${process.env.BASE_URL}/image/getByTag/MainCarroucel/Mobile`).then(resp => resp.json()),
-    fetch(`${process.env.BASE_URL}/image/list`).then(resp => resp.json()),
-    fetch(`${process.env.BASE_URL}/image/getByTag/Sobre/Web`).then(resp => resp.json()),
-    fetch(`${process.env.BASE_URL}/question/list`).then(resp => resp.json()),
-    fetch(`${process.env.BASE_URL}/text/getByArea/regras`).then(resp => resp.json()),
-    fetch(`${process.env.BASE_URL}/text/getByArea/sobre`).then(resp => resp.json())
+    fetch(`${process.env.SERVER_URL}/image/getByTag/Card/Web`).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/image/getByTag/MainCarroucel/Mobile`).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/image/list`).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/image/getByTag/Sobre/Web`).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/question/list`).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/text/getByArea/regras`).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/text/getByArea/sobre`).then(resp => resp.json())
   ]);
 
 

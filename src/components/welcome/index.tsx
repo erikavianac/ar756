@@ -10,23 +10,19 @@ import { ShowOnlyOnWebComponent } from "@/components/utils/showOnlyOnWeb";
 
 export async function WelcomeComponent() {
 
-  const welcomeMobileImageList: ImageType[] = await fetch(
-    `${process.env.BASE_URL}/image/getByTag/Carroucel/Mobile`,
-    {
+  const [
+    welcomeMobileImageList,
+    welcomeWebImageList
+  ] = await Promise.all([
+    fetch(`${process.env.SERVER_URL}/image/getByTag/Carroucel/Mobile`, {
       method: "GET",
       cache: "no-cache",
-    }
-  ).then((resp) => resp.json());
-
-  const welcomeWebImageList = await fetch(
-    `${process.env.BASE_URL}/image/getByTag/Grid/Web`,
-    {
+    }).then(resp => resp.json()),
+    fetch(`${process.env.SERVER_URL}/image/getByTag/Grid/Web`, {
       method: "GET",
       cache: "no-cache",
-    }
-  ).then(async (resp) => {
-    return await resp.json();
-  });
+    }).then(resp => resp.json())
+  ]);
 
   return (
     <SectionComponent classname="pt-10 flex flex-col justify-between pb-3">

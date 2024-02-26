@@ -11,7 +11,7 @@ interface OrcamentoByiDPageProps {
 
 export async function generateStaticParams(){
   const orcamentoList : BugdetType[] = await fetch(
-    `${process.env.BASE_URL}/orcamento/list`,
+    `${process.env.SERVER_URL}/orcamento/list`,
     {
       method: "GET",
     }
@@ -24,7 +24,7 @@ export async function generateStaticParams(){
 
 export async function generateMetadata({params} : OrcamentoByiDPageProps):Promise<Metadata>{
   const orcamentoByID  = await fetch(
-    `${process.env.BASE_URL}/orcamento/getById/${params.id}`,
+    `${process.env.SERVER_URL}/orcamento/getById/${params.id}`,
     {
       method: "GET",
     }
@@ -41,7 +41,7 @@ export async function generateMetadata({params} : OrcamentoByiDPageProps):Promis
 export default async function OrcamentoPage({ params }: OrcamentoByiDPageProps) {
   
   const orcamentoByID = await fetch(
-    `${process.env.BASE_URL}/orcamento/getById/${params.id}`,
+    `${process.env.SERVER_URL}/orcamento/getById/${params.id}`,
     {
       method: "GET",
     }
