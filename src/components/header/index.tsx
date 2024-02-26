@@ -13,6 +13,7 @@ import {
 } from "react-icons/tb";
 import { FaTiktok } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 
 export function HomeHeaderComponent() {
   const { replace } = useRouter();
@@ -22,11 +23,13 @@ export function HomeHeaderComponent() {
   }
   return (
     <header className="z-10 absolute  flex items-center justify-center w-full px-3 py-1 lg:justify-start lg:py-3 lg:px-14">
-      <GiHamburgerMenu
-        size={30}
-        className="absolute top-4 left-4"
-        onClick={() => setMenuIsOpen(true)}
-      />
+      <ShowOnlyOnMobileComponent>
+        <GiHamburgerMenu
+          size={30}
+          className="absolute top-4 left-4"
+          onClick={() => setMenuIsOpen(true)}
+        />
+      </ShowOnlyOnMobileComponent>
       <ImageComponent
         alt={"logo"}
         h={"h-[6.25rem] lg:h-[9.375tem]"}
@@ -124,7 +127,6 @@ export function HomeHeaderComponent() {
                     />
                   }
                   bgColor="bg-[#25D366] border-[2px] border-white"
-                  
                 />
                 <AnchorComponent
                   href="https://www.facebook.com/profile.php?id=100085832906065"
