@@ -1,6 +1,8 @@
 import { ImageType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { ImageComponent } from "./image";
+import Image from "next/image";
 
 interface MainCarroucelProps {
   mobileCarroucelmageList: ImageType[];
@@ -21,12 +23,9 @@ export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
   return (
     <div className="flex">
       <AnimatePresence mode="popLayout">
-        <motion.img
+        <motion.div
           className="max-h-screen min-h-screen h-full w-full"
           key={
-            mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
-          }
-          src={
             mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
           }
           initial={{
@@ -46,7 +45,16 @@ export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
               type: "linear",
             },
           }}
-        />
+        >
+          <Image
+           src={
+            mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
+          }
+          alt="foto"
+          fill
+          />
+          
+        </motion.div>
       </AnimatePresence>
     </div>
   );
