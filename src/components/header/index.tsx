@@ -1,5 +1,5 @@
 "use client";
-
+import { IoMdHome } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { ImageComponent } from "../utils/image";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -70,6 +70,17 @@ export function HomeHeaderComponent() {
               }}
               className="px-3 py-5 text-gray-400 font-semibold flex flex-col gap-y-3 mt-10"
             >
+              <motion.p
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: 0.4 }}
+                onClick={() => {
+                  handleCloseModal();
+                  replace("/");
+                }}
+              >
+                Principal
+              </motion.p>
               <motion.p
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 1, x: 0 }}
