@@ -42,7 +42,7 @@ export default function GaleriaListComponent({
     <Scrollbars
       style={{
         width: "100%",
-        height: isSmallScreen ? 550 : 600,
+        height: 550,
         gap: 20,
       }}
     >
@@ -59,6 +59,18 @@ export default function GaleriaListComponent({
             }
 
             if(item?.tag === "Sobre"){
+              return
+            }
+
+            if(item?.responsiveMode === "Mobile"){
+              return
+            }
+
+            if(item?.tag === "Home"){
+              return
+            }
+
+            if(item?.tag === "Area"){
               return
             }
             return (

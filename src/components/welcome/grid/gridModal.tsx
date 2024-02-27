@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { ImageComponent } from "@/components/utils/image";
@@ -23,14 +23,35 @@ export function GridModalComponent({
       ? imageList?.findIndex((item: ImageType) => item.id === imageId)
       : 0
   );
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Função para verificar se a tela é pequena ou grande
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
+  };
+
+  // Executa a função ao montar o componente
+  useEffect(() => {
+    checkScreenSize();
+
+    // Adiciona um listener para verificar quando a tela for redimensionada
+    window.addEventListener("resize", checkScreenSize);
+
+    // Remove o listener ao desmontar o componente para evitar vazamentos de memória
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
   return (
     <ModalComponent
       onClose={() => setIsModalOpen(false)}
-      styleInternal="bg-transparent flex flex-row  md:h-[31.25rem] md:w-[60rem] relative"
+      styleInternal="bg-transparent flex flex-row w-[90%] rounded-md  md:h-[31.25rem] md:w-[60rem] relative"
     >
       {searchIndex && searchIndex > 0 && (
         <MdKeyboardArrowLeft
-          className="text-white text-[3rem] z-30 absolute mt-[14rem] cursor-pointer"
+          className="text-white text-[3rem] z-30 absolute mt-[7rem] lg:mt-[14rem] cursor-pointer"
           onClick={() => {
             setSearchIndex(() => searchIndex - 1);
           }}
@@ -38,17 +59,17 @@ export function GridModalComponent({
       )}
       <motion.div
         className="flex flex-row z-10"
-        initial={{ x: searchIndex * -960 }}
-        animate={{ x: searchIndex * -960 }}
+        initial={{ x: isSmallScreen ? searchIndex * -400 :  searchIndex * -960 }}
+        animate={{ x: isSmallScreen ? searchIndex * -400 :  searchIndex * -960 }}
         transition={{ duration: 0.5 }}
       >
         {imageList &&
-          imageList.map((image: ImageType) => {
+          imageList?.map((image: ImageType) => {
             return (
               <ImageComponent
                 key={image.id}
-                h="md:h-[31.25rem]"
-                w={"md:w-[60rem]"}
+                h="h-[16rem] md:h-[31.25rem]"
+                w={"w-[25rem] md:w-[60rem]"}
                 src={image.imageUrl}
                 alt="photo"
               />
@@ -57,7 +78,7 @@ export function GridModalComponent({
       </motion.div>
       {imageList && searchIndex < imageList?.length - 1 && (
         <MdKeyboardArrowRight
-          className="text-white absolute mt-[14rem]  z-30 right-0  text-[3rem]  cursor-pointer"
+          className="text-white absolute mt-[7rem] lg:mt-[14rem]  z-30 right-0  text-[3rem]  cursor-pointer"
           onClick={() => {
             setSearchIndex(() => searchIndex + 1);
           }}

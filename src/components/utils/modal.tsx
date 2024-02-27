@@ -9,6 +9,7 @@ export interface PropsNewModal {
   animate?: boolean;
   styleExternal?: string;
   styleInternal?: string;
+  id?:string
 }
 
 export function ModalComponent({
@@ -17,22 +18,26 @@ export function ModalComponent({
   styleExternal,
   styleInternal,
   animate,
+  id
 }: PropsNewModal) {
+
+  const modalId = id ? id :'modal-root';
+
   const handleOutsideClick = (e: any) => {
     if (animate) {
       setTimeout(() => {
-        if (e.target.id === 'modal-root') {
+        if (e.target.id === modalId) {
           onClose();
         }
       }, 5000);
     } else {
-      if (e.target.id === 'modal-root') {
+      if (e.target.id === modalId) {
         onClose();
       }
     }
   };
 
-  const modalRoot = document?.getElementById('modal-root') ?? document?.createElement('div');
+  const modalRoot = document?.getElementById(modalId) ?? document?.createElement('div');
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -45,7 +50,7 @@ export function ModalComponent({
   return ReactDOM.createPortal(
     <div
       aria-hidden="true"
-      id={'modal-root'}
+      id={modalId}
       onClick={(e) => handleOutsideClick(e)}
       className={`${
         styleExternal ? styleExternal : 'bg-black/40'
