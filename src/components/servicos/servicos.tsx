@@ -19,14 +19,8 @@ export  function ServicosComponents() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   return (
     <SectionComponent>
-      <div className="hidden md:flex absolute left-10   -mt-[85px]">
-        <ImageComponent
-          alt={'logo-branco'}
-          h={'h-[188px]'}
-          w={'w-[529px]'}
-          src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png'}
-          containerClassname="z-30"
-        />
+      <div className="hidden md:flex absolute left-10   -mt-[150px]">
+      <p className={`${stencilFont.className} text-[150px] text-black mt-10 z-20`}>AR756</p>
       </div>
       <div className="w-screen h-screen relative">
       <ImageComponent
@@ -34,7 +28,7 @@ export  function ServicosComponents() {
           h={'h-[613px]'}
           w={'w-[100%]'}
           src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704736008/yzp7gvs0ekodg00bz7zr.jpg'}
-          containerClassname="z-20"
+          containerClassname=""
         />
         {/* <video className="h-[613px] w-[100%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa03_v01.mp4"} autoPlay loop muted/> */}
       <CardComponent
@@ -45,7 +39,7 @@ rounded-md shadow-lg lg:bottom-[14rem]  2xl:bottom-[10.5rem] inset-x-0 "
       >
         <div className="flex items-center justify-end w-full space-x-3">
           <div className="border-[1px] border-black flex-1 h-0 " />
-          <p className={`${stencilFont.className} text-[40px] text-black`}>AR756</p>
+          <p className={`${stencilFont.className} text-[40px] text-black z-20 w-[30%]`}>AR756</p>
           <h1 className="absolute w-full text-end text-2xl text-black top-[4.3rem] pr-[45px]">
             SERVICOS EXTRAS
           </h1>

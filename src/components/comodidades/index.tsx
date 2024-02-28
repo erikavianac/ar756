@@ -13,6 +13,7 @@ import { ButtonComponent } from '../utils/button';
 import { ModalComponent } from '../utils/modal';
 import { ConsultarFormComponent } from '../consultar';
 import { useState } from 'react';
+import { stencilFont } from '@/fonts/constants';
 
 
 export  function ComodidadeComponent() {
@@ -36,12 +37,7 @@ export  function ComodidadeComponent() {
       >
         <div className="flex items-center justify-end w-full space-x-3">
           <div className="flex items-center justify-end w-[140px] ">
-            <ImageComponent
-              alt={'logo'}
-              h={'h-[60px] '}
-              w={'w-[100px]'}
-              src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png'}
-            />
+            <p className={`${stencilFont.className} text-[40px] text-black`}>AR756</p>
           </div>
           <div className="border-[1px] border-black flex-1 h-0 " />
           <h1 className="absolute w-full text-2xl text-black top-[4.3rem] left-8">COMODIDADES</h1>
