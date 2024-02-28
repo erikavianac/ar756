@@ -14,13 +14,14 @@ export default function FaqItemList({ item }: FaqItemListProps) {
     <div
       className={`shadow-lg border-[0.5px]  border-black/25 rounded-md py-2 px-2 flex flex-col gap-y-2 space-x-2 w-full ${isQuestionOpen ? " h-auto" :  " h-[60px] md:h-[40px]"} duration-300`}
       key={item.id}
+      onClick={() => setIsQuestionOpen(!isQuestionOpen)}
     >
       <div className="w-full flex justify-between items-center ">
         <p
           className={`text-gray-500 font-semibold text-[12px] md:text-[14px]`}
         >{`${item.question} ?`}</p>
         <IoIosArrowDown
-          onClick={() => setIsQuestionOpen(!isQuestionOpen)}
+          
           className={`${
             isQuestionOpen && "rotate-180"
           } transition duration-500 cursor-pointer`}
