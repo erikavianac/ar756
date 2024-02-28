@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function ConsultarPage() {
   return (
-    <div className="flex justify-center items-center pt-20">
+    <div className="flex justify-center items-center pt-28">
         <ConsultarFormComponent />
     </div>
   )
