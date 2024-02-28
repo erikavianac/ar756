@@ -14,6 +14,7 @@ import {
 import { FaTiktok } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
+import { stencilFont } from "@/fonts/constants";
 
 export function HomeHeaderComponent() {
   const { replace } = useRouter();
@@ -30,7 +31,7 @@ export function HomeHeaderComponent() {
           onClick={() => setMenuIsOpen(true)}
         />
       </ShowOnlyOnMobileComponent>
-      <ImageComponent
+     {/*  <ImageComponent
         alt={"logo"}
         h={"h-[6.25rem] lg:h-[9.375tem]"}
         w={"w-[15.625rem] lg:w-[18.75rem]"}
@@ -39,7 +40,9 @@ export function HomeHeaderComponent() {
         }
         containerClassname={"z-20"}
         onclik={() => replace("/")}
-      />
+        priority={true}
+      /> */}
+      <p className={`${stencilFont.className} text-[80px] text-black mt-10`}>AR756</p>
       {menuIsOpen && (
         <ModalMenuComponent
           onClose={handleCloseModal}
@@ -51,16 +54,7 @@ export function HomeHeaderComponent() {
               animate={{ opacity: 1 }}
               className="w-full "
             >
-              <ImageComponent
-                alt={"logo"}
-                h={"h-[3.25rem] "}
-                w={"w-[8.625rem]"}
-                src={
-                  "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1699297655/vpyhnm1o0zsfsj8httyz.png"
-                }
-                containerClassname={"z-20 mx-auto"}
-                onclik={() => replace("/")}
-              />
+               <p className={`${stencilFont.className} text-[70px] text-white pl-3`}>AR756</p>
             </motion.div>
             <motion.div
               transition={{
@@ -68,7 +62,7 @@ export function HomeHeaderComponent() {
                 delayChildren: 0.5,
                 staggerChildren: 0.2,
               }}
-              className="px-3 py-5 text-gray-400 font-semibold flex flex-col gap-y-3 mt-10"
+              className="px-3 py-5 text-gray-400 font-semibold flex flex-col gap-y-3"
             >
               <motion.p
                 initial={{ opacity: 0, x: -100 }}

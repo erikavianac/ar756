@@ -3,6 +3,7 @@
 import { AnimatedTitleComponent } from '@/components/utils/animatedTitle';
 import { AnimatedVerticalComponent } from '@/components/utils/animatedVertical';
 import { ImageComponent } from '@/components/utils/image';
+import { stencilFont } from '@/fonts/constants';
 import { motion } from 'framer-motion';
 
 export function WelcomeHeaderComponent() {
@@ -34,14 +35,7 @@ export function WelcomeHeaderComponent() {
         />
       </div>
       <AnimatedVerticalComponent className="flex justify-center items-center w-full">
-        <ImageComponent
-          alt={'logo AR756'}
-          h={'h-[80px] md:h-[100px] '}
-          w={'w-[220px] md:w-[320px]'}
-          src={
-            'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png'
-          }
-        />
+        <p className={`${stencilFont.className} text-[70px] text-balck`}>AR756</p>
       </AnimatedVerticalComponent>
     </>
   );

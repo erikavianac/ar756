@@ -14,6 +14,7 @@ import { ModalComponent } from '../utils/modal';
 import { ConsultarFormComponent } from '../consultar';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { stencilFont } from '@/fonts/constants';
 
 export function ComodidadeCardComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
@@ -46,12 +47,7 @@ export function ComodidadeCardComponent() {
     >
       <div className="relative flex items-center justify-end w-full space-x-3">
         <div className="flex items-center justify-end w-[14.375rem] ">
-          <ImageComponent
-            alt={'logo'}
-            h={'h-[60px] '}
-            w={'w-[100px]'}
-            src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png'}
-          />
+        <p className={`${stencilFont.className} text-[40px] text-black`}>AR756</p>
         </div>
         <motion.div
           initial={{ width: 0 }}
@@ -60,7 +56,7 @@ export function ComodidadeCardComponent() {
           viewport={{ once: true, amount: 'some' }}
           className="border-[1px] border-black  h-0 "
         />
-        <h1 className="absolute w-full text-2xl text-black top-[2.6rem] left-8">COMODIDADES</h1>
+        <h1 className={"absolute w-full text-2xl text-black top-[2.6rem] left-8"}>COMODIDADES</h1>
       </div>
       <div className="flex mt-8 gap-x-5 flex-1">
         <div className="space-y-3">

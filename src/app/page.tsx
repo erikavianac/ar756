@@ -6,31 +6,22 @@ import { ShowOnlyOnMobileComponent } from "@/components/utils/showOnlyOnMobile";
 import { ShowOnlyOnWebComponent } from "@/components/utils/showOnlyOnWeb";
 import { VideobgComponent } from "@/components/video/videobg";
 import { WelcomeComponent } from "@/components/welcome";
+import { data } from "@/hooks/data";
 
 export default async function Home() {
-
-  const [
+  const {
     cardImageList,
     mobileCarroucelmageList,
     imageList,
     imageSobreList,
     questionList,
     textRegrasList,
-    textSobreList
-  ] = await Promise.all([
-    fetch(`${process.env.SERVER_URL}/image/getByTag/Card/Web`).then(resp => resp.json()),
-    fetch(`${process.env.SERVER_URL}/image/getByTag/MainCarroucel/Mobile`).then(resp => resp.json()),
-    fetch(`${process.env.SERVER_URL}/image/list`).then(resp => resp.json()),
-    fetch(`${process.env.SERVER_URL}/image/getByTag/Sobre/Web`).then(resp => resp.json()),
-    fetch(`${process.env.SERVER_URL}/question/list`).then(resp => resp.json()),
-    fetch(`${process.env.SERVER_URL}/text/getByArea/regras`).then(resp => resp.json()),
-    fetch(`${process.env.SERVER_URL}/text/getByArea/sobre`).then(resp => resp.json())
-  ]);
-
+    textSobreList,
+  } = await data();
 
   return (
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
-      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList}/>
+      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} />
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>
         <MobileCarroucelComopnent />

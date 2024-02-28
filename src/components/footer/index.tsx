@@ -8,6 +8,7 @@ import { TbBrandFacebook, TbBrandInstagram, TbBrandWhatsapp } from 'react-icons/
 import AnchorComponent from '@/components/utils/anchor';
 import { ImageComponent } from '@/components/utils/image';
 import { AnimatedVerticalComponent } from '../utils/animatedVertical';
+import { stencilFont } from '@/fonts/constants';
 
 export function FooterComponent() {
   const { push } = useRouter();
@@ -21,13 +22,7 @@ export function FooterComponent() {
     <footer className="flex flex-col items-center justify-center w-full pb-10 md:pb-0 bg-zinc-900 md:items-start gap-y-4">
       <div className="flex flex-col items-center justify-center w-full md:h-[138px]  text-white  md:flex-row md:justify-between overflow-hidden  relative">
         <div className="relative ">
-          <ImageComponent
-            alt={'logo-branco'}
-            h={'h-[80px] md:h-[100px] '}
-            w={'w-[220px] md:w-[320px]'}
-            src={"https://res.cloudinary.com/dcjkvwbvh/image/upload/v1699297655/vpyhnm1o0zsfsj8httyz.png"}
-            containerClassname="z-30 absolute md:ml-5"
-          />
+        <p className={`${stencilFont.className} text-[80px] text-white`}>AR756</p>
           <div className="hidden md:flex md:absolute md:-mt-[120px]">
             <ImageComponent
               alt={'logo-branco'}

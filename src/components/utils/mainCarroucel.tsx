@@ -24,7 +24,7 @@ export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
     <div className="flex">
       <AnimatePresence mode="popLayout">
         <motion.div
-          className="max-h-screen min-h-screen h-full w-full"
+          className="max-h-screen min-h-screen h-full w-full relative"
           key={
             mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
           }

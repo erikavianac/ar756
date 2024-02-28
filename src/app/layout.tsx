@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { HomeHeaderComponent } from "@/components/header";
 import { FooterComponent } from "@/components/footer";
 import { GoogleTagManager } from "@next/third-parties/google";
+import LoadingPage from "@/components/utils/loadingPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,16 +27,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <html lang="en">
-      <body className={`${inter.className} w-full min-h-screen relative`}>
-      <Analytics/>
+      <body suppressHydrationWarning={true} className={`${inter.className} w-full min-h-screen relative`}>
+        <LoadingPage />
         <div id="modal-root" />
         <HomeHeaderComponent />
         {children}
         <FooterComponent />
       </body>
+      <Analytics/>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />
     </html>
   );
