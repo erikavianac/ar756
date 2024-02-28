@@ -17,7 +17,7 @@ export function WelcomeGridComponent({ imageList }: WelcomeGridProps) {
     >
       {imageList?.map((gridItem: ImageType, index: number) => {
         return (
-          <div key={gridItem?.id}>
+          <>
             <GridItemComponent
               gridItem={gridItem}
               index={index}
@@ -34,7 +34,7 @@ export function WelcomeGridComponent({ imageList }: WelcomeGridProps) {
                 imageList={imageList}
               />
             )}
-          </div>
+          </>
         );
       })}
     </div>
