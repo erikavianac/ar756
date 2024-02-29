@@ -15,6 +15,8 @@ import { FaTiktok } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { stencilFont } from "@/fonts/constants";
+import { AnimatedTitleComponent } from "../utils/animatedTitle";
+import { AnimatedSubTitleComponent } from "../utils/animatedText";
 
 export function HomeHeaderComponent() {
   const { replace } = useRouter();
@@ -31,7 +33,7 @@ export function HomeHeaderComponent() {
           onClick={() => setMenuIsOpen(true)}
         />
       </ShowOnlyOnMobileComponent>
-     {/*  <ImageComponent
+      {/*  <ImageComponent
         alt={"logo"}
         h={"h-[6.25rem] lg:h-[9.375tem]"}
         w={"w-[15.625rem] lg:w-[18.75rem]"}
@@ -42,7 +44,9 @@ export function HomeHeaderComponent() {
         onclik={() => replace("/")}
         priority={true}
       /> */}
-      <p className={`${stencilFont.className} text-[80px] text-black mt-10`}>AR756</p>
+      <p className={`${stencilFont.className} text-[80px] text-black mt-10`}>
+        AR756
+      </p>
       {menuIsOpen && (
         <ModalMenuComponent
           onClose={handleCloseModal}
@@ -54,7 +58,11 @@ export function HomeHeaderComponent() {
               animate={{ opacity: 1 }}
               className="w-full "
             >
-               <p className={`${stencilFont.className} text-[70px] text-white pl-3`}>AR756</p>
+              <p
+                className={`${stencilFont.className} text-[70px] text-white pl-3`}
+              >
+                AR756
+              </p>
             </motion.div>
             <motion.div
               transition={{
@@ -64,61 +72,51 @@ export function HomeHeaderComponent() {
               }}
               className="px-3 py-5 text-gray-400 font-semibold flex flex-col gap-y-3"
             >
-              <motion.p
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.4 }}
-                onClick={() => {
+              <AnimatedSubTitleComponent
+                className=""
+                text="Principal"
+                delay={0.4}
+                onclick={() => {
                   handleCloseModal();
                   replace("/");
                 }}
-              >
-                Principal
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.4 }}
-                onClick={() => {
+              />
+              <AnimatedSubTitleComponent
+                className=""
+                text="FAQ"
+                delay={0.5}
+                onclick={() => {
                   handleCloseModal();
                   replace("/faq");
                 }}
-              >
-                FAQ
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.6 }}
-                onClick={() => {
+              />
+              <AnimatedSubTitleComponent
+                className=""
+                text="Galeria"
+                delay={0.6}
+                onclick={() => {
                   handleCloseModal();
                   replace("/galeria");
                 }}
-              >
-                Galeria
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 0.8 }}
-                onClick={() => {
+              />
+              <AnimatedSubTitleComponent
+                className=""
+                text="Sobre nós"
+                delay={0.7}
+                onclick={() => {
                   handleCloseModal();
                   replace("/regras");
                 }}
-              >
-                Sobre nós
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.2, delay: 1 }}
-                onClick={() => {
+              />
+              <AnimatedSubTitleComponent
+                className=""
+                text=" Faça seu orçamento"
+                delay={0.8}
+                onclick={() => {
                   handleCloseModal();
                   replace("/consultar");
                 }}
-              >
-                Faça seu orçamento
-              </motion.p>
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -151,7 +149,6 @@ export function HomeHeaderComponent() {
                   initial={{ opacity: 0, y: 200 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, delay: 1.4 }}
-                  
                 >
                   <AnchorComponent
                     href="https://api.whatsapp.com/send/?phone=351910452428&text&type=phone_number&app_absent=0"

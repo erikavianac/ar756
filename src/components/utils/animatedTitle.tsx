@@ -6,9 +6,10 @@ interface AnimetedTitleProps {
   title: string;
   className: string;
   delay?: number;
+  onclick: () => void
 }
 
-export function AnimatedTitleComponent({ title, delay, className }: AnimetedTitleProps) {
+export function AnimatedTitleComponent({ title, delay, className, onclick }: AnimetedTitleProps) {
   const words = title.split('');
 
   const defaultAnimations = {
@@ -32,6 +33,7 @@ export function AnimatedTitleComponent({ title, delay, className }: AnimetedTitl
         duration: 1,
         staggerChildren: 0.05,
       }}
+      onClick={onclick}
     >
       {words.map((word: string, index: number) => {
         return (
