@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"
 import { HomeHeaderComponent } from "@/components/header";
@@ -7,7 +7,10 @@ import { FooterComponent } from "@/components/footer";
 import { GoogleTagManager } from "@next/third-parties/google";
 import LoadingPage from "@/components/utils/loadingPage";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title:{
@@ -29,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={`${inter.className} w-full min-h-screen relative`}>
+      <body suppressHydrationWarning={true} className={`${roboto.className} w-full min-h-screen relative`}>
         <LoadingPage />
         <div id="modal-root" />
         <HomeHeaderComponent />
