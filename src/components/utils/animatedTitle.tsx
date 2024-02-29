@@ -6,7 +6,7 @@ interface AnimetedTitleProps {
   title: string;
   className: string;
   delay?: number;
-  onclick: () => void
+  onclick?: () => void
 }
 
 export function AnimatedTitleComponent({ title, delay, className, onclick }: AnimetedTitleProps) {
