@@ -81,7 +81,7 @@ export function ExploreComponent({
       <div className=" text-[#555D2D] w-full h-full flex flex-col  justify-center pb-5 items-center gap-y-8 pt-8 px-2 mx-auto  lg:gap-y-16  lg:-mt-16">
         <div className="flex items-center justify-center w-full h-full">
           <p
-            className={`${stencilFont.className}  text-center text-black text- lg:text-[18px] xl:text-[40px] tracking-[0.25rem] font-semibold`}
+            className={`${stencilFont.className}  text-center text-black text-[20px] lg:text-[18px] xl:text-[40px] tracking-[0.25rem] font-semibold`}
           >
             MAIS INFORMAÇÕES
           </p>
