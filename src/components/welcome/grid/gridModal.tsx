@@ -46,6 +46,7 @@ export function GridModalComponent({
 
   return (
     <ModalComponent
+    styleExternal="bg-black"
       onClose={() => setIsModalOpen(false)}
       styleInternal="bg-transparent flex flex-row w-[90%] rounded-md  md:h-[31.25rem] md:w-[60rem] relative"
     >

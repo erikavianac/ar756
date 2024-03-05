@@ -4,6 +4,7 @@ import GaleriaListComponent from "./galeriaList";
 import { ImageComponent } from "@/components/utils/image";
 import CloseButtonComponent from "@/components/utils/closeButton";
 import { ImageType } from "@/types";
+import { stencilFont } from "@/fonts/constants";
 
 interface GaleriaCardProps {
   imageList: ImageType[] | undefined;
@@ -22,17 +23,7 @@ export function GaleriaCardComponent({
     <div className="bg-white  max-w-[97%] min-w-[97%] min-h-[97%]  overflow-y-auto   relative  rounded-md   md:rounded-md py-2 px-5 flex flex-col gap-y-3  z-30  md:mt-2">
       {handleCloseGaleriaModa && (
         <>
-          <div className="flex items-center justify-center w-full">
-            <ImageComponent
-              alt={"logo"}
-              h={"h-[130px] md:h-[180px]"}
-              w={"w-[150px] md:w-[250px]"}
-              src={
-                "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"
-              }
-              containerClassname={"z-20 rounded-md -ml-2"}
-            />
-          </div>
+          <p className={`${stencilFont.className} text-[80px]  z-50 mx-auto`}>AR756</p>
           <CloseButtonComponent handleCloseModal={handleCloseGaleriaModa} />
         </>
       )}

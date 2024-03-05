@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent  overflow-y-scroll">
       <body suppressHydrationWarning={true} className={`${roboto.className} w-full min-h-screen relative`}>
         <LoadingPage />
         <div id="modal-root" />

@@ -22,7 +22,7 @@ export function FooterComponent() {
     <footer className="flex flex-col items-center justify-center w-full pb-10 md:pb-0 bg-zinc-900 md:items-start gap-y-4">
       <div className="flex flex-col items-center justify-center w-full md:h-[138px]  text-white  md:flex-row md:justify-between overflow-hidden  relative">
         <div className="relative ">
-          <p className={`${stencilFont.className} text-[100px] text-white z-50 md:absolute md:-mt-[70px] ml-[80px]`}>AR756</p>
+          <p className={`${stencilFont.className} text-[100px] text-white z-30 md:absolute md:-mt-[70px] ml-[80px]`}>AR756</p>
           <div className="hidden md:flex md:absolute md:-mt-[70px]">
             <ImageComponent
               alt={'logo-branco'}

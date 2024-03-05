@@ -12,7 +12,7 @@ export async function WelcomeTextsComponent() {
   ).then((resp) => resp.json());
 
   return (
-    <div className="flex flex-col gap-y-2 mt-10">
+    <div className="flex flex-col gap-y-2 mt-10 xl:mt-5">
     {welcomeTexts.map((text: TextType) => {
         return (
           <AnimatedVerticalComponent

@@ -13,7 +13,7 @@ export function WelcomeGridComponent({ imageList }: WelcomeGridProps) {
   const [selectedImageId, setSelectedImageId] = useState<string | undefined>("")
   return (
     <div
-      className={`relative w-full grid grid-cols-14 grid-rows-8 gap-2 overflow-hidden h-[25rem] xl:h-[28.125rem]`}
+      className={`relative w-full grid grid-cols-14 grid-rows-8 gap-2 overflow-hidden  h-[20.125rem]  min-[2300px]:h-[25rem]`}
     >
       {imageList?.map((gridItem: ImageType, index: number) => {
         return (
