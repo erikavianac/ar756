@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import CloseButtonComponent from "../utils/closeButton";
@@ -17,6 +17,7 @@ import { timesVisitAvailabel } from "@/constants/horarioLista";
 import { ImageComponent } from "../utils/image";
 import { ImageType } from "@/types";
 import { useRouter } from "next/navigation";
+import Scrollbars from "react-custom-scrollbars";
 
 interface ConsultarFromProps {
   handleCloseReservaModal?: () => void;
@@ -52,7 +53,7 @@ export function ConsultarFormComponent({
     "Pessoais"
   );
 
-  const {replace} = useRouter()
+  const { replace } = useRouter();
   const [imageList, setImageList] = useState<ImageType[] | null>(null);
   const eventoForm = formMode.includes("Evento");
   const pessoaisForm = formMode.includes("Pessoais");
@@ -80,13 +81,13 @@ export function ConsultarFormComponent({
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
       encType="multipart/form-data"
-      className="overflow-hidden rounded-md lg:max-w-[500px] lg:max-h-[750px] max-w-[390px] w-full  my-10  
+      className=" rounded-md lg:max-w-[500px] lg:max-h-[650px] max-w-[390px] w-full  my-10  
         relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
-        bg-white z-30"
+        bg-white z-30 overflow-y-auto overflow-x-hidden scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
     >
-      {handleCloseReservaModal &&
-      <CloseButtonComponent handleCloseModal={handleCloseReservaModal} />
-      }
+      {handleCloseReservaModal && (
+        <CloseButtonComponent handleCloseModal={handleCloseReservaModal} />
+      )}
       <h1 className="md:text-[21px] w-full  text-[18px] text-center py-5 ">
         {isSendMailSuccess ? "" : "CONSULTAR ORCAMENTO"}
       </h1>

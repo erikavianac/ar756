@@ -42,7 +42,7 @@ export default function GaleriaListComponent({
     <Scrollbars
       style={{
         width: "100%",
-        height: 550,
+        height: 450,
         gap: 20,
       }}
     >
@@ -73,6 +73,7 @@ export default function GaleriaListComponent({
             if(item?.tag === "Area"){
               return
             }
+
             return (
               <GaleriaItemComponent imageList={imageList} index={index} item={item} key={item?.id}/>
             );
