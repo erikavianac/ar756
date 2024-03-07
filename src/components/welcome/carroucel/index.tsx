@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { ImageType } from '@/types';
-import Image from 'next/image';
 
 interface WelcomeCarroucelProps {
   imageList: ImageType[];
@@ -48,14 +47,10 @@ export function WelcomeCarroucelComponent({ imageList }: WelcomeCarroucelProps) 
         <AnimatePresence>
           {imageList?.map((item: ImageType) => {
             return (
-              <Image
-                src={item?.imageUrl}
-                key={item?.id}
+              <motion.img
                 className="min-w-full min-h-full overflow-hidden rounded-md "
-                alt="foto"
-                fill
-                priority
-                quality={50}
+                key={item?.id}
+                src={item?.imageUrl}
               />
             );
           })}

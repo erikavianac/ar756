@@ -16,11 +16,9 @@ export async function WelcomeComponent() {
   ] = await Promise.all([
     fetch(`${process.env.SERVER_URL}/image/getByTag/Carroucel/Mobile`, {
       method: "GET",
-      cache: "no-cache",
     }).then(resp => resp.json()),
     fetch(`${process.env.SERVER_URL}/image/getByTag/Grid/Web`, {
       method: "GET",
-      cache: "no-cache",
     }).then(resp => resp.json())
   ]);
 
@@ -31,7 +29,6 @@ export async function WelcomeComponent() {
         <WelcomeTextsComponent />
       </div>
       <ShowOnlyOnMobileComponent>
-
         <WelcomeCarroucelComponent imageList={welcomeMobileImageList} />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
