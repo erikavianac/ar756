@@ -7,7 +7,6 @@ export async function WelcomeTextsComponent() {
     `${process.env.SERVER_URL}/text/getByArea/Welcome`,
     {
       method: 'GET',
-      cache: 'no-cache',
     },
   ).then((resp) => resp.json());
 
