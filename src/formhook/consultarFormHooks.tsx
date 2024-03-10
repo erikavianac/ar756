@@ -57,6 +57,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
 
   async function handleOnSubmit({
     nome,
+    tipo,
     email,
     texto,
     limpeza,
@@ -86,7 +87,6 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       `https://art56-server-v2.vercel.app/value/list/`,
       {
         method: "GET",
-        cache: "no-cache",
       }
     ).then(async (resp) => {
       return await resp.json();
@@ -110,7 +110,8 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
 
     const diaria = calcDiaria(
       convidados,
-      dataExtra.find((item: ValueType) => item.titulo === "Por Pessoa")?.valor
+      dataExtra.find((item: ValueType) => item.titulo === "Por Pessoa")?.valor,
+      tipo
     );
 
     const qtdHorasExtras = calcQtdHoraExtra(diaria, duracaoFesta);

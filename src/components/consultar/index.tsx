@@ -18,6 +18,14 @@ import { ImageComponent } from "../utils/image";
 import { ImageType } from "@/types";
 import { useRouter } from "next/navigation";
 import Scrollbars from "react-custom-scrollbars";
+import { stencilFont } from "@/fonts/constants";
+import AnchorComponent from "../utils/anchor";
+import {
+  TbBrandFacebook,
+  TbBrandInstagram,
+  TbBrandWhatsapp,
+} from "react-icons/tb";
+import { FaTiktok } from "react-icons/fa";
 
 interface ConsultarFromProps {
   handleCloseReservaModal?: () => void;
@@ -49,15 +57,17 @@ export function ConsultarFormComponent({
     handleStartHourChange,
   } = UseConsultaFormHooks();
 
-  const [formMode, setformMode] = useState<"Pessoais" | "Evento" | "Success">(
-    "Pessoais"
-  );
+  const [formMode, setformMode] = useState<
+    "Pessoais" | "Evento" | "Success" | "Tipo"
+  >("Tipo");
 
   const { replace } = useRouter();
   const [imageList, setImageList] = useState<ImageType[] | null>(null);
   const eventoForm = formMode.includes("Evento");
+  const typeForm = formMode.includes("Tipo");
   const pessoaisForm = formMode.includes("Pessoais");
 
+  const controlsType = useAnimation();
   const controlsEventos = useAnimation();
   const controlsSuccess = useAnimation();
   const controlsPessoais = useAnimation();
@@ -74,6 +84,10 @@ export function ConsultarFormComponent({
       controlsEventos.start(opacityHidde);
       controlsSuccess.start(opacityShow);
       setformMode("Success");
+    }
+
+    if (typeForm) {
+      controlsPessoais.start(opacityHidde);
     }
   }, [isSendMailSuccess, controlsSuccess]);
 
@@ -96,13 +110,122 @@ export function ConsultarFormComponent({
           x: 0,
         }}
         animate={{
-          x: pessoaisForm ? 0 : eventoForm ? "-100%" : "-200%",
+          x: typeForm ? 0 : pessoaisForm ? "-100%" : "-200%",
           transition: {
             duration: 0.5,
           },
         }}
         className="flex w-full h-full"
       >
+        <motion.div
+          className="z-50 flex flex-col min-w-full  h-full"
+          animate={controlsType}
+        >
+          <p className="mx-auto">Que tipo de locacao voce procura?</p>
+          <div className="px-10 flex flex(-col  gap-y-4 mt-4">
+            <div
+              className="opacity-[1.5] h-[12rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
+    active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative"
+              onClick={() => {
+                setformMode("Pessoais");
+                setValue("tipo", "Festa")
+                controlsType.start(opacityHidde);
+                controlsPessoais.start(opacityShow);
+              }}
+            >
+              <div className="bg-black/30 w-full h-full absolute z-30 " />
+              <ImageComponent
+                src="https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704735967/v4ri3bjodxhrrmznvawi.jpg"
+                alt="foto"
+                h="h-full"
+                w="w-full"
+              />
+              <p
+                className={`${stencilFont.className} absolute inset-0 z-30 text-white  flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
+              >
+                EVENTO
+              </p>
+            </div>
+            <div
+              className="opacity-[1.5] h-[12rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
+    active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative"
+              onClick={() => {
+                setformMode("Pessoais");
+                setValue("tipo", "Filmagem")
+                controlsType.start(opacityHidde);
+                controlsPessoais.start(opacityShow);
+              }}
+            >
+              <div className="bg-black/30 w-full h-full absolute z-30 " />
+              <ImageComponent
+                src="https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704736008/yzp7gvs0ekodg00bz7zr.jpg"
+                alt="foto"
+                h="h-full"
+                w="w-full"
+              />
+              <p
+                className={`${stencilFont.className} absolute inset-0 z-30 text-white  flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
+              >
+                FILMAGEM
+              </p>
+            </div>
+          </div>
+          <div className="w-full mt-5">
+            <p className={`${stencilFont.className} text-[70px] text-center`}>
+              AR756
+            </p>
+            <div className="mx-auto flex justify-center items-center gap-x-3">
+              <div>
+                <AnchorComponent
+                  href="https://api.whatsapp.com/send/?phone=351910452428&text&type=phone_number&app_absent=0"
+                  icon={
+                    <TbBrandWhatsapp
+                      className="cursor-pointer text-white"
+                      size={30}
+                    />
+                  }
+                  bgColor="bg-[#25D366] border-[2px] border-white"
+                />
+              </div>
+              <div>
+                <AnchorComponent
+                  href="https://www.facebook.com/profile.php?id=100085832906065"
+                  icon={
+                    <TbBrandFacebook
+                      className="cursor-pointer  text-white"
+                      size={30}
+                    />
+                  }
+                  bgColor=" bg-[#3b5998] border-[2px] border-white"
+                />
+              </div>
+              <div>
+                <AnchorComponent
+                  href="https://www.tiktok.com/@ar756_"
+                  icon={
+                    <FaTiktok
+                      className=" cursor-pointer text-white"
+                      size={30}
+                    />
+                  }
+                  bgColor=" bg-black border-[2px] border-white w-[45px]"
+                />
+              </div>
+              <div>
+                <AnchorComponent
+                  href="https://www.instagram.com/ar756_/"
+                  icon={
+                    <TbBrandInstagram
+                      className="cursor-pointer text-white "
+                      size={30}
+                    />
+                  }
+                  bgColor="bg-gradient-to-r from-fuchsia-500 to-pink-500 border-[2px] border-white"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
         <motion.div
           initial={{
             x: 0,
@@ -187,7 +310,23 @@ export function ConsultarFormComponent({
               errorsMsg={errors?.trafegoCanal?.message}
             />
           </div>
-          <motion.div className="flex items-end justify-end">
+          <motion.div className="flex items-end justify-between flex-1 absolute bottom-0 w-full">
+            <ButtonComponent
+              icon={<HiArrowLeft size={20} />}
+              onClick={() => {
+                setformMode("Tipo");
+                controlsPessoais.start(opacityHidde);
+                controlsType.start(opacityShow);
+              }}
+              type="button"
+              className={`
+                  z-30
+                  text-[15px]
+                  tracking-[3px] text-black
+                  transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
+                  flex justify-center items-center flex-row-reverse  gap-x-2
+                    `}
+            />
             <ButtonComponent
               title="PROXIMO"
               onClick={async () => {

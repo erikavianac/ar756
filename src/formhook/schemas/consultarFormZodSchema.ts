@@ -7,6 +7,9 @@ export const consultarFormSchema = z.object({
   conheceEspaco: z.boolean({
     required_error: 'Este campo e obrigatorio!',
   }),
+  tipo: z.string({
+    required_error: 'Este campo e obrigatorio!',
+  }),
   horarioFim: z
     .string()
     .nonempty('Este campo é obrigatório!')
