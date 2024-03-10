@@ -8,18 +8,15 @@ export function calcDiaria(
 
     result += convidados * ppessoaValue;
 
-    return result;
+    return result < 2500 ? 2500 : result;
   }
 
   if (tipo === "Filmagem") {
-    let result = 2500;
+    let result = 0;
 
-    if(convidados > 16){
-      const extra = 16 - convidados
-      return result += extra *  ppessoaValue;
-    }else{
-      return result;
-    }
+    result += convidados * 50;
+
+    return result < 2500 ? 2500 : result;
   }
 
   return 0

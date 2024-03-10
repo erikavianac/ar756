@@ -60,12 +60,13 @@ export function ConsultarFormComponent({
   const [formMode, setformMode] = useState<
     "Pessoais" | "Evento" | "Success" | "Tipo"
   >("Tipo");
-
+  console.log(formMode);
   const { replace } = useRouter();
   const [imageList, setImageList] = useState<ImageType[] | null>(null);
   const eventoForm = formMode.includes("Evento");
   const typeForm = formMode.includes("Tipo");
   const pessoaisForm = formMode.includes("Pessoais");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const controlsType = useAnimation();
   const controlsEventos = useAnimation();
@@ -89,7 +90,25 @@ export function ConsultarFormComponent({
     if (typeForm) {
       controlsPessoais.start(opacityHidde);
     }
-  }, [isSendMailSuccess, controlsSuccess]);
+    console.log(formMode);
+  }, [isSendMailSuccess, controlsSuccess, formMode]);
+
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
+  };
+
+  // Executa a função ao montar o componente
+  useEffect(() => {
+    checkScreenSize();
+
+    // Adiciona um listener para verificar quando a tela for redimensionada
+    window.addEventListener("resize", checkScreenSize);
+
+    // Remove o listener ao desmontar o componente para evitar vazamentos de memória
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
 
   return (
     <form
@@ -97,7 +116,8 @@ export function ConsultarFormComponent({
       encType="multipart/form-data"
       className=" rounded-md lg:max-w-[500px] lg:max-h-[650px] max-w-[390px] w-full  my-10  
         relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
-        bg-white z-30 overflow-y-auto overflow-x-hidden scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        bg-white z-30 overflow-y-auto overflow-x-hidden scrollbar-thumb-rounded-full 
+        scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
     >
       {handleCloseReservaModal && (
         <CloseButtonComponent handleCloseModal={handleCloseReservaModal} />
@@ -110,7 +130,7 @@ export function ConsultarFormComponent({
           x: 0,
         }}
         animate={{
-          x: typeForm ? 0 : pessoaisForm ? "-100%" : "-200%",
+          x: typeForm ? 0 : pessoaisForm ? "-100%" : eventoForm ? "-200%" : "-300%",
           transition: {
             duration: 0.5,
           },
@@ -122,13 +142,13 @@ export function ConsultarFormComponent({
           animate={controlsType}
         >
           <p className="mx-auto">Que tipo de locacao voce procura?</p>
-          <div className="px-10 flex flex(-col  gap-y-4 mt-4">
+          <div className="px-10 flex flex-col  gap-y-4 mt-4">
             <div
               className="opacity-[1.5] h-[12rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
     active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative"
               onClick={() => {
                 setformMode("Pessoais");
-                setValue("tipo", "Festa")
+                setValue("tipo", "Festa");
                 controlsType.start(opacityHidde);
                 controlsPessoais.start(opacityShow);
               }}
@@ -137,8 +157,8 @@ export function ConsultarFormComponent({
               <ImageComponent
                 src="https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704735967/v4ri3bjodxhrrmznvawi.jpg"
                 alt="foto"
-                h="h-full"
-                w="w-full"
+                h="h-[500px]"
+                w="w-[500px]"
               />
               <p
                 className={`${stencilFont.className} absolute inset-0 z-30 text-white  flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
@@ -151,7 +171,7 @@ export function ConsultarFormComponent({
     active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative"
               onClick={() => {
                 setformMode("Pessoais");
-                setValue("tipo", "Filmagem")
+                setValue("tipo", "Filmagem");
                 controlsType.start(opacityHidde);
                 controlsPessoais.start(opacityShow);
               }}
@@ -160,8 +180,8 @@ export function ConsultarFormComponent({
               <ImageComponent
                 src="https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704736008/yzp7gvs0ekodg00bz7zr.jpg"
                 alt="foto"
-                h="h-full"
-                w="w-full"
+                h="h-[500px]"
+                w="w-[500px]"
               />
               <p
                 className={`${stencilFont.className} absolute inset-0 z-30 text-white  flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
@@ -170,61 +190,63 @@ export function ConsultarFormComponent({
               </p>
             </div>
           </div>
-          <div className="w-full mt-5">
-            <p className={`${stencilFont.className} text-[70px] text-center`}>
-              AR756
-            </p>
-            <div className="mx-auto flex justify-center items-center gap-x-3">
-              <div>
-                <AnchorComponent
-                  href="https://api.whatsapp.com/send/?phone=351910452428&text&type=phone_number&app_absent=0"
-                  icon={
-                    <TbBrandWhatsapp
-                      className="cursor-pointer text-white"
-                      size={30}
-                    />
-                  }
-                  bgColor="bg-[#25D366] border-[2px] border-white"
-                />
-              </div>
-              <div>
-                <AnchorComponent
-                  href="https://www.facebook.com/profile.php?id=100085832906065"
-                  icon={
-                    <TbBrandFacebook
-                      className="cursor-pointer  text-white"
-                      size={30}
-                    />
-                  }
-                  bgColor=" bg-[#3b5998] border-[2px] border-white"
-                />
-              </div>
-              <div>
-                <AnchorComponent
-                  href="https://www.tiktok.com/@ar756_"
-                  icon={
-                    <FaTiktok
-                      className=" cursor-pointer text-white"
-                      size={30}
-                    />
-                  }
-                  bgColor=" bg-black border-[2px] border-white w-[45px]"
-                />
-              </div>
-              <div>
-                <AnchorComponent
-                  href="https://www.instagram.com/ar756_/"
-                  icon={
-                    <TbBrandInstagram
-                      className="cursor-pointer text-white "
-                      size={30}
-                    />
-                  }
-                  bgColor="bg-gradient-to-r from-fuchsia-500 to-pink-500 border-[2px] border-white"
-                />
+          {!isSmallScreen && (
+            <div className="w-full mt-5">
+              <p className={`${stencilFont.className} text-[70px] text-center`}>
+                AR756
+              </p>
+              <div className="mx-auto flex justify-center items-center gap-x-3">
+                <div>
+                  <AnchorComponent
+                    href="https://api.whatsapp.com/send/?phone=351910452428&text&type=phone_number&app_absent=0"
+                    icon={
+                      <TbBrandWhatsapp
+                        className="cursor-pointer text-white"
+                        size={30}
+                      />
+                    }
+                    bgColor="bg-[#25D366] border-[2px] border-white"
+                  />
+                </div>
+                <div>
+                  <AnchorComponent
+                    href="https://www.facebook.com/profile.php?id=100085832906065"
+                    icon={
+                      <TbBrandFacebook
+                        className="cursor-pointer  text-white"
+                        size={30}
+                      />
+                    }
+                    bgColor=" bg-[#3b5998] border-[2px] border-white"
+                  />
+                </div>
+                <div>
+                  <AnchorComponent
+                    href="https://www.tiktok.com/@ar756_"
+                    icon={
+                      <FaTiktok
+                        className=" cursor-pointer text-white"
+                        size={30}
+                      />
+                    }
+                    bgColor=" bg-black border-[2px] border-white w-[45px]"
+                  />
+                </div>
+                <div>
+                  <AnchorComponent
+                    href="https://www.instagram.com/ar756_/"
+                    icon={
+                      <TbBrandInstagram
+                        className="cursor-pointer text-white "
+                        size={30}
+                      />
+                    }
+                    bgColor="bg-gradient-to-r from-fuchsia-500 to-pink-500 border-[2px] border-white"
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </motion.div>
         <motion.div
           initial={{
@@ -573,17 +595,8 @@ export function ConsultarFormComponent({
             opacity: 0,
           }}
           animate={controlsSuccess}
-          className="flex flex-col items-center justify-start min-w-full gap-y-2"
+          className="flex flex-col items-center justify-center min-w-full gap-y-2"
         >
-          <ImageComponent
-            alt={"logo"}
-            h={"h-[200px] md:h-[300px] "}
-            w={"w-[200px] md:w-[400px]"}
-            src={
-              "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"
-            }
-            containerClassname={"z-20"}
-          />
           <p className="text-[15px] md:text-[20px] font-semibold text-center md:w-[430px] mx-auto ">
             Obrigado {nomeWatch} !
           </p>
@@ -593,6 +606,63 @@ export function ConsultarFormComponent({
               orcamento do seu evento.
             </p>
           </div>
+          {!isSmallScreen && (
+            <div className="w-full mt-5">
+              <p className={`${stencilFont.className} text-[70px] text-center`}>
+                AR756
+              </p>
+              <div className="mx-auto flex justify-center items-center gap-x-3">
+                <div>
+                  <AnchorComponent
+                    href="https://api.whatsapp.com/send/?phone=351910452428&text&type=phone_number&app_absent=0"
+                    icon={
+                      <TbBrandWhatsapp
+                        className="cursor-pointer text-white"
+                        size={30}
+                      />
+                    }
+                    bgColor="bg-[#25D366] border-[2px] border-white"
+                  />
+                </div>
+                <div>
+                  <AnchorComponent
+                    href="https://www.facebook.com/profile.php?id=100085832906065"
+                    icon={
+                      <TbBrandFacebook
+                        className="cursor-pointer  text-white"
+                        size={30}
+                      />
+                    }
+                    bgColor=" bg-[#3b5998] border-[2px] border-white"
+                  />
+                </div>
+                <div>
+                  <AnchorComponent
+                    href="https://www.tiktok.com/@ar756_"
+                    icon={
+                      <FaTiktok
+                        className=" cursor-pointer text-white"
+                        size={30}
+                      />
+                    }
+                    bgColor=" bg-black border-[2px] border-white w-[45px]"
+                  />
+                </div>
+                <div>
+                  <AnchorComponent
+                    href="https://www.instagram.com/ar756_/"
+                    icon={
+                      <TbBrandInstagram
+                        className="cursor-pointer text-white "
+                        size={30}
+                      />
+                    }
+                    bgColor="bg-gradient-to-r from-fuchsia-500 to-pink-500 border-[2px] border-white"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </form>

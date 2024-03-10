@@ -30,6 +30,7 @@ export interface ValueType{
 
 export interface CreateOrcamentoReqBody {
   trafegoCanal: string;
+  tipo: string;
   conheceEspaco: boolean;
   dataFim: Date;
   dataInicio: Date;
