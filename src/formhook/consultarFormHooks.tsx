@@ -111,7 +111,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
     const diaria = calcDiaria(
       convidados,
       dataExtra.find((item: ValueType) => item.titulo === "Por Pessoa")?.valor,
-      tipo
+      tipo,
     );
 
     const qtdHorasExtras = calcQtdHoraExtra(diaria, duracaoFesta);
@@ -122,6 +122,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       nome,
       texto,
       email,
+      tipo,
       total,
       dataFim: final,
       limpeza,

@@ -9,7 +9,6 @@ export default async function sendOrcamentoEmail(
     `${process.env.SERVER_URL}/orcamento/create`,
     {
       method: "POST",
-      cache: "no-cache",
       headers: {
         "Content-Type": "application/json",
       },
