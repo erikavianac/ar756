@@ -79,7 +79,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       horarioInicio: horarioInicio,
     });
   
-    const final = moment(new Date(dataFim)).utcOffset("-03:00").toDate();
+    const final = moment(new Date(dataInicial)).utcOffset("-03:00").toDate();
     const inicial = moment(new Date(dataFim)).utcOffset("-03:00").toDate();
     console.log(final)
     const duracaoFesta = calcDuracaoFesta(inicial, final);
