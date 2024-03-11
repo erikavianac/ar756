@@ -125,7 +125,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       email,
       tipo,
       total,
-      dataFim: new Date(final),
+      dataFim: moment(final).toDate(),
       limpeza,
       telefone,
       seguranca,
@@ -136,7 +136,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       qtdHorasExtras,
       valorHoraExtra,
       valorBase: diaria,
-      dataInicio: new Date(inicial),
+      dataInicio:  moment(inicial).toDate(),
     });
     console.log(orcamento)
     if(orcamento.id){
