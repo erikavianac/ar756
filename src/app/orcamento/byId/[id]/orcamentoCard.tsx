@@ -2,11 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { BugdetType } from "@/types";
-import { format } from "date-fns-tz";
 import moment from "moment";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import { BiMailSend, BiTrash } from "react-icons/bi";
-import { FcCheckmark } from "react-icons/fc";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { SlPeople } from "react-icons/sl";
@@ -24,10 +22,8 @@ import { opacityHidde, opacityShow, shakeAnimation } from "@/constants";
 import { ImageComponent } from "@/components/utils/image";
 import Link from "next/link";
 import { updateOrcamentoActionServer } from "@/action/updateOrcamento";
-import infoOrcamentoinfo from "./inforcamentoinfo";
 import InfoOrcamentoinfo from "./inforcamentoinfo";
 import LoadingOrcamentoComponent from "./loadingOrcamento";
-import ptBR from 'date-fns/locale/pt-BR'
 
 interface OrcamentoCardProps {
   orcamentoByid: BugdetType | undefined;
@@ -206,9 +202,9 @@ export default function OrcamentoCardComponent({
             <AiOutlineClockCircle size={20} />
             <p className="text-[12px] md:text-sm">{`${
               orcamentoByid?.dataInicio &&
-              format(orcamentoByid?.dataInicio, "HH:mm", { timeZone: 'America/Sao_Paulo' } )
+              moment.tz(orcamentoByid?.dataInicio.toDateString(), "America/Sao_Paulo")
             } - ${
-              orcamentoByid?.dataFim && format(orcamentoByid?.dataFim, "HH:mm",{timeZone: "America/Sao_Paulo"})
+              orcamentoByid?.dataFim && moment.tz(orcamentoByid?.dataFim.toDateString(), "America/Sao_Paulo")
             } (${duracaoFesta}hrs)`}</p>
           </div>
           <div className="flex items-center justify-center gap-x-2">
