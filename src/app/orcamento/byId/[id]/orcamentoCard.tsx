@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { BugdetType } from "@/types";
-import moment from "moment";
+import moment from "moment-timezone";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import { BiMailSend, BiTrash } from "react-icons/bi";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
@@ -202,9 +202,9 @@ export default function OrcamentoCardComponent({
             <AiOutlineClockCircle size={20} />
             <p className="text-[12px] md:text-sm">{`${
               orcamentoByid?.dataInicio &&
-              moment.tz(orcamentoByid?.dataInicio.toDateString(), "America/Sao_Paulo")
+              moment.tz(orcamentoByid?.dataInicio, "America/Sao_Paulo").format("HH:mm")
             } - ${
-              orcamentoByid?.dataFim && moment.tz(orcamentoByid?.dataFim.toDateString(), "America/Sao_Paulo")
+              orcamentoByid?.dataFim && moment.tz(orcamentoByid?.dataFim, "America/Sao_Paulo").format("HH:mm")
             } (${duracaoFesta}hrs)`}</p>
           </div>
           <div className="flex items-center justify-center gap-x-2">
