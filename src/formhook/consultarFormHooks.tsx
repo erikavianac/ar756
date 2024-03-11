@@ -79,10 +79,10 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       horarioInicio: horarioInicio,
     });
   
-    const final = new Date(dataFim);
-    const inicial = new Date(dataInicial);
+    const final = new Date(dataFim).toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
+    const inicial = new Date(dataInicial).toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
 
-    const duracaoFesta = calcDuracaoFesta(inicial, final);
+    const duracaoFesta = 6;
 
     const valueList = await fetch(
       `https://art56-server-v2.vercel.app/value/list/`,
@@ -125,7 +125,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       email,
       tipo,
       total,
-      dataFim: moment.tz(final, "America/Sao_Paulo").toDate(),
+      dataFim: new Date(final),
       limpeza,
       telefone,
       seguranca,
@@ -136,7 +136,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       qtdHorasExtras,
       valorHoraExtra,
       valorBase: diaria,
-      dataInicio: moment.tz(inicial, "America/Sao_Paulo").toDate(),
+      dataInicio: new Date(inicial),
     });
     console.log(orcamento)
     if(orcamento.id){
