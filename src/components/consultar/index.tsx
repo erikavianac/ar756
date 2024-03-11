@@ -26,6 +26,7 @@ import {
   TbBrandWhatsapp,
 } from "react-icons/tb";
 import { FaTiktok } from "react-icons/fa";
+import CarouselComponent from "../utils/carroucelv2";
 
 interface ConsultarFromProps {
   handleCloseReservaModal?: () => void;
@@ -130,7 +131,13 @@ export function ConsultarFormComponent({
           x: 0,
         }}
         animate={{
-          x: typeForm ? 0 : pessoaisForm ? "-100%" : eventoForm ? "-200%" : "-300%",
+          x: typeForm
+            ? 0
+            : pessoaisForm
+            ? "-100%"
+            : eventoForm
+            ? "-200%"
+            : "-300%",
           transition: {
             duration: 0.5,
           },
@@ -141,7 +148,7 @@ export function ConsultarFormComponent({
           className="z-50 flex flex-col min-w-full  h-full"
           animate={controlsType}
         >
-          <p className="mx-auto">Que tipo de locacao voce procura?</p>
+          <p className="mx-auto">Que tipo de locação você procura?</p>
           <div className="px-10 flex flex-col  gap-y-4 mt-4">
             <div
               className="opacity-[1.5] h-[12rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
@@ -475,7 +482,7 @@ export function ConsultarFormComponent({
               </div>
             </div>
             <InputComponent<ConsultarFormData>
-              title="Convidados"
+              title={watch("tipo") === "Filmagem" ? "Colaboradores" : "Convidados"}
               entity="convidados"
               type="number"
               max={100}
@@ -595,20 +602,11 @@ export function ConsultarFormComponent({
             opacity: 0,
           }}
           animate={controlsSuccess}
-          className="flex flex-col items-center justify-center min-w-full gap-y-2"
+          className="flex flex-col items-center justify-center min-w-full gap-y-5"
         >
-          <p className="text-[15px] md:text-[20px] font-semibold text-center md:w-[430px] mx-auto ">
-            Obrigado {nomeWatch} !
-          </p>
-          <div className="w-[80%] mx-auto text-center flex flex-col gap-y-5">
-            <p className="text-[13px] md:text-[16px] font-semibold text-center md:w-[430px] mx-auto ">
-              Encaminhamos para seu email {emailWatch} uma simulacao do
-              orcamento do seu evento.
-            </p>
-          </div>
           {!isSmallScreen && (
             <div className="w-full mt-5">
-              <p className={`${stencilFont.className} text-[70px] text-center`}>
+              <p className={`${stencilFont.className}  text-[70px] text-center`}>
                 AR756
               </p>
               <div className="mx-auto flex justify-center items-center gap-x-3">
@@ -663,6 +661,16 @@ export function ConsultarFormComponent({
               </div>
             </div>
           )}
+
+          <p className="text-[15px] md:text-[20px] font-semibold text-center md:w-[430px] mx-auto ">
+            Obrigado {nomeWatch} !
+          </p>
+          <div className="w-[80%] mx-auto text-center flex flex-col gap-y-5">
+            <p className="text-[13px] md:text-[16px] font-semibold text-center  mx-auto ">
+              Encaminhamos para seu email {emailWatch} uma simulação do
+              orçamento do seu evento. 
+            </p>
+          </div>
         </motion.div>
       </motion.div>
     </form>
