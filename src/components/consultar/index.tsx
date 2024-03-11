@@ -61,7 +61,6 @@ export function ConsultarFormComponent({
   const [formMode, setformMode] = useState<
     "Pessoais" | "Evento" | "Success" | "Tipo"
   >("Tipo");
-  console.log(formMode);
   const { replace } = useRouter();
   const [imageList, setImageList] = useState<ImageType[] | null>(null);
   const eventoForm = formMode.includes("Evento");
@@ -91,7 +90,6 @@ export function ConsultarFormComponent({
     if (typeForm) {
       controlsPessoais.start(opacityHidde);
     }
-    console.log(formMode);
   }, [isSendMailSuccess, controlsSuccess, formMode]);
 
   const checkScreenSize = () => {
