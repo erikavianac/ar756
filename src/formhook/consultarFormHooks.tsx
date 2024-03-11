@@ -11,6 +11,7 @@ import { calcQtdHoraExtra } from "@/functions/calcQtdHoraExtra";
 import { ConsultarFormData } from "./types/consultarFormZodType";
 import { consultarFormSchema } from "./schemas/consultarFormZodSchema";
 import sendOrcamentoEmail from "@/action/emailOrcamento";
+import moment from "moment-timezone";
 
 export default function UseConsultaFormHooks(orcamento?: any | undefined) {
   const [isSendMailSuccess, setIsSendMailSucess] = useState(false)
@@ -124,7 +125,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       email,
       tipo,
       total,
-      dataFim: final,
+      dataFim: moment.tz(final, "America/Sao_Paulo").toDate(),
       limpeza,
       telefone,
       seguranca,
@@ -135,8 +136,9 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       qtdHorasExtras,
       valorHoraExtra,
       valorBase: diaria,
-      dataInicio: inicial,
+      dataInicio: moment.tz(inicial, "America/Sao_Paulo").toDate(),
     });
+    console.log(orcamento)
     if(orcamento.id){
       setIsSendMailSucess(true)
     }
