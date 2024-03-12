@@ -204,13 +204,13 @@ export default function OrcamentoCardComponent({
               orcamentoByid?.dataInicio &&
               moment(orcamentoByid?.dataInicio).format("HH:mm")
             } - ${
-              orcamentoByid?.dataFim && moment(orcamentoByid?.dataFim).format("HH:mm")
+              orcamentoByid?.dataFim && moment.utc(orcamentoByid?.dataFim).format("HH:mm")
             } (${duracaoFesta}hrs)`}</p>
           </div>
           <div className="flex items-center justify-center gap-x-2">
             <AiOutlineCalendar size={20} />
             <p className="text-[12px] md:text-sm">
-              ({moment(orcamentoByid?.dataInicio).format("DD/MM/YYYY")})
+              ({moment.utc(orcamentoByid?.dataInicio).format("DD/MM/YYYY")})
             </p>
           </div>
         </div>

@@ -28,7 +28,7 @@ export function transformDate({
   );
 
   return {
-    dataInicial: dataInicial.toISOString(),
-    dataFim: dataFim.toISOString(),
+    dataInicial: dataInicial,
+    dataFim: dataFim,
   };
 }
