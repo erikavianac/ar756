@@ -79,9 +79,9 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       horarioInicio: horarioInicio,
     });
   
-    const final = moment(new Date(dataInicial)).utcOffset("-03:00").toDate();
-    const inicial = moment(new Date(dataFim)).utcOffset("-03:00").toDate();
-    console.log(final)
+    const final = new Date (dataFim.toDate())
+    const inicial = new Date (dataInicial.toDate())
+    
     const duracaoFesta = calcDuracaoFesta(inicial, final);
 
     const valueList = await fetch(
@@ -118,7 +118,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
     const qtdHorasExtras = calcQtdHoraExtra(diaria, duracaoFesta);
     const valorHoraExtra = calcHorasExtras(diaria);
     const total = diaria + extras + valorHoraExtra * qtdHorasExtras;
-
+    
     const orcamento =  await sendOrcamentoEmail({
       nome,
       texto,
