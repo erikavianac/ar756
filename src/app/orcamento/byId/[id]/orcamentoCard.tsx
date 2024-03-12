@@ -202,7 +202,7 @@ export default function OrcamentoCardComponent({
             <AiOutlineClockCircle size={20} />
             <p className="text-[12px] md:text-sm">{`${
               orcamentoByid?.dataInicio &&
-              moment(orcamentoByid?.dataInicio).format("HH:mm")
+              moment.utc(orcamentoByid?.dataInicio).format("HH:mm")
             } - ${
               orcamentoByid?.dataFim && moment.utc(orcamentoByid?.dataFim).format("HH:mm")
             } (${duracaoFesta}hrs)`}</p>
