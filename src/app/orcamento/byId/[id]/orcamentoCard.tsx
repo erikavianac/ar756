@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { BugdetType } from "@/types";
+import { BugdetType, ValueType } from "@/types";
 import moment from "moment-timezone";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import { BiMailSend, BiTrash } from "react-icons/bi";
@@ -27,10 +27,12 @@ import LoadingOrcamentoComponent from "./loadingOrcamento";
 
 interface OrcamentoCardProps {
   orcamentoByid: BugdetType | undefined;
+  valuesList: ValueType[];
 }
 
 export default function OrcamentoCardComponent({
   orcamentoByid,
+  valuesList
 }: OrcamentoCardProps) {
   const [duracaoFesta, setduracaoFesta] = useState<number>(0);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
@@ -216,7 +218,7 @@ export default function OrcamentoCardComponent({
         </div>
         {
           orcamentoByid ? 
-          <InfoOrcamentoinfo orcamentoById={orcamentoByid} /> :
+          <InfoOrcamentoinfo valuesList={valuesList} orcamentoById={orcamentoByid} /> :
           <LoadingOrcamentoComponent />
         }
         <div className="flex items-center justify-between w-full mt-10 gap-x-3 ">
@@ -227,6 +229,8 @@ export default function OrcamentoCardComponent({
               displayType={"text"}
               thousandSeparator={"."}
               decimalSeparator={","}
+              decimalScale={2} // Define o número de casas decimais
+              fixedDecimalScale={true}
               prefix={"R$ "}
               className="font-semibold text-[25px]"
             />

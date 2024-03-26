@@ -61,10 +61,7 @@ export  function ComodidadeComponent() {
               title="Churrasqueira"
               icon={<GiBarbecue size={20} />}
             />
-            <ItemCardComponent
-              title="Salao de Festa"
-              icon={<GiPartyPopper size={20} />}
-            />
+         
           </div>
           <div className="space-y-3">
             <ItemCardComponent
@@ -79,13 +76,9 @@ export  function ComodidadeComponent() {
               title="Camarim"
               icon={<GiDress size={20} />}
             />
-            <ItemCardComponent
-              title="Garagem"
-              icon={<BsCarFrontFill size={20} />}
-            />
-            <ItemCardComponent
-              title="Academia"
-              icon={<BiDumbbell size={20} />}
+             <ItemCardComponent
+              title="Salao de Festa"
+              icon={<GiPartyPopper size={20} />}
             />
           </div>
         </div>
