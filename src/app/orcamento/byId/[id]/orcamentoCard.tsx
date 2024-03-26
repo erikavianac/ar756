@@ -239,7 +239,7 @@ export default function OrcamentoCardComponent({
         </div>
         <p className="text-[14px] mb-5">
           {" "}
-          <span className="text-[12px]">*</span> Valor sujeito a alterecao
+          <span className="text-[12px]">*</span> Valor sujeito a alteração.
         </p>
         {orcamentoByid?.aprovadoCliente ? (
           <div className="text-[12px] md:text-sm">
