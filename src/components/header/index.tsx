@@ -151,7 +151,7 @@ export function HomeHeaderComponent() {
                   transition={{ duration: 0.2, delay: 1.4 }}
                 >
                   <AnchorComponent
-                    href="https://api.whatsapp.com/send/?phone=351910452428&text&type=phone_number&app_absent=0"
+                    href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0"
                     icon={
                       <TbBrandWhatsapp
                         className="cursor-pointer text-white"
