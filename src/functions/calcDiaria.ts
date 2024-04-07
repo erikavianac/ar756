@@ -6,17 +6,23 @@ export function calcDiaria(
   if (tipo === "Festa") {
     let result = 0;
 
-    result += convidados * ppessoaValue;
+    if(convidados < 25){
+      return 2500
+    }else{
+      const pessoasMais25 = (convidados - 25) * 50
 
-    return result < 2500 ? 2500 : result;
+      return 2500 + pessoasMais25
+    }
   }
 
   if (tipo === "Filmagem") {
-    let result = 0;
+    if(convidados < 15){
+      return 1500
+    }else{
+      const pessoasMais25 = (convidados - 15) * 50
 
-    result += convidados * 50;
-
-    return result < 2500 ? 2500 : result;
+      return 1500 + pessoasMais25
+    }
   }
 
   return 0
