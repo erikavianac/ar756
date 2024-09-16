@@ -27,7 +27,7 @@ export  function ServicosComponents() {
           alt={'logo-branco'}
           h={'h-[613px]'}
           w={'w-[100%]'}
-          src={'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1704736008/yzp7gvs0ekodg00bz7zr.jpg'}
+          src={'https://res.cloudinary.com/dzwboczzd/image/upload/v1726318982/file_2_gjm6nx.jpg'}
           containerClassname=""
         />
         {/* <video className="h-[613px] w-[100%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa03_v01.mp4"} autoPlay loop muted/> */}
