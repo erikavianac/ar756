@@ -9,7 +9,7 @@ export function calcDiaria(
     if(convidados < 25){
       return 2500
     }else{
-      const pessoasMais25 = (convidados - 25) * 50
+      const pessoasMais25 = (convidados - 25) * 100
 
       return 2500 + pessoasMais25
     }
