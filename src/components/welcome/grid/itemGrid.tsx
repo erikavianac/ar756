@@ -21,10 +21,12 @@ export function GridItemComponent({ gridItem, index,setIsModalOpen,setSelectedIm
     "col-start-6 col-end-8 row-start-6 row-end-12",
   ];
 
+  const position = gridItem.position  - 1
+
   return (
     <div
       className={` rounded-md  hover:scale-[1.01] cursor-pointer hover:z-30 duration-300  shadow-lg  
-      overflow-hidden  hover:brightness-110 ${gridPositionToClasses[index]}`}
+      overflow-hidden  hover:brightness-110 ${gridPositionToClasses[position]}`}
       onClick={() => {
         setIsModalOpen(true)
         setSelectedImageId(gridItem.id)
