@@ -251,11 +251,11 @@ export default function OrcamentoCardComponent({
           </div>
         ) : (
           <>
-          <div className="text-sm flex justify-start items-center gap-x-3 py-10">
+          <div className="text-sm flex justify-start items-center gap-x-3 py-10 flex-col gap-y-2">
             <p>Tem alguma dúvida ou gostaria de conversar com a gente?</p>
           
 
-          <a href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0" target="_blank" className="rounded-md animate-bounce hover:scale-105 duration-200 text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"> <p>Falar no WhatsApp</p> <FaWhatsapp/></a>
+          <a href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0" target="_blank" className="rounded-md animate-bounce hover:scale-105 duration-200  text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"> <p>Falar no WhatsApp</p> <FaWhatsapp/></a>
 
           </div>
        {/*      <SelectBooleansItemsCompoenent
