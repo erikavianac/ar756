@@ -5,6 +5,7 @@ import { BugdetType, ValueType } from "@/types";
 import moment from "moment-timezone";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import { BiMailSend, BiTrash } from "react-icons/bi";
+import { FaWhatsapp } from "react-icons/fa";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { SlPeople } from "react-icons/sl";
@@ -250,7 +251,14 @@ export default function OrcamentoCardComponent({
           </div>
         ) : (
           <>
-            <SelectBooleansItemsCompoenent
+          <div className="text-sm flex justify-start items-center gap-x-3 py-10">
+            <p>Tem alguma dúvida ou gostaria de conversar com a gente?</p>
+          
+
+          <a href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0" target="_blank" className="rounded-md animate-bounce hover:scale-105 duration-200 text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"> <p>Falar no WhatsApp</p> <FaWhatsapp/></a>
+
+          </div>
+       {/*      <SelectBooleansItemsCompoenent
               title="Aprovar?"
               setValue={setValue}
               field={"aprovadoCliente"}
@@ -286,7 +294,7 @@ export default function OrcamentoCardComponent({
                   flex justify-center items-center flex-row-reverse  gap-x-2 mb-5
                   `}
               />
-            </motion.div>
+            </motion.div> */}
           </>
         )}
       </motion.div>
