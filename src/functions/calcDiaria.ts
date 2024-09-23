@@ -1,17 +1,30 @@
 export function calcDiaria(
+  tipo: string,
+  month: string,
   convidados: number,
   ppessoaValue: number,
-  tipo: string
 ) {
   if (tipo === "Festa") {
     let result = 0;
 
     if(convidados < 25){
+
+      if(month === "12"){
+
+        return 3750
+      }
+
       return 2500
     }else{
-      const pessoasMais25 = (convidados - 25) * 100
+      if(month === "12"){
+        const pessoasMais25 = convidados  * 150
 
-      return 2500 + pessoasMais25
+        return pessoasMais25
+      }
+
+      const pessoasMais25 = convidados * 100
+
+      return pessoasMais25
     }
   }
 

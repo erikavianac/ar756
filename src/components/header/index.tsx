@@ -38,7 +38,7 @@ export function HomeHeaderComponent() {
         h={"h-[6.25rem] lg:h-[9.375tem]"}
         w={"w-[15.625rem] lg:w-[18.75rem]"}
         src={
-          "https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637347/onbridge/uswu0yqtfeo2aq3vomkf.png"
+          "https://res.cloudinary.com/dzwboczzd/image/upload/v1726318982/file_2_gjm6nx.jpg"
         }
         containerClassname={"z-20"}
         onclik={() => replace("/")}

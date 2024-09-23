@@ -8,7 +8,7 @@ import { Icon, icon } from 'leaflet';
 function MapComponent() {
   const customIcon = new Icon({
     iconUrl:
-      'https://res.cloudinary.com/dcjkvwbvh/image/upload/v1688637822/onbridge/onkggypchr1yoffmtyop.png',
+      'https://res.cloudinary.com/dzwboczzd/image/upload/v1727106821/1000_F_280874872_tVNxGcKAMB3s1rVuNtcB8MeloTb0PV28_zcesrq.jpg',
     iconSize: [100, 100],
     attribution: 'sdsd',
   });

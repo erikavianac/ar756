@@ -109,10 +109,13 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
         ?.valor
     );
 
+    const [yearInicio, monthInicio, dayInicio] = dataInicio.split('-');
+    console.log(0)
     const diaria = calcDiaria(
+      tipo,
+      monthInicio,
       convidados,
       dataExtra.find((item: ValueType) => item.titulo === "Por Pessoa")?.valor,
-      tipo,
     );
 
     const qtdHorasExtras = calcQtdHoraExtra(diaria, duracaoFesta);
