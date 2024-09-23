@@ -141,7 +141,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       valorBase: diaria,
       dataInicio: inicial,
     });
-    console.log(orcamento)
+  
     if(orcamento.id){
       setIsSendMailSucess(true)
     }

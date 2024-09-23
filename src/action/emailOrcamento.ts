@@ -38,7 +38,7 @@ export default async function sendOrcamentoEmail(
                       <table style="background-color: white; margin: auto; padding: 20px; width: 50%; height: 690px; border-radius: 10px;">
                           <tr>
                           <td style="text-align: center;">
-                              <img style="width: 300px; height: 290px; margin: 0 auto;" src="https://res.cloudinary.com/dzwboczzd/image/upload/v1727106821/1000_F_280874872_tVNxGcKAMB3s1rVuNtcB8MeloTb0PV28_zcesrq.jpg" alt="logo AR756" />
+                              <img style="width: 300px; height: 290px; margin: 0 auto;" src="https://res.cloudinary.com/dzwboczzd/image/upload/v1727109726/piscina-cima_ga2yep.jpg" alt="logo AR756" />
                               <h1 style="color: #333; width: 100%; text-align: center; margin-top: 10px;">Olá ${data.nome}, recebemos a sua mensagem!</h1>
                               <p style="font-size: 14px; width: 60%; margin: 10px auto; text-align: center;">Agradecemos o seu interesse em conhecer a AR756. Simulamos um orçamento para seu evento, por gentileza clique no botão abaixo para ver a proposta.</p>
                               <div style="width: 100%; text-align: center;margin-top: 40px;">
@@ -48,9 +48,9 @@ export default async function sendOrcamentoEmail(
                               </div>
                               <h2 style="font-size: 14px; width: 60%; margin: 10px auto; text-align: center; margin-top: 40px;">SIGA-NOS</h2>
                               <div style="text-align: center;">
-                              <a href="https://www.tiktok.com/@ar756_" style="text-decoration: none; margin-right: 10px;"><img src="https://res.cloudinary.com/process.env.SERVER_URL/image/upload/v1684619444/onbridge/acavjdbzordarbrebmel.png" alt="Logo Instagram" /></a>
-                              <a href="https://www.instagram.com/ar756_/" style="text-decoration: none; margin-right: 10px;"><img src="https://res.cloudinary.com/process.env.SERVER_URL/image/upload/v1684618470/onbridge/dtl5hydbqev8msdjthpi.png" alt="Logo Instagram" /></a>
-                              <a href="https://www.facebook.com/profile.php?id=100085832906065" style="text-decoration: none;"><img src="https://res.cloudinary.com/process.env.SERVER_URL/image/upload/v1684619160/onbridge/vtrjovla8axhudksaedi.png" alt="Logo Instagram" /></a>
+                              <a href="https://www.tiktok.com/@ar756_" style="text-decoration: none; margin-right: 10px;"><img src="https://res.cloudinary.com/dzwboczzd/image/upload/v1727110146/tiktok-share-icon-black-seeklogo_ksy9nk.svg" alt="Logo TiTok" /></a>
+                              <a href="https://www.instagram.com/ar756_/" style="text-decoration: none; margin-right: 10px;"><img src="https://res.cloudinary.com/dzwboczzd/image/upload/v1727110020/instagram-new-2016-seeklogo_oyqx5s.ai" alt="Logo Instagram" /></a>
+                              <a href="https://www.facebook.com/profile.php?id=100085832906065" style="text-decoration: none;"><img src="https://res.cloudinary.com/dzwboczzd/image/upload/v1727110373/icons8-facebook-240_xpegaf.png" alt="Logo Facebook" /></a>
                               </div>
                           </td>
                           </tr>
