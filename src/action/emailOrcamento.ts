@@ -31,13 +31,14 @@ export default async function sendOrcamentoEmail(
     to: data.email,
     subject: "Proposta AR756",
     html: `
-          <div style="font-family: Arial, sans-serif; height: 990px;">
+           <div style="font-family: Arial, sans-serif; height: 990px;">
               <table style="width: 100%; height: 100%; background-image: url('https://res.cloudinary.com/dzwboczzd/image/upload/v1727109726/piscina-cima_ga2yep.jpg'); background-size: cover;">
                   <tr>
                       <td>
                       <table style="background-color: white; margin: auto; padding: 20px; width: 50%; height: 690px; border-radius: 10px;">
                           <tr>
                           <td style="text-align: center;">
+                              <img style="width: 300px; height: 290px; margin: 0 auto;" src="https://res.cloudinary.com/dzwboczzd/image/upload/v1727111051/FAVICON2_ar756_bjwskb.png" alt="logo AR756" />
                               <h1 style="color: #333; width: 100%; text-align: center; margin-top: 10px;">Olá ${data.nome}, recebemos a sua mensagem!</h1>
                               <p style="font-size: 14px; width: 60%; margin: 10px auto; text-align: center;">Agradecemos o seu interesse em conhecer a AR756. Simulamos um orçamento para seu evento, por gentileza clique no botão abaixo para ver a proposta.</p>
                               <div style="width: 100%; text-align: center;margin-top: 40px;">
