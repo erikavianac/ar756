@@ -331,6 +331,7 @@ export function ConsultarFormComponent({
                 "Instagram",
                 "Google",
                 "Amigos",
+                "Airbnb",
                 "Outros",
               ]}
               errors={!!errors.trafegoCanal}

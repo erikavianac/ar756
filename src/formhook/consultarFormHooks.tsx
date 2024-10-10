@@ -110,7 +110,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
     );
 
     const [yearInicio, monthInicio, dayInicio] = dataInicio.split('-');
-    console.log(0)
+ 
     const diaria = calcDiaria(
       tipo,
       monthInicio,
