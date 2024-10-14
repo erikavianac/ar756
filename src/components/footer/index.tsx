@@ -35,7 +35,7 @@ export function FooterComponent() {
         </div>
         <div className="flex mt-10 mr-5 gap-x-2 md:mt-0 ">
           <AnchorComponent
-            href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0"
+            href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
             icon={
               <TbBrandWhatsapp
                 className="text-white cursor-pointer"

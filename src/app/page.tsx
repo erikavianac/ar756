@@ -25,7 +25,7 @@ export default async function Home() {
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
       <div className="fixed z-50 bottom-4 right-4">
        <AnchorComponent
-                    href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0"
+                    href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
                     icon={
                       <TbBrandWhatsapp
                         className="cursor-pointer text-white"

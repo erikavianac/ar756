@@ -203,7 +203,7 @@ export function ConsultarFormComponent({
               <div className="mx-auto flex justify-center items-center gap-x-3">
                 <div>
                   <AnchorComponent
-                    href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0"
+                    href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
                     icon={
                       <TbBrandWhatsapp
                         className="cursor-pointer text-white"
@@ -606,12 +606,12 @@ export function ConsultarFormComponent({
           {!isSmallScreen && (
             <div className="w-full mt-5">
               <p className={`${stencilFont.className}  text-[70px] text-center`}>
-                AR756
+                AR756 
               </p>
               <div className="mx-auto flex justify-center items-center gap-x-3">
                 <div>
                   <AnchorComponent
-                    href="https://api.whatsapp.com/send/?phone=351933679073&text&type=phone_number&app_absent=0"
+                    href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
                     icon={
                       <TbBrandWhatsapp
                         className="cursor-pointer text-white"
