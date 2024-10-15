@@ -42,7 +42,7 @@ export default function GaleriaListComponent({
     <Scrollbars
       style={{
         width: "100%",
-        height: "80%",
+        height: 750,
         gap: 20,
       }}
     >
