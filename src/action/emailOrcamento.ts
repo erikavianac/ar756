@@ -19,15 +19,17 @@ export default async function sendOrcamentoEmail(
   });
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.hostinger.com",
+    port: 587,
+    secure: false,
     auth: {
-      user: "igorlabakig@gmail.com", // Seu endereço de e-mail
+      user: "contato@ar756.com", // Seu endereço de e-mail
       pass: process.env.EMAIL_PASSWORD, // Sua senha de e-mail
     },
   });
 
   const mailOptions = {
-    from: "igorlabakig@gmail.com",
+    from: '"AR756" <contato@ar756.com>',
     to: data.email,
     subject: "Proposta AR756",
     html: `
