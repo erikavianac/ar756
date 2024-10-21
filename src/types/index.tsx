@@ -37,6 +37,7 @@ export interface CreateOrcamentoReqBody {
   seguranca: boolean;
   limpeza: boolean;
   recepcionista: boolean;
+  termosAceito: boolean;
   nome: string;
   email: string;
   telefone: string;

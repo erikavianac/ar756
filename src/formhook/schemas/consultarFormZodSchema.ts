@@ -7,6 +7,14 @@ export const consultarFormSchema = z.object({
   conheceEspaco: z.boolean({
     required_error: 'Este campo e obrigatorio!',
   }),
+  termosAceito: z.boolean({
+    required_error: 'Este campo e obrigatorio!',
+  }).refine(
+    (val) => val === true,
+    {
+      message: 'Os termos devem ser aceitos para o envio do orcamento.',
+    },
+  ),
   tipo: z.string({
     required_error: 'Este campo e obrigatorio!',
   }),

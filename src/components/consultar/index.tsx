@@ -481,7 +481,9 @@ export function ConsultarFormComponent({
               </div>
             </div>
             <InputComponent<ConsultarFormData>
-              title={watch("tipo") === "Filmagem" ? "Colaboradores" : "Convidados"}
+              title={
+                watch("tipo") === "Filmagem" ? "Colaboradores" : "Convidados"
+              }
               entity="convidados"
               type="number"
               max={100}
@@ -549,6 +551,38 @@ export function ConsultarFormComponent({
                 {errors.texto && errors.texto.message}
               </span>
             </div>
+            <div
+              className={`w-full flex flex-col gap-y-2  text-[12px] md:text-[15px] justify-between items-center mt-3"`}
+            >
+              <div className="flex justify-between w-full">
+                <div className="font-semibold text-sm flex gap-x-1">
+                  <p>Li e concordo com os</p> <a href="/termos" target="_blank" className="text-blue-500 hover:scale-[1.02]">Termos de Privacidade</a>
+                </div>
+                <div className="flex text-sm font-light text-veryDarkGraishCyan">
+                  <div
+                    className="flex items-center justify-center gap-2 cursor-pointer "
+                    onClick={() => {
+                      if (watch("termosAceito") === false) {
+                        setValue("termosAceito", true);
+                      } else {
+                        setValue("termosAceito", false);
+                      }
+                      trigger("termosAceito");
+                    }}
+                  >
+                    <div
+                      className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
+                      tabIndex={0}
+                    >
+                      {watch("termosAceito") === true && <BsCheckLg />}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span className="text-red-700 text-[11px] md:text-[15px] w-full">
+                {errors && errors.termosAceito?.message}
+              </span>
+            </div>
           </div>
           <div className="flex flex-col gap-y-2">
             <div className="flex items-end justify-between">
@@ -605,8 +639,10 @@ export function ConsultarFormComponent({
         >
           {!isSmallScreen && (
             <div className="w-full mt-5">
-              <p className={`${stencilFont.className}  text-[70px] text-center`}>
-                AR756 
+              <p
+                className={`${stencilFont.className}  text-[70px] text-center`}
+              >
+                AR756
               </p>
               <div className="mx-auto flex justify-center items-center gap-x-3">
                 <div>
@@ -667,7 +703,7 @@ export function ConsultarFormComponent({
           <div className="w-[80%] mx-auto text-center flex flex-col gap-y-5">
             <p className="text-[13px] md:text-[16px] font-semibold text-center  mx-auto ">
               Encaminhamos para seu email {emailWatch} uma simulação do
-              orçamento do seu evento. 
+              orçamento do seu evento.
             </p>
           </div>
         </motion.div>

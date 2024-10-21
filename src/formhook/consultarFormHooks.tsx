@@ -14,8 +14,8 @@ import sendOrcamentoEmail from "@/action/emailOrcamento";
 import moment from "moment-timezone";
 
 export default function UseConsultaFormHooks(orcamento?: any | undefined) {
-  const [isSendMailSuccess, setIsSendMailSucess] = useState(false)
-  const [isSendMailLoading, setIsSendMailLoading] = useState(false)
+  const [isSendMailSuccess, setIsSendMailSucess] = useState(false);
+  const [isSendMailLoading, setIsSendMailLoading] = useState(false);
   const {
     watch,
     reset,
@@ -27,6 +27,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
   } = useForm<ConsultarFormData>({
     resolver: zodResolver(consultarFormSchema),
     defaultValues: {
+      termosAceito: false,
       nome: orcamento?.nome,
       texto: orcamento?.texto,
       email: orcamento?.email,
@@ -67,21 +68,23 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
     convidados,
     dataInicio,
     horarioFim,
+    termosAceito,
     trafegoCanal,
     horarioInicio,
     recepcionista,
     conheceEspaco,
   }: ConsultarFormData) {
-    setIsSendMailLoading(true)
+    console.log(termosAceito);
+    setIsSendMailLoading(true);
     const { dataFim, dataInicial } = transformDate({
       dataInicio: dataInicio,
       horarioFim: horarioFim,
       horarioInicio: horarioInicio,
     });
-  
-    const final = new Date (dataFim.toDate())
-    const inicial = new Date (dataInicial.toDate())
-    
+
+    const final = new Date(dataFim.toDate());
+    const inicial = new Date(dataInicial.toDate());
+
     const duracaoFesta = calcDuracaoFesta(inicial, final);
 
     const valueList = await fetch(
@@ -109,20 +112,20 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
         ?.valor
     );
 
-    const [yearInicio, monthInicio, dayInicio] = dataInicio.split('-');
- 
+    const [yearInicio, monthInicio, dayInicio] = dataInicio.split("-");
+
     const diaria = calcDiaria(
       tipo,
       monthInicio,
       convidados,
-      dataExtra.find((item: ValueType) => item.titulo === "Por Pessoa")?.valor,
+      dataExtra.find((item: ValueType) => item.titulo === "Por Pessoa")?.valor
     );
 
     const qtdHorasExtras = calcQtdHoraExtra(diaria, duracaoFesta);
     const valorHoraExtra = calcHorasExtras(diaria);
     const total = diaria + extras + valorHoraExtra * qtdHorasExtras;
-    
-    const orcamento =  await sendOrcamentoEmail({
+
+    const orcamento = await sendOrcamentoEmail({
       nome,
       texto,
       email,
@@ -134,6 +137,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       seguranca,
       convidados,
       trafegoCanal,
+      termosAceito,
       recepcionista,
       conheceEspaco,
       qtdHorasExtras,
@@ -141,11 +145,11 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       valorBase: diaria,
       dataInicio: inicial,
     });
-  
-    if(orcamento.id){
-      setIsSendMailSucess(true)
+
+    if (orcamento.id) {
+      setIsSendMailSucess(true);
     }
-    setIsSendMailLoading(false)
+    setIsSendMailLoading(false);
 
     return orcamento;
   }
