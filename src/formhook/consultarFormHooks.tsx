@@ -1,17 +1,9 @@
-import { ValueType } from "@/types";
 import { useForm } from "react-hook-form";
-import { ChangeEvent, useEffect, useState } from "react";
-import { calcExtras } from "@/functions/calcExtra";
-import { calcDiaria } from "@/functions/calcDiaria";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { transformDate } from "@/functions/transformData";
-import { calcHorasExtras } from "@/functions/calcHorasExtra";
-import { calcDuracaoFesta } from "@/functions/calcDuracaoFesta";
-import { calcQtdHoraExtra } from "@/functions/calcQtdHoraExtra";
+import sendOrcamentoEmail from "@/action/emailOrcamento";
+import { ChangeEvent, useEffect, useState } from "react";
 import { ConsultarFormData } from "./types/consultarFormZodType";
 import { consultarFormSchema } from "./schemas/consultarFormZodSchema";
-import sendOrcamentoEmail from "@/action/emailOrcamento";
-import moment from "moment-timezone";
 
 export default function UseConsultaFormHooks(orcamento?: any | undefined) {
   const [isSendMailSuccess, setIsSendMailSucess] = useState(false);
@@ -38,7 +30,7 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
       trafegoCanal: orcamento?.trafegoCanal,
       recepcionista: orcamento?.recepcionista,
       conheceEspaco: orcamento?.conheceEspaco,
-      dataInicio: orcamento?.dataInicio.toLocaleString().split("T")[0],
+      data: orcamento?.dataInicio.toLocaleString().split("T")[0],
       horarioFim: orcamento?.dataFim.toLocaleString().split("T")[1].slice(0, 5),
       horarioInicio: orcamento?.dataInicio
         .toLocaleString()
@@ -57,94 +49,10 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
   const horarioInicioWatch = watch("horarioInicio");
   const recepcionistaWatch = watch("recepcionista");
 
-  async function handleOnSubmit({
-    nome,
-    tipo,
-    email,
-    texto,
-    limpeza,
-    telefone,
-    seguranca,
-    convidados,
-    dataInicio,
-    horarioFim,
-    termosAceito,
-    trafegoCanal,
-    horarioInicio,
-    recepcionista,
-    conheceEspaco,
-  }: ConsultarFormData) {
-    console.log(termosAceito);
+  async function handleOnSubmit(values: ConsultarFormData) {
     setIsSendMailLoading(true);
-    const { dataFim, dataInicial } = transformDate({
-      dataInicio: dataInicio,
-      horarioFim: horarioFim,
-      horarioInicio: horarioInicio,
-    });
 
-    const final = new Date(dataFim.toDate());
-    const inicial = new Date(dataInicial.toDate());
-
-    const duracaoFesta = calcDuracaoFesta(inicial, final);
-
-    const valueList = await fetch(
-      `https://art56-server-v2.vercel.app/value/list/`,
-      {
-        method: "GET",
-      }
-    ).then(async (resp) => {
-      return await resp.json();
-    });
-
-    const dataExtra = valueList.map((item: ValueType) => {
-      return { titulo: item.titulo, valor: item?.valor };
-    });
-
-    const extras = calcExtras(
-      {
-        limpeza,
-        recepcionista,
-        seguranca,
-      },
-      dataExtra.find((item: ValueType) => item?.titulo === "Limpeza")?.valor,
-      dataExtra.find((item: ValueType) => item?.titulo === "Seguranca")?.valor,
-      dataExtra.find((item: ValueType) => item?.titulo === "Recepcionista")
-        ?.valor
-    );
-
-    const [yearInicio, monthInicio, dayInicio] = dataInicio.split("-");
-
-    const diaria = calcDiaria(
-      tipo,
-      monthInicio,
-      convidados,
-      dataExtra.find((item: ValueType) => item.titulo === "Por Pessoa")?.valor
-    );
-
-    const qtdHorasExtras = calcQtdHoraExtra(diaria, duracaoFesta);
-    const valorHoraExtra = calcHorasExtras(diaria);
-    const total = diaria + extras + valorHoraExtra * qtdHorasExtras;
-
-    const orcamento = await sendOrcamentoEmail({
-      nome,
-      texto,
-      email,
-      tipo,
-      total,
-      dataFim: final,
-      limpeza,
-      telefone,
-      seguranca,
-      convidados,
-      trafegoCanal,
-      termosAceito,
-      recepcionista,
-      conheceEspaco,
-      qtdHorasExtras,
-      valorHoraExtra,
-      valorBase: diaria,
-      dataInicio: inicial,
-    });
+    const orcamento = await sendOrcamentoEmail(values);
 
     if (orcamento.id) {
       setIsSendMailSucess(true);

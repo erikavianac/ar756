@@ -404,14 +404,14 @@ export function ConsultarFormComponent({
           <div className="flex-1 w-full">
             <InputComponent<ConsultarFormData>
               title="Data do Evento"
-              entity="dataInicio"
+              entity="data"
               type="date"
               min={new Date().toISOString().split("T")[0]}
               register={register}
               trigger={trigger}
               onKeyDown={(e) => e.preventDefault()}
-              errors={!!errors.dataInicio}
-              errorsMsg={errors?.dataInicio?.message}
+              errors={!!errors.data}
+              errorsMsg={errors?.data?.message}
             />
             <div className="flex flex-col mb-2">
               <div className="flex flex-col items-center justify-start md:flex-row gap-x-3">

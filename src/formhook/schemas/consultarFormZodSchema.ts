@@ -31,7 +31,7 @@ export const consultarFormSchema = z.object({
         message: 'O fim do evento deve estar entre 7:00 e 22:00',
       },
     ),
-  dataInicio: z.string().nonempty('Este campo e obrigatorio!'),
+  data: z.string().nonempty('Este campo e obrigatorio!'),
   horarioInicio: z
     .string()
     .nonempty('Este campo é obrigatório!')

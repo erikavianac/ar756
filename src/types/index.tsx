@@ -29,24 +29,20 @@ export interface ValueType{
 }
 
 export interface CreateOrcamentoReqBody {
-  trafegoCanal: string;
-  tipo: string;
-  conheceEspaco: boolean;
-  dataFim: Date;
-  dataInicio: Date;
-  seguranca: boolean;
-  limpeza: boolean;
-  recepcionista: boolean;
-  termosAceito: boolean;
   nome: string;
+  tipo: string;
+  data: string;
   email: string;
-  telefone: string;
   texto: string;
+  telefone: string;
+  limpeza: boolean;
   convidados: number;
-  valorBase: number;
-  qtdHorasExtras: number;
-  valorHoraExtra: number;
-  total: number;
+  seguranca: boolean;
+  horarioFim: string;
+  trafegoCanal: string;
+  horarioInicio: string;
+  conheceEspaco: boolean;
+  recepcionista: boolean;
 }
 
 export interface IBase64Files {
