@@ -12,7 +12,7 @@ export default async function sendOrcamentoEmail(
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({...values,total: 0}),
     }
   ).then(async (resp) => {
     return await resp.json();
