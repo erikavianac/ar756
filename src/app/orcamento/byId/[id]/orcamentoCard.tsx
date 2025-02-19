@@ -486,7 +486,7 @@ export default function OrcamentoCardComponent({
           h={"h-[130px] md:h-[300px] "}
           w={"w-[180px] md:w-[400px]"}
           src={
-            "https://res.cloudinary.com/dzwboczzd/image/upload/v1726318982/file_2_gjm6nx.jpg"
+            "https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958372/file_2_gjm6nx_sfgf81_ptlh6x.jpg"
           }
           containerClassname={"z-20"}
         />

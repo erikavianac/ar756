@@ -25,7 +25,7 @@ export  function ComodidadeComponent() {
           alt={'logo-branco'}
           h={'lg:h-[65%] 2xl:h-[85%]'}
           w={'w-[80%] 2xl:w-[70%]'}
-          src={'https://res.cloudinary.com/dz0qgokbv/image/upload/v1732642789/file_2_gjm6nx_sfgf81_w2e8jr.jpg'}
+          src={'https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958372/file_2_gjm6nx_sfgf81_ptlh6x.jpg'}
           containerClassname="z-20"
         />
        {/*  <video className="lg:h-[65%] 2xl:h-[85%] w-[80%] 2xl:w-[70%] object-cover" src={"https://d2tb61r1ltgmn5.cloudfront.net/casa02_v01.mp4"} autoPlay loop muted/> */}

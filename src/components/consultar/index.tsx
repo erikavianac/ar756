@@ -160,7 +160,7 @@ export function ConsultarFormComponent({
             >
               <div className="bg-black/30 w-full h-full absolute z-30 " />
               <ImageComponent
-                src="https://res.cloudinary.com/dzwboczzd/image/upload/v1726318982/file_2_gjm6nx.jpg"
+                src="https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958353/BAE-47_mhtabs_wkf2ni_rourmq.jpg"
                 alt="foto"
                 h="h-[500px]"
                 w="w-[500px]"
@@ -183,7 +183,7 @@ export function ConsultarFormComponent({
             >
               <div className="bg-black/30 w-full h-full absolute z-30 " />
               <ImageComponent
-                src="https://res.cloudinary.com/dzwboczzd/image/upload/v1726494984/file_3_beuhgj.jpg"
+                src="https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958364/IMG_7103_oc7ak7_h4ao4c_qevwdd.jpg"
                 alt="foto"
                 h="h-[500px]"
                 w="w-[500px]"
