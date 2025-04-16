@@ -80,6 +80,7 @@ export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
           <ConsultarFormComponent
+            services={[]}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />
         </ModalComponent>

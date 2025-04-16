@@ -7,14 +7,60 @@ export interface ImageType {
   responsiveMode: string;
 }
 
+export interface ImageRequestResponse {
+  success: boolean,
+  message: string,
+  data: { imagesByTag: ImageType[] },
+  count: number,
+  type: string
+}
+
+export interface ServiceType {
+  id: string;
+  name: string;
+  price: number;
+  venueId: string;
+}
+
+export interface ServiceRequestResponse {
+  success: boolean,
+  message: string,
+  data: { serviceList: ServiceType[] },
+  count: number,
+  type: string
+}
+
 export interface TextType {
   id?: string;
   area: string;
+  title: string | null;
   text: string;
   updatedAt?: Date;
   created_at?: Date;
   position: string;
-  titulo: string | null;
+}
+
+export interface TextRequestResponse {
+  success: boolean,
+  message: string,
+  data: { textList: TextType[] },
+  count: number,
+  type: string
+}
+export interface ProposalRequestResponse {
+  success: boolean,
+  message: string,
+  data: ProposalType,
+  count: number,
+  type: string
+}
+
+export interface ProposalService {
+  id?: string;
+  serviceId: string;
+  proposalId: string;
+  service: ServiceType;
+  proposal: ProposalType;
 }
 
 export interface QuestionType{
@@ -29,46 +75,62 @@ export interface ValueType{
 }
 
 export interface CreateOrcamentoReqBody {
-  nome: string;
-  tipo: string;
-  data: string;
-  email: string;
-  texto: string;
-  telefone: string;
-  limpeza: boolean;
-  convidados: number;
-  seguranca: boolean;
-  horarioFim: string;
-  trafegoCanal: string;
-  horarioInicio: string;
-  conheceEspaco: boolean;
-  recepcionista: boolean;
+    date: string,
+    completeClientName:string,
+    venueId: string,
+    endHour: string,
+    whatsapp: string,
+    startHour: string,
+    guestNumber: string,
+    description: string,
+    knowsVenue: boolean,
+    email: string,
+    userId: string,
+    serviceIds: string[],
+    totalAmountInput: string,
+    type: "PRODUCTION" | "BARTER"| "OTHER"| "EVENT", 
+    trafficSource: "AIRBNB"| "GOOGLE"| "INSTAGRAM"| "TIKTOK"| "OTHER"| "FRIEND"| "FACEBOOK"
 }
 
 export interface IBase64Files {
   fileName: string;
   base64String: unknown;
 }
-export interface BugdetType {
+export interface ProposalType {
   id?: string;
-  nome: string;
+  cep?: string;
+  cpf?: string;
+  rg?: string;
+  cnpj?: string;
+  completeClientName: string;
+  completeCompanyName: string;
+  city?: string;
+  endDate: Date;
   email: string;
-  dataFim: Date;
-  texto: string;
-  total: number;
-  telefone: string;
-  feedback: string;
-  dataInicio: Date;
-  limpeza: boolean;
-  contato: boolean;
-  valorBase: number;
-  convidados: number;
-  seguranca: boolean;
-  trafegoCanal: string;
-  conheceEspaco: boolean;
-  recepcionista: boolean;
-  qtdHorasExtras: number;
-  valorHoraExtra: number;
-  aprovadoAr756: boolean;
-  aprovadoCliente: boolean;
+  paid: boolean;
+  state?: string;
+  street?: string;
+  streetNumber?: string;
+  startDate: Date;
+  venueId: string;
+  updatedAt: Date;
+  createdAt: Date;
+  whatsapp: string;
+  contact: boolean;
+  approved: Boolean;
+  basePrice: number;
+  amountPaid: number;
+  description: string;
+  totalAmount: number;
+  knowsVenue: boolean;
+  guestNumber: number;
+  completeName: string;
+  streetnumber?: string;
+  neighborhood?: string;
+  extraHoursQty: number;
+  extraHourPrice: number;
+  termsAccepted: boolean;
+  proposalServices: ProposalService[]
+  type: "EVENT" | "OTHER" | "BARTER" | "PRODUCTION"
+  trafficSource: "AIRBNB" | "GOOGLE" | "INSTAGRAM" | "TIKTOK" | "OTHER" | "FRIEND" | "FACEBOOK"
 }

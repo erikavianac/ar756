@@ -12,30 +12,21 @@ import { TbBrandWhatsapp } from "react-icons/tb";
 
 export default async function Home() {
   const {
-    cardImageList,
     mobileCarroucelmageList,
-    imageList,
-    imageSobreList,
-    questionList,
-    textRegrasList,
-    textSobreList,
   } = await data();
 
   return (
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
       <div className="fixed z-50 bottom-4 right-4">
-       <AnchorComponent
-                    href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
-                    icon={
-                      <TbBrandWhatsapp
-                        className="cursor-pointer text-white"
-                        size={30}
-                      />
-                    }
-                    bgColor="bg-[#25D366] border-[2px] border-white"
-                  />
+        <AnchorComponent
+          href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+          icon={
+            <TbBrandWhatsapp className="cursor-pointer text-white" size={30} />
+          }
+          bgColor="bg-[#25D366] border-[2px] border-white"
+        />
       </div>
-      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} />
+      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} /> 
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>
         <MobileCarroucelComopnent />
@@ -44,14 +35,14 @@ export default async function Home() {
         <ComodidadeComponent />
         <ServicosComponents />
       </ShowOnlyOnWebComponent>
-      <ExploreComponent
+      {/*   <ExploreComponent
         cardImageList={cardImageList}
         imageList={imageList}
         questionList={questionList}
         textRegrasList={textRegrasList}
         textSobreList={textSobreList}
         imageSobreList={imageSobreList}
-      />
+      /> */}
     </main>
   );
 }

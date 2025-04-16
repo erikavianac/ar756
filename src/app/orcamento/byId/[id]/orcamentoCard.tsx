@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { BugdetType, ValueType } from "@/types";
+import { ProposalType, ValueType } from "@/types";
 import moment from "moment-timezone";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import { BiMailSend, BiTrash } from "react-icons/bi";
@@ -27,13 +27,11 @@ import InfoOrcamentoinfo from "./inforcamentoinfo";
 import LoadingOrcamentoComponent from "./loadingOrcamento";
 
 interface OrcamentoCardProps {
-  orcamentoByid: BugdetType | undefined;
-  valuesList: ValueType[];
+  orcamentoByid: ProposalType | undefined;
 }
 
 export default function OrcamentoCardComponent({
   orcamentoByid,
-  valuesList
 }: OrcamentoCardProps) {
   const [duracaoFesta, setduracaoFesta] = useState<number>(0);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
@@ -99,7 +97,7 @@ export default function OrcamentoCardComponent({
   async function handleOnSubmit(data: CreateAprovaOrcamentoFormData) {
     setIsLoading(true);
     if (data.aprovadoCliente && orcamentoByid) {
-      const aprovarOrcamneto: BugdetType = await updateOrcamentoActionServer({
+      const aprovarOrcamneto: ProposalType = await updateOrcamentoActionServer({
         ...orcamentoByid,
         aprovadoCliente: true,
       });
@@ -109,7 +107,7 @@ export default function OrcamentoCardComponent({
       }
     }
     if (data.feedback && orcamentoByid) {
-      const updateFeedbackOrcamento: BugdetType =
+      const updateFeedbackOrcamento: ProposalType =
         await updateOrcamentoActionServer({
           ...orcamentoByid,
           feedback: data.feedback,
@@ -158,13 +156,13 @@ export default function OrcamentoCardComponent({
 
   useEffect(() => {
     if (orcamentoByid) {
-      const date1 = moment(orcamentoByid?.dataInicio);
-      const date2 = moment(orcamentoByid.dataFim);
+      const date1 = moment(orcamentoByid?.startDate);
+      const date2 = moment(orcamentoByid.endDate);
       setduracaoFesta(() => date2.diff(date1, "hours"));
     }
   }, [orcamentoByid]);
 
-
+  console.log(orcamentoByid?.proposalServices)
   return (
     <motion.div
       initial={{
@@ -198,35 +196,35 @@ export default function OrcamentoCardComponent({
           <div className="flex items-center justify-center gap-x-2">
             <SlPeople size={20} />
             <p className="text-[12px] md:text-sm">
-              ({orcamentoByid?.convidados})
+              ({orcamentoByid?.guestNumber})
             </p>
           </div>
           <div className="flex items-center justify-center gap-x-2">
             <AiOutlineClockCircle size={20} />
             <p className="text-[12px] md:text-sm">{`${
-              orcamentoByid?.dataInicio &&
-              moment.utc(orcamentoByid?.dataInicio).format("HH:mm")
+              orcamentoByid?.startDate &&
+              moment.utc(orcamentoByid?.startDate).format("HH:mm")
             } - ${
-              orcamentoByid?.dataFim && moment.utc(orcamentoByid?.dataFim).format("HH:mm")
+              orcamentoByid?.endDate && moment.utc(orcamentoByid?.endDate).format("HH:mm")
             } (${duracaoFesta}hrs)`}</p>
           </div>
           <div className="flex items-center justify-center gap-x-2">
             <AiOutlineCalendar size={20} />
             <p className="text-[12px] md:text-sm">
-              ({moment.utc(orcamentoByid?.dataInicio).format("DD/MM/YYYY")})
+              ({moment.utc(orcamentoByid?.startDate).format("DD/MM/YYYY")})
             </p>
           </div>
         </div>
         {
           orcamentoByid ? 
-          <InfoOrcamentoinfo valuesList={valuesList} orcamentoById={orcamentoByid} /> :
+          <InfoOrcamentoinfo services={orcamentoByid.proposalServices} orcamentoById={orcamentoByid} /> :
           <LoadingOrcamentoComponent />
         }
         <div className="flex items-center justify-between w-full mt-10 gap-x-3 ">
           <p>Total:</p>
           <div className="flex space-x-1">
             <CurrencyFormat
-              value={orcamentoByid?.total}
+              value={orcamentoByid?.totalAmount}
               displayType={"text"}
               thousandSeparator={"."}
               decimalSeparator={","}
@@ -242,7 +240,7 @@ export default function OrcamentoCardComponent({
           {" "}
           <span className="text-[12px]">*</span> Valor sujeito a alteração.
         </p>
-        {orcamentoByid?.aprovadoCliente ? (
+        {orcamentoByid?.approved ? (
           <div className="text-[12px] md:text-sm">
             <p className="py-10">
               Maravilha! Estamos analisando o seu interesse, entraremos em
@@ -252,11 +250,12 @@ export default function OrcamentoCardComponent({
         ) : (
           <>
           <div className="text-sm flex justify-start items-center gap-x-3 py-10 flex-col gap-y-2">
+           
             <p>Tem alguma dúvida ou gostaria de conversar com a gente?</p>
           
 
           <a href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0" target="_blank" className="rounded-md animate-bounce hover:scale-105 duration-200  text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"> <p>Falar no WhatsApp</p> <FaWhatsapp/></a>
-
+          <p className="text-[10px] font-bold text-center w-full mt-5">* Este orcamento foi encaminhado para o seu email: {orcamentoByid?.email}</p>
           </div>
        {/*      <SelectBooleansItemsCompoenent
               title="Aprovar?"
@@ -491,7 +490,7 @@ export default function OrcamentoCardComponent({
           containerClassname={"z-20"}
         />
         <p className="text-[14px] md:text-[20px] font-semibold text-center w-[430px] ">
-          Obrigado {orcamentoByid?.nome} !
+          Obrigado {orcamentoByid?.completeClientName} !
         </p>
         <p className="text-[14px] md:text-[16px] font-semibold text-center w-[430px]">
           {isSendEmailOrcamentoAprovadoClienteSuccess

@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'app-house-keeper-bucket.s3.eu-north-1.amazonaws.com',
+        pathname: '**',
+      },
     ],
   },
   env: {

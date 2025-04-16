@@ -4,8 +4,10 @@ import sendOrcamentoEmail from "@/action/emailOrcamento";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ConsultarFormData } from "./types/consultarFormZodType";
 import { consultarFormSchema } from "./schemas/consultarFormZodSchema";
+import { useRouter } from 'next/navigation';
+import { ServiceType } from "@/types";
 
-export default function UseConsultaFormHooks(orcamento?: any | undefined) {
+export default function UseConsultaFormHooks(services: ServiceType[]) {
   const [isSendMailSuccess, setIsSendMailSucess] = useState(false);
   const [isSendMailLoading, setIsSendMailLoading] = useState(false);
   const {
@@ -19,87 +21,98 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
   } = useForm<ConsultarFormData>({
     resolver: zodResolver(consultarFormSchema),
     defaultValues: {
-      termosAceito: false,
-      nome: orcamento?.nome,
-      texto: orcamento?.texto,
-      email: orcamento?.email,
-      limpeza: orcamento?.limpeza,
-      telefone: orcamento?.telefone,
-      seguranca: orcamento?.seguranca,
-      convidados: orcamento?.convidados.toString(),
-      trafegoCanal: orcamento?.trafegoCanal,
-      recepcionista: orcamento?.recepcionista,
-      conheceEspaco: orcamento?.conheceEspaco,
-      data: orcamento?.dataInicio.toLocaleString().split("T")[0],
-      horarioFim: orcamento?.dataFim.toLocaleString().split("T")[1].slice(0, 5),
-      horarioInicio: orcamento?.dataInicio
-        .toLocaleString()
-        .split("T")[1]
-        .slice(0, 5),
+      termsAccepted: false,
+      completeClientName: "",
+      description: "",
+      email: "",
+      serviceIds: [],
+      whatsapp: "",
+      venueId: "8159e209-0057-4df3-ae72-855363c3b84e",
+      guestNumber: 0,
+      trafficSource: "OTHER",
+      knowsVenue: false,
+      endHour: "",
+      startHour: "",
+      date: "",
+      type: "EVENT",
     },
   });
-
-  const nomeWatch = watch("nome");
+  const { push } = useRouter();
+  const nomeWatch = watch("completeClientName");
   const emailWatch = watch("email");
-  const limpezaWatch = watch("limpeza");
-  const telefoneWatch = watch("telefone");
-  const segurancaWatch = watch("seguranca");
-  const convidadosWatch = watch("convidados");
-  const horarioFimWatch = watch("horarioFim");
-  const horarioInicioWatch = watch("horarioInicio");
-  const recepcionistaWatch = watch("recepcionista");
+  const telefoneWatch = watch("whatsapp");
+  const convidadosWatch = watch("guestNumber");
+  const horarioFimWatch = watch("endHour");
+  const horarioInicioWatch = watch("startHour");
+  const recepcionistaWatch = watch("trafficSource");
 
   async function handleOnSubmit(values: ConsultarFormData) {
     setIsSendMailLoading(true);
 
-    const orcamento = await sendOrcamentoEmail(values);
+    const proposal: any = await sendOrcamentoEmail({
+      ...values,
+      guestNumber: String(values?.guestNumber),
+      userId: "",
+      totalAmountInput: "0",
+    });
 
-    if (orcamento.id) {
+    if (proposal?.id) {
       setIsSendMailSucess(true);
+      push(`/orcamento/byId/${proposal?.id}`);
     }
     setIsSendMailLoading(false);
 
-    return orcamento;
+    return proposal;
+    console.log(values);
   }
 
   const handleStartHourChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const [hour, minutes] = e.target.value.split(":");
 
-    setValue("horarioInicio", e.target.value);
-    trigger("horarioInicio");
+    setValue("startHour", e.target.value);
+    trigger("startHour");
 
     const addHour = parseInt(hour) + 7;
     const hourToSet = addHour < 22 ? addHour : 22;
     const minutesToSet = addHour >= 22 ? "00" : minutes;
-    setValue("horarioFim", `${hourToSet}:${minutesToSet}`);
+    setValue("endHour", `${hourToSet}:${minutesToSet}`);
   };
 
   const handleEndHourChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setValue("horarioFim", e.target.value);
+    setValue("endHour", e.target.value);
   };
 
   useEffect(() => {
-    if (convidadosWatch >= 30) {
-      setValue("limpeza", true);
-      setValue("recepcionista", true);
-    }
-    if (convidadosWatch >= 70) {
-      setValue("limpeza", true);
-      setValue("seguranca", true);
-      setValue("recepcionista", true);
+    const limpeza = services.find((item: ServiceType) => item.name === "Limpeza")
+    const seguranca = services.find((item: ServiceType) => item.name === "Seguranca")
+    const recepcionista = services.find((item: ServiceType) => item.name === "Recepcionista")
+
+    const currentServices = watch("serviceIds") || [];
+
+    if (convidadosWatch >= 30 && limpeza) {
+    
+      if (!currentServices.includes(limpeza.id)) {
+        setValue("serviceIds", [...currentServices, limpeza.id]);
+      }
     }
 
-    return () => {
-      if (convidadosWatch > 30) {
-        setValue("limpeza", true);
-        setValue("recepcionista", true);
+    if (convidadosWatch >= 70 && limpeza) {
+      const currentServices = watch("serviceIds") || [];
+    
+      if (!currentServices.includes(limpeza.id)) {
+        setValue("serviceIds", [...currentServices, limpeza.id]);
       }
-      if (convidadosWatch > 70) {
-        setValue("limpeza", true);
-        setValue("seguranca", true);
-        setValue("recepcionista", true);
+    }
+    
+    if (convidadosWatch >= 70) {
+      if (seguranca && !currentServices.includes(seguranca.id)) {
+        currentServices.push(seguranca.id);
       }
-    };
+    
+      if (recepcionista && !currentServices.includes(recepcionista.id)) {
+        currentServices.push(recepcionista.id);
+      }
+    }
   }, [convidadosWatch, setValue]);
 
   return {
@@ -112,11 +125,9 @@ export default function UseConsultaFormHooks(orcamento?: any | undefined) {
     register,
     nomeWatch,
     emailWatch,
-    limpezaWatch,
     handleSubmit,
     telefoneWatch,
     handleOnSubmit,
-    segurancaWatch,
     convidadosWatch,
     horarioFimWatch,
     isSendMailSuccess,

@@ -15,7 +15,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import { BiMailSend } from "react-icons/bi";
 import { timesVisitAvailabel } from "@/constants/horarioLista";
 import { ImageComponent } from "../utils/image";
-import { ImageType } from "@/types";
+import { ImageType, ServiceRequestResponse, ServiceType } from "@/types";
 import { useRouter } from "next/navigation";
 import Scrollbars from "react-custom-scrollbars";
 import { stencilFont } from "@/fonts/constants";
@@ -29,10 +29,12 @@ import { FaTiktok } from "react-icons/fa";
 import CarouselComponent from "../utils/carroucelv2";
 
 interface ConsultarFromProps {
+  services: ServiceType[];
   handleCloseReservaModal?: () => void;
 }
 
 export function ConsultarFormComponent({
+  services,
   handleCloseReservaModal,
 }: ConsultarFromProps) {
   const {
@@ -43,20 +45,16 @@ export function ConsultarFormComponent({
     register,
     setValue,
     nomeWatch,
-    emailWatch,
     handleSubmit,
-    limpezaWatch,
-    segurancaWatch,
     handleOnSubmit,
-    convidadosWatch,
     horarioFimWatch,
+    convidadosWatch,
     isSendMailSuccess,
     isSendMailLoading,
     horarioInicioWatch,
-    recepcionistaWatch,
     handleEndHourChange,
     handleStartHourChange,
-  } = UseConsultaFormHooks();
+  } = UseConsultaFormHooks(services);
 
   const [formMode, setformMode] = useState<
     "Pessoais" | "Evento" | "Success" | "Tipo"
@@ -73,12 +71,33 @@ export function ConsultarFormComponent({
   const controlsSuccess = useAnimation();
   const controlsPessoais = useAnimation();
 
-  const handleCheckBoxClick = (
+  /*   const handleCheckBoxClick = (
     name: "seguranca" | "limpeza" | "recepcionista",
     status: boolean
   ) => {
     setValue(name, !status);
   };
+ */
+
+  const traficSourceList: {
+    display: string;
+    value:
+      | "AIRBNB"
+      | "GOOGLE"
+      | "INSTAGRAM"
+      | "TIKTOK"
+      | "OTHER"
+      | "FRIEND"
+      | "FACEBOOK";
+  }[] = [
+    { display: "Facebook", value: "FACEBOOK" },
+    { display: "Instagram", value: "INSTAGRAM" },
+    { display: "Google", value: "GOOGLE" },
+    { display: "Airbnb", value: "AIRBNB" },
+    { display: "Amigo", value: "FRIEND" },
+    { display: "Tiktok", value: "TIKTOK" },
+    { display: "Outro", value: "OTHER" },
+  ];
 
   useEffect(() => {
     if (isSendMailSuccess) {
@@ -108,7 +127,7 @@ export function ConsultarFormComponent({
       window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
-
+ 
   return (
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
@@ -149,47 +168,36 @@ export function ConsultarFormComponent({
           <p className="mx-auto">Que tipo de locação você procura?</p>
           <div className="px-10 flex flex-col  gap-y-4 mt-4">
             <div
-              className="opacity-[1.5] h-[12rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
-    active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative"
+              className="opacity-[1.5] h-[4rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
+    active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative border-[2px] border-black"
               onClick={() => {
                 setformMode("Pessoais");
-                setValue("tipo", "Festa");
+                setValue("type", "EVENT");
                 controlsType.start(opacityHidde);
                 controlsPessoais.start(opacityShow);
               }}
             >
-              <div className="bg-black/30 w-full h-full absolute z-30 " />
-              <ImageComponent
-                src="https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958353/BAE-47_mhtabs_wkf2ni_rourmq.jpg"
-                alt="foto"
-                h="h-[500px]"
-                w="w-[500px]"
-              />
+              <div className=" w-full h-full absolute z-30 " />
               <p
-                className={`${stencilFont.className} absolute inset-0 z-30 text-white  flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
+                className={`${stencilFont.className} absolute inset-0 z-30 text-black   flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
               >
                 EVENTO
               </p>
             </div>
             <div
-              className="opacity-[1.5] h-[12rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
-    active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative"
+              className="opacity-[1.5] h-[4rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
+    active:scale-95 hover:brightness-110  cursor-pointer rounded-lg overflow-hidden relative border-[2px] border-black"
               onClick={() => {
                 setformMode("Pessoais");
-                setValue("tipo", "Filmagem");
+                setValue("type", "PRODUCTION");
                 controlsType.start(opacityHidde);
                 controlsPessoais.start(opacityShow);
               }}
             >
-              <div className="bg-black/30 w-full h-full absolute z-30 " />
-              <ImageComponent
-                src="https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958364/IMG_7103_oc7ak7_h4ao4c_qevwdd.jpg"
-                alt="foto"
-                h="h-[500px]"
-                w="w-[500px]"
-              />
+              <div className="bg-white w-full h-full absolute z-30 " />
+
               <p
-                className={`${stencilFont.className} absolute inset-0 z-30 text-white  flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
+                className={`${stencilFont.className} absolute inset-0 z-30 text-black   flex items-center justify-center text-[18px] lg:text-[20px] w-[80%] mx-auto text-center brightness-110`}
               >
                 FILMAGEM
               </p>
@@ -262,12 +270,12 @@ export function ConsultarFormComponent({
         >
           <div className="flex flex-col flex-1 h-full w-full gap-y-6 ">
             <InputComponent<ConsultarFormData>
-              title="nome"
-              entity="nome"
+              title="Nome"
+              entity="completeClientName"
               register={register}
               trigger={trigger}
-              errors={!!errors.nome}
-              errorsMsg={errors?.nome?.message}
+              errors={!!errors.completeClientName}
+              errorsMsg={errors?.completeClientName?.message}
             />
             <InputComponent<ConsultarFormData>
               title="email"
@@ -287,8 +295,8 @@ export function ConsultarFormComponent({
               </label>
               <InputMask
                 onChange={(e) => {
-                  setValue("telefone", e.target.value as string);
-                  trigger("telefone");
+                  setValue("whatsapp", e.target.value as string);
+                  trigger("whatsapp");
                 }}
                 mask="(99) 99999-9999"
                 placeholder="(99) 99999-9999"
@@ -302,27 +310,27 @@ export function ConsultarFormComponent({
                 outline-none
                 transition
                 text-[12px] md:text-[15px]
-                ${errors.telefone && "border-[1px] border-red-700 "}`}
+                ${errors.whatsapp && "border-[1px] border-red-700 "}`}
               />
 
               <span className="text-red-700 text-[11px] md:text-[15px] w-full">
-                {errors && errors.telefone?.message}
+                {errors && errors.whatsapp?.message}
               </span>
             </div>
             <SelectBooleansItemsCompoenent
               title="Ja conhece o espaco?"
               setValue={setValue}
-              field={"conheceEspaco"}
+              field={"knowsVenue"}
               trigger={trigger}
               watch={watch}
               listOptions={["Sim", "Nao"]}
-              errors={!!errors.conheceEspaco}
-              errorsMsg={errors?.conheceEspaco?.message}
+              errors={!!errors.knowsVenue}
+              errorsMsg={errors?.knowsVenue?.message}
             />
-            <SelectItemsZodComponent
+        {/*     <SelectItemsZodComponent
               title="Onde nos achou?"
               setValue={setValue}
-              field={"trafegoCanal"}
+              field={"trafficSource"}
               trigger={trigger}
               watch={watch}
               listOptions={[
@@ -334,9 +342,45 @@ export function ConsultarFormComponent({
                 "Airbnb",
                 "Outros",
               ]}
-              errors={!!errors.trafegoCanal}
-              errorsMsg={errors?.trafegoCanal?.message}
-            />
+              errors={!!errors.trafficSource}
+              errorsMsg={errors?.trafficSource?.message}
+            /> */}
+            <div
+              className={`w-full flex flex-col gap-y-2  text-[12px] md:text-[15px] animate-openOpacity justify-center items-start  flex-wrap"`}
+            >
+              <label
+                htmlFor="nome"
+                className={`font-semibold  text-[12px] md:text-[15px]`}
+              >
+                Onde nos achou?
+              </label>
+              <div className="flex flex-wrap gap-4 text-sm font-light text-veryDarkGraishCyan">
+                {traficSourceList.map((item) => {
+                  return (
+                    <div
+                      key={item.display}
+                      className="flex items-center justify-center gap-2 cursor-pointer  text-[12px] md:text-[15px]"
+                    >
+                      <div className="flex flex-row items-center justify-center gap-x-2 cursor-pointer ">
+                        <div
+                          onClick={() => {
+                            setValue("trafficSource", item.value);
+                          }}
+                          className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
+                        >
+                          {watch("trafficSource") === item.value && (
+                            <BsCheckLg />
+                          )}
+                        </div>
+                        <p className="text-custom-gray text-[14px]">
+                          {item.display}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
           <motion.div className="flex items-end justify-between flex-1 absolute bottom-0 w-full">
             <ButtonComponent
@@ -359,10 +403,10 @@ export function ConsultarFormComponent({
               title="PROXIMO"
               onClick={async () => {
                 const isEmailValid = await trigger("email");
-                const isNameValid = await trigger("nome");
-                const isTelefoneValid = await trigger("telefone");
-                const isTrafegoValid = await trigger("trafegoCanal");
-                const isConheceEspacoValid = await trigger("conheceEspaco");
+                const isNameValid = await trigger("completeClientName");
+                const isTelefoneValid = await trigger("whatsapp");
+                const isTrafegoValid = await trigger("trafficSource");
+                const isConheceEspacoValid = await trigger("knowsVenue");
                 // Dispara a validação dos campos
                 if (
                   isEmailValid &&
@@ -404,14 +448,14 @@ export function ConsultarFormComponent({
           <div className="flex-1 w-full">
             <InputComponent<ConsultarFormData>
               title="Data do Evento"
-              entity="data"
+              entity="date"
               type="date"
               min={new Date().toISOString().split("T")[0]}
               register={register}
               trigger={trigger}
               onKeyDown={(e) => e.preventDefault()}
-              errors={!!errors.data}
-              errorsMsg={errors?.data?.message}
+              errors={!!errors.date}
+              errorsMsg={errors?.date?.message}
             />
             <div className="flex flex-col mb-2">
               <div className="flex flex-col items-center justify-start md:flex-row gap-x-3">
@@ -442,9 +486,9 @@ export function ConsultarFormComponent({
                       );
                     })}
                   </select>
-                  {errors?.horarioInicio && (
+                  {errors?.startHour && (
                     <p className="text-red-700 text-[11px] md:text-[15px] w-full">
-                      {errors?.horarioInicio?.message}
+                      {errors?.startHour?.message}
                     </p>
                   )}
                 </div>
@@ -472,9 +516,9 @@ export function ConsultarFormComponent({
                       );
                     })}
                   </select>
-                  {errors?.horarioFim && (
+                  {errors?.endHour && (
                     <p className="text-red-700 text-[11px] md:text-[15px] w-full">
-                      {errors?.horarioFim?.message}
+                      {errors?.endHour?.message}
                     </p>
                   )}
                 </div>
@@ -482,18 +526,18 @@ export function ConsultarFormComponent({
             </div>
             <InputComponent<ConsultarFormData>
               title={
-                watch("tipo") === "Filmagem" ? "Colaboradores" : "Convidados"
+                watch("type") === "PRODUCTION" ? "Colaboradores" : "Convidados"
               }
-              entity="convidados"
+              entity="guestNumber"
               type="number"
               max={100}
               min={0}
               register={register}
               trigger={trigger}
-              errors={!!errors.convidados}
-              errorsMsg={errors?.convidados?.message}
+              errors={!!errors.guestNumber}
+              errorsMsg={errors?.guestNumber?.message}
             />
-            <div className="flex items-center justify-start w-full my-5 gap-x-7 text-[12px] md:text-[15px]">
+            {/*  <div className="flex items-center justify-start w-full my-5 gap-x-7 text-[12px] md:text-[15px]">
               <div className="flex items-center justify-center gap-x-3 ">
                 <div
                   className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
@@ -533,56 +577,129 @@ export function ConsultarFormComponent({
                 </div>
                 <p className="font-semibold ">Seguranca</p>
               </div>
+            </div> */}
+            <div className="font-semibold text-custom-gray text-[14px] gap-y-3 mt-2">
+              <p className="font-semibold text-custom-gray text-[14px]">
+                Servicos
+              </p>
+              <div className="flex flex-row gap-x-1 justify-start items-start  flex-wrap">
+                {services?.length === 0 ? (
+                  <p className="text-sm text-center font-light text-gray-400">
+                    Nao ha servicos cadastrados nessa organizacao
+                  </p>
+                ) : (
+                  services?.map((item: ServiceType) => {
+                    const isSelected = watch("serviceIds")?.includes(item.id); // Verifica se o proprietário já foi selecionado
+                    const isDisabled = (item: any) => {
+                      if (item.name === "Limpeza" && convidadosWatch >= 30) return true;
+                      if (convidadosWatch >= 70) return true;
+                      return false;
+                    };
+                    return (
+                      <div
+                        key={item.id}
+                        className="
+            flex flex-wrap flex-col gap-x-2 text-sm font-light text-veryDarkGraishCyan  
+            text-[12px] md:text-[15px]"
+                      >
+                        <button
+                          className={`flex flex-row items-center justify-center gap-x-1 cursor-pointer rounded-sm  py-1`}
+                          onClick={() => {
+                            const currentOwners = watch("serviceIds");
+
+                            if (isSelected) {
+                              // Remove o proprietário se ele já estiver na lista
+                              setValue(
+                                "serviceIds",
+                                currentOwners.filter(
+                                  (id: string) => id !== item.id
+                                )
+                              );
+                            } else {
+                              // Adiciona o proprietário
+                              setValue("serviceIds", [
+                                ...currentOwners,
+                                item.id,
+                              ]);
+                            }
+                          }}
+                          disabled={isDisabled(item)}
+                        >
+                          <div
+                            className={`
+                              w-4 h-4 border-[1px] border-gray-500 cursor-pointer 
+                              flex justify-center items-center rounded-sm overflow-hidden `}
+                          >
+                            {isSelected && <BsCheckLg />}
+                          </div>
+                          <p className="text-custom-gray text-[14px]">
+                            {item.name}
+                          </p>
+                        </button>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
             </div>
-            <div className="flex flex-col mt-3 gap-y-2">
-              <label
-                htmlFor="nome"
-                className="font-semibold text-[12px] md:text-[15px]"
-              >
-                Discorra sobre o evento
-              </label>
-              <textarea
-                className={`bg-gray-50 outline-none rounded-md w-full h-[100px] md:h-[200px] p-2 text-[12px] md:text-[15px] ${
-                  errors.texto && "border-[1px] border-red-700"
-                }`}
-                {...register("texto", { onChange: () => trigger("texto") })}
-              ></textarea>
-              <span className="text-red-700 text-[11px] md:text-[15px] w-full">
-                {errors.texto && errors.texto.message}
-              </span>
-            </div>
-            <div
-              className={`w-full flex flex-col gap-y-2  text-[12px] md:text-[15px] justify-between items-center mt-3"`}
+          </div>
+          <div className="flex flex-col mt-3 gap-y-2">
+            <label
+              htmlFor="nome"
+              className="font-semibold text-[12px] md:text-[15px]"
             >
-              <div className="flex justify-between w-full">
-                <div className="font-semibold text-sm flex gap-x-1">
-                  <p>Li e concordo com os</p> <a href="/termos" target="_blank" className="text-blue-500 hover:scale-[1.02]">Termos de Privacidade</a>
-                </div>
-                <div className="flex text-sm font-light text-veryDarkGraishCyan">
+              Discorra sobre o evento
+            </label>
+            <textarea
+              className={`bg-gray-50 outline-none rounded-md w-full h-[100px] md:h-[200px] p-2 text-[12px] md:text-[15px] ${
+                errors.description && "border-[1px] border-red-700"
+              }`}
+              {...register("description", {
+                onChange: () => trigger("description"),
+              })}
+            ></textarea>
+            <span className="text-red-700 text-[11px] md:text-[15px] w-full">
+              {errors.description && errors.description.message}
+            </span>
+          </div>
+          <div
+            className={`w-full flex flex-col gap-y-2  text-[12px] md:text-[15px] justify-between items-center mt-3"`}
+          >
+            <div className="flex justify-between w-full">
+              <div className="font-semibold text-sm flex gap-x-1">
+                <p>Li e concordo com os</p>{" "}
+                <a
+                  href="/termos"
+                  target="_blank"
+                  className="text-blue-500 hover:scale-[1.02]"
+                >
+                  Termos de Privacidade
+                </a>
+              </div>
+              <div className="flex text-sm font-light text-veryDarkGraishCyan">
+                <div
+                  className="flex items-center justify-center gap-2 cursor-pointer "
+                  onClick={() => {
+                    if (watch("termsAccepted") === false) {
+                      setValue("termsAccepted", true);
+                    } else {
+                      setValue("termsAccepted", false);
+                    }
+                    trigger("termsAccepted");
+                  }}
+                >
                   <div
-                    className="flex items-center justify-center gap-2 cursor-pointer "
-                    onClick={() => {
-                      if (watch("termosAceito") === false) {
-                        setValue("termosAceito", true);
-                      } else {
-                        setValue("termosAceito", false);
-                      }
-                      trigger("termosAceito");
-                    }}
+                    className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
+                    tabIndex={0}
                   >
-                    <div
-                      className="w-4 h-4 border-[1px] border-gray-500 cursor-pointer brightness-75 flex justify-center items-center"
-                      tabIndex={0}
-                    >
-                      {watch("termosAceito") === true && <BsCheckLg />}
-                    </div>
+                    {watch("termsAccepted") === true && <BsCheckLg />}
                   </div>
                 </div>
               </div>
-              <span className="text-red-700 text-[11px] md:text-[15px] w-full">
-                {errors && errors.termosAceito?.message}
-              </span>
             </div>
+            <span className="text-red-700 text-[11px] md:text-[15px] w-full">
+              {errors && errors.termsAccepted?.message}
+            </span>
           </div>
           <div className="flex flex-col gap-y-2">
             <div className="flex items-end justify-between">
@@ -702,8 +819,7 @@ export function ConsultarFormComponent({
           </p>
           <div className="w-[80%] mx-auto text-center flex flex-col gap-y-5">
             <p className="text-[13px] md:text-[16px] font-semibold text-center  mx-auto ">
-              Encaminhamos para seu email {emailWatch} uma simulação do
-              orçamento do seu evento.
+              Aguarde enquanto te redirecinamos para o seu orcamento.
             </p>
           </div>
         </motion.div>

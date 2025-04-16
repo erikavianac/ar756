@@ -1,4 +1,4 @@
-import { ImageType } from "@/types";
+import { ImageRequestResponse, ImageType } from "@/types";
 import { WelcomeCarroucelComponent } from "./carroucel";
 import { WelcomeGridComponent } from "./grid";
 import { WelcomeHeaderComponent } from "./welcomeHeader";
@@ -9,17 +9,22 @@ import { ShowOnlyOnMobileComponent } from "@/components/utils/showOnlyOnMobile";
 import { ShowOnlyOnWebComponent } from "@/components/utils/showOnlyOnWeb";
 
 export async function WelcomeComponent() {
-
   const [
     welcomeMobileImageList,
-    welcomeWebImageList
+    /* welcomeWebImageList */
   ] = await Promise.all([
-    fetch(`${process.env.SERVER_URL}/image/getByTag/Carroucel/Mobile`, {
+    /*     fetch(`${process.env.SERVER_URL}/text/list?venueId=8159e209-0057-4df3-ae72-855363c3b84e&tag=`, {
       method: "GET",
-    }).then(resp => resp.json()),
-    fetch(`${process.env.SERVER_URL}/image/getByTag/Grid/Web`, {
-      method: "GET",
-    }).then(resp => resp.json())
+    }).then(resp => resp.json()), */
+    fetch(
+      `${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e&tag=Grid&responsiveMode=Mobile`,
+      {
+        method: "GET",
+      }
+    ).then(async (resp) => {
+      const response: ImageRequestResponse = await resp.json();
+      return response.data.imagesByTag;
+    }),
   ]);
 
   return (
@@ -31,9 +36,9 @@ export async function WelcomeComponent() {
       <ShowOnlyOnMobileComponent>
         <WelcomeCarroucelComponent imageList={welcomeMobileImageList} />
       </ShowOnlyOnMobileComponent>
-      <ShowOnlyOnWebComponent>
+      {/*<ShowOnlyOnWebComponent>
         <WelcomeGridComponent imageList={welcomeWebImageList} />
-      </ShowOnlyOnWebComponent>
+      </ShowOnlyOnWebComponent> */}
     </SectionComponent>
   );
 }

@@ -1,37 +1,37 @@
-import { BugdetType, ValueType } from "@/types";
+import { ProposalService, ProposalType, ValueType } from "@/types";
 import React from "react";
 import CurrencyFormat from "react-currency-format";
 import { FcCheckmark } from "react-icons/fc";
 
 interface InfoOrcamentoinfoProps {
-  orcamentoById: BugdetType;
-  valuesList: ValueType[];
+  orcamentoById: ProposalType;
+  services: ProposalService[];
 }
 
 export default function InfoOrcamentoinfo({
   orcamentoById,
-  valuesList,
+  services,
 }: InfoOrcamentoinfoProps) {
   const valorHoraExtra =
-    orcamentoById?.valorHoraExtra * orcamentoById?.qtdHorasExtras;
+    orcamentoById?.extraHourPrice * orcamentoById?.extraHoursQty;
   return (
     <div className="flex flex-col flex-1 mt-10 gap-y-2">
       <div className="flex items-center justify-between w-full gap-x-3 ">
         <p className="text-[14px] md:text-[18px] ">Valor base:</p>
         <CurrencyFormat
-              value={orcamentoById?.valorBase}
-              displayType={"text"}
-              thousandSeparator={"."}
-              decimalSeparator={","}
-              decimalScale={2} // Define o número de casas decimais
-              fixedDecimalScale={true}
-              prefix={"R$ "}
-            />
+          value={orcamentoById?.basePrice}
+          displayType={"text"}
+          thousandSeparator={"."}
+          decimalSeparator={","}
+          decimalScale={2} // Define o número de casas decimais
+          fixedDecimalScale={true}
+          prefix={"R$ "}
+        />
       </div>
-      {orcamentoById?.qtdHorasExtras ? (
+      {orcamentoById?.extraHoursQty ? (
         <div className="flex items-center justify-between w-full gap-x-3 ">
           <p className="text-[14px] md:text-[18px] ">
-            Horas extras ({orcamentoById?.qtdHorasExtras}hrs):
+            Horas extras ({orcamentoById?.extraHoursQty}hrs):
           </p>
           <CurrencyFormat
             value={valorHoraExtra}
@@ -44,12 +44,15 @@ export default function InfoOrcamentoinfo({
           />
         </div>
       ) : null}
-      {orcamentoById?.seguranca && (
-        <div className="flex items-center justify-between w-full gap-x-3 ">
-          <p className="text-[14px] md:text-[18px] ">Seguranca</p>
-          <CurrencyFormat
-              value={ valuesList.find((item: ValueType) => item?.titulo === "Seguranca")
-              ?.valor}
+      {services.map((item: ProposalService) => {
+        return (
+          <div
+            key={item.id}
+            className="flex items-center justify-between w-full gap-x-3 "
+          >
+            <p className="text-[14px] md:text-[18px] ">{item?.service.name}</p>
+            <CurrencyFormat
+              value={item?.service?.price}
               displayType={"text"}
               thousandSeparator={"."}
               decimalSeparator={","}
@@ -57,38 +60,14 @@ export default function InfoOrcamentoinfo({
               fixedDecimalScale={true}
               prefix={"R$ "}
             />
+          </div>
+        );
+      })}
+      {/*  {orcamentoById?.seguranca && (
+        <div >
+          
         </div>
-      )}
-      {orcamentoById?.recepcionista && (
-        <div className="flex items-center justify-between w-full gap-x-3 ">
-          <p className="text-[14px] md:text-[18px] ">Recepcionista</p>
-          <CurrencyFormat
-              value={ valuesList.find((item: ValueType) => item?.titulo === "Recepcionista")
-              ?.valor}
-              displayType={"text"}
-              thousandSeparator={"."}
-              decimalSeparator={","}
-              decimalScale={2} // Define o número de casas decimais
-              fixedDecimalScale={true}
-              prefix={"R$ "}
-            />
-        </div>
-      )}
-      {orcamentoById?.limpeza && (
-        <div className="flex items-center justify-between w-full gap-x-3 ">
-          <p className="text-[14px] md:text-[18px] ">Limpeza</p>
-          <CurrencyFormat
-              value={ valuesList.find((item: ValueType) => item?.titulo === "Limpeza")
-              ?.valor}
-              displayType={"text"}
-              thousandSeparator={"."}
-              decimalSeparator={","}
-              decimalScale={2} // Define o número de casas decimais
-              fixedDecimalScale={true}
-              prefix={"R$ "}  
-            />
-        </div>
-      )}
+      )} */}
     </div>
   );
 }

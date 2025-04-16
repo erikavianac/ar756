@@ -1,13 +1,11 @@
 import { z } from 'zod';
 
 export const consultarFormSchema = z.object({
-  trafegoCanal: z.string({
+  trafficSource: z.enum(["AIRBNB", "GOOGLE", "INSTAGRAM", "TIKTOK", "OTHER", "FRIEND", "FACEBOOK"]),
+  knowsVenue: z.boolean({
     required_error: 'Este campo e obrigatorio!',
   }),
-  conheceEspaco: z.boolean({
-    required_error: 'Este campo e obrigatorio!',
-  }),
-  termosAceito: z.boolean({
+  termsAccepted: z.boolean({
     required_error: 'Este campo e obrigatorio!',
   }).refine(
     (val) => val === true,
@@ -15,10 +13,8 @@ export const consultarFormSchema = z.object({
       message: 'Os termos devem ser aceitos para o envio do orcamento.',
     },
   ),
-  tipo: z.string({
-    required_error: 'Este campo e obrigatorio!',
-  }),
-  horarioFim: z
+  type: z.enum(["PRODUCTION", "BARTER", "OTHER", "EVENT"]),
+  endHour: z
     .string()
     .nonempty('Este campo é obrigatório!')
     .refine(
@@ -31,8 +27,8 @@ export const consultarFormSchema = z.object({
         message: 'O fim do evento deve estar entre 7:00 e 22:00',
       },
     ),
-  data: z.string().nonempty('Este campo e obrigatorio!'),
-  horarioInicio: z
+  date: z.string().nonempty('Este campo e obrigatorio!'),
+  startHour: z
     .string()
     .nonempty('Este campo é obrigatório!')
     .refine(
@@ -45,24 +41,23 @@ export const consultarFormSchema = z.object({
         message: 'O inicio do evento deve estar entre 7:00 e 22:00',
       },
     ),
-  seguranca: z.boolean().default(false),
-  limpeza: z.boolean().default(false),
-  recepcionista: z.boolean().default(false),
-  nome: z
+  serviceIds: z.array(z.string()),
+  completeClientName: z
     .string()
     .nonempty('Este campo e obrigatorio!')
     .min(5, 'Nome deve conter pelo menos 5 caracteres.'),
   email: z.string().email('Email invalido!').nonempty('Este campo e obrigatorio!'),
-  telefone: z
+  venueId: z.string(),
+  whatsapp: z
     .string()
     .regex(/^\(\d{2}\) \d{5}-\d{4}$/, 'Digite um número de whatsapp válido') // Regex para validar um número de celular
     .min(15, 'Digite um número de telefone válido')
     .max(15, 'Digite um número de telefone válido'),
-  texto: z
+  description: z
     .string()
     .nonempty('Este campo e obrigatorio!')
     .min(10, 'A descricao do evento deve conter pelo menos 10 caracteres.'),
-  convidados: z
+  guestNumber: z
     .string()
     .nonempty('Este campo e obrigatorio!')
     .transform((val) => parseInt(val))
@@ -73,8 +68,3 @@ export const consultarFormSchema = z.object({
       message: 'O número de convidados não pode 0',
     }),
 });
-
-/*   telefone:  z
-  .string()
-  .min(8, { message: 'número inválido' })
-  .regex(/^[^_]*$/, { message: 'número inválido' }), */

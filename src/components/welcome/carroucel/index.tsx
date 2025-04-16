@@ -48,7 +48,7 @@ export function WelcomeCarroucelComponent({ imageList }: WelcomeCarroucelProps) 
           {imageList?.map((item: ImageType) => {
             return (
               <motion.img
-                className="min-w-full min-h-full overflow-hidden rounded-md "
+                className="min-w-full max-h-[18rem] overflow-hidden rounded-md "
                 key={item?.id}
                 src={item?.imageUrl}
               />

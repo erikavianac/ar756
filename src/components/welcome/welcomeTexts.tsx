@@ -1,18 +1,21 @@
-import { AnimatedVerticalComponent } from '@/components/utils/animatedVertical';
-import { TextType } from '@/types';
-
+import { AnimatedVerticalComponent } from "@/components/utils/animatedVertical";
+import { TextRequestResponse, TextType } from "@/types";
 
 export async function WelcomeTextsComponent() {
-  const welcomeTexts: TextType[] = await fetch(
-    `${process.env.SERVER_URL}/text/getByArea/Welcome`,
+  const welcomeTexts: TextRequestResponse = await fetch(
+    `${process.env.SERVER_URL}/text/list?venueId=8159e209-0057-4df3-ae72-855363c3b84e&area=Intro`,
     {
-      method: 'GET',
-    },
-  ).then((resp) => resp.json());
+      method: "GET",
+    }
+  ).then((resp) => {
+    const response: any = resp.json();
+
+    return response;
+  });
 
   return (
     <div className="flex flex-col gap-y-2 mt-10 xl:mt-5">
-    {welcomeTexts.map((text: TextType) => {
+      {welcomeTexts?.data.textList.map((text: TextType) => {
         return (
           <AnimatedVerticalComponent
             key={text.id}
@@ -21,7 +24,7 @@ export async function WelcomeTextsComponent() {
             <p>{text.text}</p>
           </AnimatedVerticalComponent>
         );
-      })} 
+      })}
     </div>
   );
 }
