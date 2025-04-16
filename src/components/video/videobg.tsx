@@ -8,14 +8,15 @@ import { ConsultarFormComponent } from "../consultar";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { ShowOnlyOnWebComponent } from "../utils/showOnlyOnWeb";
 import { useRouter } from "next/navigation";
-import { ImageType } from "@/types";
+import { ImageType, ServiceType } from "@/types";
 import { MainCarroucel } from "../utils/mainCarroucel";
 
 interface VideobgProps{
+  services: ServiceType[];
   mobileCarroucelmageList: ImageType[]
 }
 
-export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
+export function VideobgComponent({mobileCarroucelmageList,services}:VideobgProps) {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [screenSizeChecked, setScreenSizeChecked] = useState(false);
@@ -80,7 +81,7 @@ export function VideobgComponent({mobileCarroucelmageList}:VideobgProps) {
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
           <ConsultarFormComponent
-            services={[]}
+            services={services}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />
         </ModalComponent>

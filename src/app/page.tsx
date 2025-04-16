@@ -12,6 +12,7 @@ import { TbBrandWhatsapp } from "react-icons/tb";
 
 export default async function Home() {
   const {
+    services,
     mobileCarroucelmageList,
   } = await data();
 
@@ -26,14 +27,14 @@ export default async function Home() {
           bgColor="bg-[#25D366] border-[2px] border-white"
         />
       </div>
-      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} /> 
+      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} services={services}/> 
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>
         <MobileCarroucelComopnent />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
-        <ComodidadeComponent />
-        <ServicosComponents />
+        <ComodidadeComponent services={services}/>
+        <ServicosComponents services={services}/>
       </ShowOnlyOnWebComponent>
       {/*   <ExploreComponent
         cardImageList={cardImageList}

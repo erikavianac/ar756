@@ -1,8 +1,9 @@
-import { ImageRequestResponse } from "@/types";
+import { ImageRequestResponse, ServiceRequestResponse } from "@/types";
 
 export async function data() {
   const [
     mobileCarroucelmageList,
+    services,
     /*     cardImageList,
         imageList,
         imageSobreList,
@@ -15,6 +16,15 @@ export async function data() {
         const response: ImageRequestResponse = await resp.json()
         return response.data.imagesByTag
       }),
+      await fetch(
+          `${process.env.SERVER_URL}/service/list?venueId=8159e209-0057-4df3-ae72-855363c3b84e`,
+          {
+            method: "GET",
+          }
+        ).then(async (resp) => {
+          const response: ServiceRequestResponse = await resp.json();
+          return response?.data?.serviceList;
+        })
     /*  fetch(`${process.env.SERVER_URL}/image/getByTag/Card/Web`).then((resp) =>
        resp.json()
      ),
@@ -34,6 +44,7 @@ export async function data() {
   ]);
 
   return {
+    services,
     mobileCarroucelmageList,
     /* 
     cardImageList,
