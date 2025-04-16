@@ -9,14 +9,12 @@ import { stencilFont } from "@/fonts/constants";
 
 interface RegrasProps {
   handleCloseRegrasModal?: () => void;
-  textRegrasList: TextType[];
   textSobreList: TextType[];
   imageSobreList: ImageType[];
 }
 
 export function RegrasCardComponent({
   handleCloseRegrasModal,
-  textRegrasList,
   textSobreList,
   imageSobreList,
 }: RegrasProps) {
@@ -76,15 +74,6 @@ export function RegrasCardComponent({
           >
             SOBRE
           </p>
-          <p
-            className={`relative cursor-pointer tracking-[0.10rem] ${
-              ar756ModalMode.includes("REGRAS") &&
-              "after:absolute after:bottom-0 after:left-0 after:w-full after:h-[0.05rem] after:bg-black"
-            }`}
-            onClick={() => setAr756ModalMode("REGRAS")}
-          >
-            REGRAS
-          </p>
         </div>
         {ar756ModalMode.includes("SOBRE") && (
           <Scrollbars
@@ -109,7 +98,7 @@ export function RegrasCardComponent({
                       <div key={item?.id} className="flex flex-col gap-y-2">
                         <p
                           className={`${
-                            item?.titulo?.includes("footer") &&
+                            item?.title?.includes("footer") &&
                             "text-[12px] md:text-[12px] font-semibold mb-5 mt-3"
                           }`}
                         >
@@ -132,48 +121,6 @@ export function RegrasCardComponent({
               </div>
           </motion.div>
             </Scrollbars>
-        )}
-        {ar756ModalMode.includes("REGRAS") && (
-          <Scrollbars
-            style={{
-              width: "100%",
-              height: 500,
-              gap: 20,
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: ar756ModalMode.includes("REGRAS") ? 1 : 0,
-                transition: { duration: 0.5 },
-              }}
-              className="flex flex-col gap-y-2 text-[13px] md:text-[14px] text-justify"
-            >
-              {textRegrasList &&
-                textRegrasList.map((item: TextType, index: number) => {
-                  return (
-                    <div
-                      key={item?.id}
-                      className="flex gap-x-2 justify-start items-start text-justify w-[95%]"
-                    >
-                      <p
-                        className={`${
-                          item?.titulo?.includes("footer") && "hidden"
-                        } font-semibold text-[14px] md:text-[14px] flex`}
-                      >{`${index + 1}.`}</p>
-                      <p
-                        className={`${
-                          item?.titulo?.includes("footer") &&
-                          "text-[14px] md:text-[16px] font-semibold mb-5 mt-3"
-                        }`}
-                      >
-                        {item?.text}
-                      </p>
-                    </div>
-                  );
-                })}
-            </motion.div>
-          </Scrollbars>
         )}
       </div>
     </Scrollbars>

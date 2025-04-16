@@ -47,6 +47,13 @@ export interface TextRequestResponse {
   count: number,
   type: string
 }
+export interface QuestionRequestResponse {
+  success: boolean,
+  message: string,
+  data: { questionList: QuestionType[] },
+  count: number,
+  type: string
+}
 export interface ProposalRequestResponse {
   success: boolean,
   message: string,

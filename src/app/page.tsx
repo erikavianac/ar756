@@ -13,6 +13,11 @@ import { TbBrandWhatsapp } from "react-icons/tb";
 export default async function Home() {
   const {
     services,
+    questions,
+    imageList,
+    cardImageList,
+    textSobreList,
+    imageSobreList,
     mobileCarroucelmageList,
   } = await data();
 
@@ -36,14 +41,13 @@ export default async function Home() {
         <ComodidadeComponent services={services}/>
         <ServicosComponents services={services}/>
       </ShowOnlyOnWebComponent>
-      {/*   <ExploreComponent
+      <ExploreComponent
         cardImageList={cardImageList}
         imageList={imageList}
-        questionList={questionList}
-        textRegrasList={textRegrasList}
+        questionList={questions}
         textSobreList={textSobreList}
         imageSobreList={imageSobreList}
-      /> */}
+      />
     </main>
   );
 }

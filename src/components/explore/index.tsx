@@ -16,7 +16,6 @@ interface ExploreProps {
   textSobreList: TextType[];
   cardImageList: ImageType[];
   imageSobreList: ImageType[];
-  textRegrasList: TextType[];
   questionList: QuestionType[];
 }
 
@@ -24,7 +23,6 @@ export function ExploreComponent({
   cardImageList,
   imageList,
   questionList,
-  textRegrasList,
   textSobreList,
   imageSobreList,
 }: ExploreProps) {
@@ -103,7 +101,7 @@ export function ExploreComponent({
                   alt="foto"
                   containerClassname="z-20"
                   src={cardImageList[0]?.imageUrl}
-                  title="SOBRE E REGRAS"
+                  title="SOBRE"
                 />
               </div>
               <div
@@ -172,7 +170,6 @@ export function ExploreComponent({
           >
             <RegrasCardComponent
               handleCloseRegrasModal={handleCloseRegrasModal}
-              textRegrasList={textRegrasList}
               textSobreList={textSobreList}
               imageSobreList={imageSobreList}
             />
