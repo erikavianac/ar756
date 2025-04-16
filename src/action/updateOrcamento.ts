@@ -1,8 +1,8 @@
 "use server";
 
-import { BugdetType, CreateOrcamentoReqBody } from "@/types";
+import { ProposalType, CreateOrcamentoReqBody } from "@/types";
 
-export  async function updateOrcamentoActionServer( data: BugdetType) {
+export  async function updateOrcamentoActionServer( data: ProposalType) {
   const updatedOrcamento = await fetch(
     `${process.env.SERVER_URL}/orcamento/update/${data.id}`,
     {
