@@ -1,16 +1,18 @@
 import React from "react";
 import { GaleriaCardComponent } from "@/components/explore/galeria/galeriaCard";
 import { Metadata } from "next";
+import { ImageRequestResponse } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Galeria"
+  title: "Galeria",
 };
 
 export default async function Galeria() {
-  const imageList = await fetch(`${process.env.SERVER_URL}/image/list`, {
-    method: "GET",
-  }).then(async (resp) => {
-    return await resp.json();
+  const imageList = await fetch(
+    `${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e`
+  ).then(async (resp) => {
+    const response: ImageRequestResponse = await resp.json();
+    return response.data.imagesByTag;
   });
 
   return (
