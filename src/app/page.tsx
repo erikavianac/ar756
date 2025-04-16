@@ -35,7 +35,7 @@ export default async function Home() {
       <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} services={services}/> 
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>
-        <MobileCarroucelComopnent />
+        <MobileCarroucelComopnent services={services}/>
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
         <ComodidadeComponent services={services}/>
