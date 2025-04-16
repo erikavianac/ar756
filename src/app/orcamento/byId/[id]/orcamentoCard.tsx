@@ -96,27 +96,6 @@ export default function OrcamentoCardComponent({
 
   async function handleOnSubmit(data: CreateAprovaOrcamentoFormData) {
     setIsLoading(true);
-    if (data.aprovadoCliente && orcamentoByid) {
-      const aprovarOrcamneto: ProposalType = await updateOrcamentoActionServer({
-        ...orcamentoByid,
-        aprovadoCliente: true,
-      });
-      if (aprovarOrcamneto.id) {
-   
-        seIsSendEmailOrcamentoAprovadoClienteSuccess(true);
-      }
-    }
-    if (data.feedback && orcamentoByid) {
-      const updateFeedbackOrcamento: ProposalType =
-        await updateOrcamentoActionServer({
-          ...orcamentoByid,
-          feedback: data.feedback,
-        });
-      if (updateFeedbackOrcamento.id) {
-     
-        seIsSendFeedbackEmailSuccess(true);
-      }
-    }
     setIsLoading(false);
   }
 
