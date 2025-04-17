@@ -9,19 +9,13 @@ export async function data() {
     services,
     questions,
     textSobreList
-    /*     ,
-        
-        ,
-        questionList,
-        textRegrasList,
-        , */
   ] = await Promise.all([
     fetch(`${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e&tag=MainCarroucel&responsiveMode=Mobile`)
       .then(async (resp) => {
         const response: ImageRequestResponse = await resp.json()
         return response.data.imagesByTag
       }),
-    fetch(`${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e&tag=Card`)
+    fetch(`${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e&tag=Card&responsiveMode=`)
       .then(async (resp) => {
         const response: ImageRequestResponse = await resp.json()
         return response.data.imagesByTag
@@ -31,7 +25,7 @@ export async function data() {
         const response: ImageRequestResponse = await resp.json()
         return response.data.imagesByTag
       }),
-    fetch(`${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e&tag=Sobre`)
+    fetch(`${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e&tag=Sobre&responsiveMode=`)
       .then(async (resp) => {
         const response: ImageRequestResponse = await resp.json()
         return response.data.imagesByTag

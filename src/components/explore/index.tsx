@@ -85,7 +85,7 @@ export function ExploreComponent({
           </p>
         </div>
         <div className="w-full  lg:w-[80%]   flex lg:gap-x-10 text-white justify-center items-center flex-col lg:flex-row gap-y-4 lg:gap-y-0">
-          {cardImageList && (
+          {cardImageList && cardImageList.length > 0 && (
             <>
               <div
                 className="w-full "

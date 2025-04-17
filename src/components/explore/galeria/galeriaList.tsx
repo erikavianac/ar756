@@ -47,7 +47,7 @@ export default function GaleriaListComponent({
       }}
     >
       <div className="flex flex-wrap items-center justify-center w-full gap-2 md:gap-1 pb-5 md:pb-0 ">
-        {imageList &&
+        {imageList && imageList?.length > 0 &&
           imageList.map((item: ImageType, index: number) => {
             if (
               !galeriaModalMode

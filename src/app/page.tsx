@@ -20,13 +20,7 @@ export default async function Home() {
     imageSobreList,
     mobileCarroucelmageList,
   } = await data();
-  console.log([
-    { question: questions },
-    { imageList: imageList },
-    { cardImageList: cardImageList },
-    { textSobreList: textSobreList },
-    { imageSobreList: imageSobreList },
-  ]);
+
   return (
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
       <div className="fixed z-50 bottom-4 right-4">
