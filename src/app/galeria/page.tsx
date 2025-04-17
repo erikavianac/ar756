@@ -15,7 +15,7 @@ export default async function Galeria() {
     const response: ImageRequestResponse = await resp.json();
     return response.data.imagesByTag;
   });
-  console.log(imageList)
+
   return (
     <div className="flex justify-center items-center pt-20">
       <div className="flex-1 mt-20">
