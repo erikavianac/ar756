@@ -1,7 +1,7 @@
 export interface ImageType {
   id?: string;
   tag: string;
-  area: string;
+  description: string;
   position: number;
   imageUrl: string;
   responsiveMode: string;

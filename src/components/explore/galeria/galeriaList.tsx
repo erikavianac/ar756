@@ -52,26 +52,10 @@ export default function GaleriaListComponent({
             if (
               !galeriaModalMode
                 .toLocaleLowerCase()
-                .includes(item.area.toLocaleLowerCase()) &&
+                .includes(item.description.toLocaleLowerCase()) &&
               !galeriaModalMode.includes("TODAS")
             ) {
               return;
-            }
-
-            if(item?.tag === "Sobre"){
-              return
-            }
-
-            if(item?.responsiveMode === "Mobile"){
-              return
-            }
-
-            if(item?.tag === "Home"){
-              return
-            }
-
-            if(item?.tag === "Area"){
-              return
             }
 
             return (

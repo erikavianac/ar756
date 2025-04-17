@@ -141,7 +141,7 @@ export function ExploreComponent({
             </>
           )}
         </div>
-        {galeriaModal && (
+        {galeriaModal &&  (
           <ModalComponent
             onClose={handleCloseGaleriaModa}
             styleInternal="max-w-[90%] min-w-[90%]  max-h-[90%] min-h-[90%]  md:max-w-[600px]  md:min-w-[600px]   relative bg-white"
