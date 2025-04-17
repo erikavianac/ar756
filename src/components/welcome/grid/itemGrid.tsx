@@ -33,7 +33,7 @@ export function GridItemComponent({ gridItem, index,setIsModalOpen,setSelectedIm
       }}
     >
       <ImageComponent
-        alt={gridItem.area}
+        alt={gridItem.description}
         h={"h-full "}
         w={"w-full"}
         src={gridItem?.imageUrl}

@@ -20,7 +20,13 @@ export default async function Home() {
     imageSobreList,
     mobileCarroucelmageList,
   } = await data();
-
+  console.log([
+    { question: questions },
+    { imageList: imageList },
+    { cardImageList: cardImageList },
+    { textSobreList: textSobreList },
+    { imageSobreList: imageSobreList },
+  ]);
   return (
     <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
       <div className="fixed z-50 bottom-4 right-4">
@@ -32,14 +38,17 @@ export default async function Home() {
           bgColor="bg-[#25D366] border-[2px] border-white"
         />
       </div>
-      <VideobgComponent mobileCarroucelmageList={mobileCarroucelmageList} services={services}/> 
+      <VideobgComponent
+        mobileCarroucelmageList={mobileCarroucelmageList}
+        services={services}
+      />
       <WelcomeComponent />
       <ShowOnlyOnMobileComponent>
-        <MobileCarroucelComopnent services={services}/>
+        <MobileCarroucelComopnent services={services} />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
-        <ComodidadeComponent services={services}/>
-        <ServicosComponents services={services}/>
+        <ComodidadeComponent services={services} />
+        <ServicosComponents services={services} />
       </ShowOnlyOnWebComponent>
       <ExploreComponent
         cardImageList={cardImageList}
