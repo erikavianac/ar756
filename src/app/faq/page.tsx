@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 
 export default async function Faq() {
   const questionList = await fetch(`${process.env.SERVER_URL}/question/list`)
-    .then((resp) => resp.json())
     .then(async (resp) => {
       const response: QuestionRequestResponse = await resp.json();
       return response?.data?.questionList;
