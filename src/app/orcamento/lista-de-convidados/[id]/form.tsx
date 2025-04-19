@@ -158,16 +158,6 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
           errorsMsg={errors?.email?.message}
           classNameLable={`${stencilFont.className} font-normal  text-[14px]`}
         />
-        <InputComponent
-          title="Rg"
-          entity="rg"
-          register={register}
-          trigger={trigger}
-          errorInPlaceHolder={true}
-          errors={!!errors.rg}
-          errorsMsg={errors?.rg?.message}
-          classNameLable={`${stencilFont.className} font-normal  text-[14px]`}
-        />
         <div className="md:w-[200px]">
           <button
             onClick={async () => {
@@ -265,7 +255,6 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
                     </div>
                     <p>{item.name}</p>
                     <p>{item.email}</p>
-                    <p>{item.rg}</p>
                   </div>
                   {isDeleteModalOpen && (
                     <ModalComponent onClose={() => setIsDeleteModalOpen(false)}>
