@@ -259,7 +259,7 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
                   >
                     <div
                       onClick={() => setIsDeleteModalOpen(true)}
-                      className="absolute right-3 top-3 text-red-900 z-40"
+                      className="absolute right-3 top-3 text-red-900 z-20"
                     >
                       <FaRegTrashAlt />
                     </div>
