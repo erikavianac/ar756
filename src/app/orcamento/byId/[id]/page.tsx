@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import OrcamentoCardComponent from "./orcamentoCard";
 import { ProposalRequestResponse, ProposalType } from "@/types";
 import { notFound } from "next/navigation";
+import { getProposalById } from "@/util/get-proposal";
 
 interface OrcamentoByiDPageProps {
   params: {
@@ -12,15 +13,7 @@ interface OrcamentoByiDPageProps {
 export async function generateMetadata({
   params,
 }: OrcamentoByiDPageProps): Promise<Metadata> {
-  const orcamentoByID = await fetch(
-    `${process.env.SERVER_URL}/proposal/byId/${params.id}`,
-    {
-      method: "GET",
-    }
-  ).then(async (resp) => {
-    const response: ProposalRequestResponse = await resp.json();
-    return response?.data;
-  });
+  const orcamentoByID = await getProposalById(params.id);
 
   return {
     title: `Orçamento ${
@@ -32,15 +25,7 @@ export async function generateMetadata({
 export default async function OrcamentoPage({
   params,
 }: OrcamentoByiDPageProps) {
-  const orcamentoByID = await fetch(
-    `${process.env.SERVER_URL}/proposal/byId/${params.id}`,
-    {
-      method: "GET",
-    }
-  ).then(async (resp) => {
-    const response: ProposalRequestResponse = await resp.json();
-    return response?.data;
-  });
+  const orcamentoByID = await getProposalById(params.id);;
 
   if (!orcamentoByID?.id) {
     notFound();

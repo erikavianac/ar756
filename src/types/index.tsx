@@ -61,6 +61,15 @@ export interface ProposalRequestResponse {
   count: number,
   type: string
 }
+export interface CreatePersonRequestResponse {
+  success: boolean,
+  message: string,
+  data: {
+    personList: PersonType[]
+  },
+  count: number,
+  type: string
+}
 
 export interface ProposalService {
   id?: string;
@@ -138,6 +147,18 @@ export interface ProposalType {
   extraHourPrice: number;
   termsAccepted: boolean;
   proposalServices: ProposalService[]
+  personList: PersonType[]
   type: "EVENT" | "OTHER" | "BARTER" | "PRODUCTION"
   trafficSource: "AIRBNB" | "GOOGLE" | "INSTAGRAM" | "TIKTOK" | "OTHER" | "FRIEND" | "FACEBOOK"
+}
+
+export interface PersonType {
+  name: string;
+  proposalId: string;
+  rg?: string ;
+  email?: string ;
+  type: "GUEST" | "WORKER";
+  id?: string;
+  attendance?: boolean;
+  confirmAttendanceEmail?: boolean;
 }

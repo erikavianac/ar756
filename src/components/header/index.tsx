@@ -25,7 +25,7 @@ export function HomeHeaderComponent() {
     setMenuIsOpen(false);
   }
   return (
-    <header className="z-10 absolute  flex items-center justify-center w-full px-3 py-1 lg:justify-start lg:py-3 lg:px-14">
+    <header className="z-10  flex items-center justify-center w-full px-3 py-1 lg:justify-start lg:py-3 lg:px-14 relative">
       <ShowOnlyOnMobileComponent>
         <GiHamburgerMenu
           size={30}
@@ -44,7 +44,7 @@ export function HomeHeaderComponent() {
         onclik={() => replace("/")}
         priority={true}
       /> */}
-      <p className={`${stencilFont.className} text-[80px] text-black mt-10`}>
+      <p className={`${stencilFont.className} text-[80px] text-black `}>
         AR756
       </p>
       {menuIsOpen && (

@@ -6,6 +6,7 @@ import { HomeHeaderComponent } from "@/components/header";
 import { FooterComponent } from "@/components/footer";
 import { GoogleTagManager } from "@next/third-parties/google";
 import LoadingPage from "@/components/utils/loadingPage";
+import { ToastProvider } from "@/components/toat-provider/toast-provider";
 
 const roboto = Roboto({
   weight: '400',
@@ -34,10 +35,9 @@ export default function RootLayout({
     <html lang="en" className="scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent  overflow-y-scroll">
       <body suppressHydrationWarning={true} className={`${roboto.className} w-full min-h-screen relative`}>
         <LoadingPage />
+        <ToastProvider />
         <div id="modal-root" />
-        <HomeHeaderComponent />
         {children}
-        <FooterComponent />
       </body>
       <Analytics/>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID as string} />

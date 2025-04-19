@@ -84,27 +84,24 @@ export default function UseConsultaFormHooks(services: ServiceType[]) {
 
   useEffect(() => {
     const limpeza = services.find((item: ServiceType) => item.name === "Limpeza")
+
+    const currentServices = watch("serviceIds") || [];
+
+    if (convidadosWatch >= 30 && limpeza) {
+      if (!currentServices.includes(limpeza.id)) {
+        setValue("serviceIds", [...currentServices, limpeza.id]);
+      }
+    }
+  }, [convidadosWatch, setValue]);
+
+  useEffect(() => {
     const seguranca = services.find((item: ServiceType) => item.name === "Seguranca")
     const recepcionista = services.find((item: ServiceType) => item.name === "Recepcionista")
 
     const currentServices = watch("serviceIds") || [];
 
-    if (convidadosWatch >= 30 && limpeza) {
-    
-      if (!currentServices.includes(limpeza.id)) {
-        setValue("serviceIds", [...currentServices, limpeza.id]);
-      }
-    }
-
-    if (convidadosWatch >= 70 && limpeza) {
-      const currentServices = watch("serviceIds") || [];
-    
-      if (!currentServices.includes(limpeza.id)) {
-        setValue("serviceIds", [...currentServices, limpeza.id]);
-      }
-    }
-    
     if (convidadosWatch >= 70) {
+      console.log("jorge")
       if (seguranca && !currentServices.includes(seguranca.id)) {
         currentServices.push(seguranca.id);
       }
