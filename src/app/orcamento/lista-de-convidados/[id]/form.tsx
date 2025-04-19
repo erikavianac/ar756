@@ -45,9 +45,7 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
   const [selectGuest, setselectGuest] = useState<AddPersonFormSchema | null>(
     null
   );
-  const [filterList, setFilterList] = useState<string>(
-    ""
-  );
+  const [filterList, setFilterList] = useState<string>("");
 
   const [guestList, setGuestList] = useState<AddPersonFormSchema[]>([
     ...proposal.personList,
@@ -57,6 +55,11 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
     useState<boolean>(false);
 
   const onSubmit = async (data: AddPersonFormSchema) => {
+    if (!selectGuest && guestList.length >= proposal.guestNumber) {
+      toast.error("Número máximo de convidados atingido.");
+      return;
+    }
+
     const isValid = await trigger();
 
     if (isValid) {
@@ -83,7 +86,6 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
       reset();
       setselectGuest(null);
     } else {
-      console.log("porra");
       controlsType.start(shakeAnimation);
     }
   };
@@ -109,21 +111,29 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
     }
     setIsLoadingCreateGuest(false);
   };
+  const formRef = React.useRef<HTMLFormElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     if (selectGuest) {
-      setValue("name", selectGuest?.name);
-      setValue("email", selectGuest?.email);
-      setValue("rg", selectGuest?.rg);
-      if (selectGuest.id) {
-        setValue("id", selectGuest?.id);
-      }
+      reset({
+        name: selectGuest.name,
+        email: selectGuest.email,
+        rg: selectGuest.rg,
+        id: selectGuest.id,
+        type: "GUEST",
+        proposalId: proposal.id,
+      });
     }
-  }, [selectGuest, setValue]);
+  }, [selectGuest, reset, proposal.id]);
 
   return (
     <div className="w-full bg-transparent px-10 flex flex-col">
       <motion.form
+        ref={formRef}
         animate={controlsType}
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col md:flex-row gap-2 md:py-5 max-w-full mx-auto px-5  items-end w-full bg-white text-lg pt-8 rounded-md shadow-lg py-4"
@@ -186,7 +196,7 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
             {`(${guestList.length}/${proposal.guestNumber})`}
           </h2>
           <button
-            disabled={isLoadingCreateGuest ? true : false}
+            disabled={isLoadingCreateGuest}
             onClick={() => {
               handleSendList();
             }}
@@ -218,93 +228,107 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
                 text-[12px] md:text-[15px]
                 gap-x-2
                `}
-          ><CiSearch size={25} /><input type="text" className="flex-1  outline-none  text-[12px] md:text-[15px]"  onChange={(e) => setFilterList(e.target.value)} value={filterList}/></div>
+          >
+            <CiSearch size={25} />
+            <input
+              type="text"
+              className="flex-1  outline-none  text-[12px] md:text-[15px]"
+              onChange={(e) => setFilterList(e.target.value)}
+              value={filterList}
+            />
+          </div>
         </div>
         <div className="flex flex-col gap-y-3 mt-3">
           {guestList?.length > 0 ? (
             guestList?.map((item, index) => {
-              if (filterList && !item.name.toLowerCase().includes(filterList.toLowerCase())) {
+              if (
+                filterList &&
+                !item.name.toLowerCase().includes(filterList.toLowerCase())
+              ) {
                 return null;
               }
-              return(
+              return (
                 <>
-                <div
-                  key={index}
-                  className="p-3 bg-gray-100 rounded  relative shadow-md hover:scale-[1.005] active:scale-[0.98] cursor-pointer transition duration-[350ms] ease-in-out"
-                  onClick={() => setselectGuest(item)}
-                >
                   <div
-                    onClick={() => setIsDeleteModalOpen(true)}
-                    className="absolute right-3 top-3 text-red-900 z-40"
+                    key={index}
+                    className="p-3 bg-gray-100 rounded  relative shadow-md hover:scale-[1.005] active:scale-[0.98] cursor-pointer transition duration-[350ms] ease-in-out"
+                    onClick={() => {
+                      setselectGuest(item);
+                      scrollToForm();
+                    }}
                   >
-                    <FaRegTrashAlt />
-                  </div>
-                  <p>{item.name}</p>
-                  <p>{item.email}</p>
-                  <p>{item.rg}</p>
-                </div>
-                {isDeleteModalOpen && (
-                  <ModalComponent onClose={() => setIsDeleteModalOpen(false)}>
-                    <div className={`bg-white py-3 px-4 rounded-md mx-2 `}>
-                      <div className="flex justify-center items-center text-[20px] gap-x-1">
-                        <p className={` ${stencilFont.className} text-center`}>
-                          Deseja Deletar {selectGuest?.name} da sua lista ?
-                        </p>
-                      </div>
-                      <div className="flex justify-center items-center gap-x-4 mt-4">
-                        <button
-                          onClick={async () => {
-                            if (selectGuest?.id) {
-                              try {
-                                await deleteGuestActionServer(selectGuest.id);
-                                toast.success(
-                                  "Convidado deletado com sucesso!"
-                                );
-                              } catch (error) {
-                                toast.error(
-                                  "Houve um erro ao deletar o convidado!"
-                                );
-                              }
-                              const updatedGuestList = guestList.filter(
-                                (guest: AddPersonFormSchema) =>
-                                  guest.name !== selectGuest?.name
-                              );
-                              setGuestList(updatedGuestList);
-                              setselectGuest(null);
-                              reset();
-                              setIsDeleteModalOpen(false);
-                            } else {
-                              const updatedGuestList = guestList.filter(
-                                (guest: AddPersonFormSchema) =>
-                                  guest.name !== selectGuest?.name
-                              );
-                              setGuestList(updatedGuestList);
-                              setselectGuest(null);
-                              setIsDeleteModalOpen(false);
-                            }
-                          }}
-                          className={`${stencilFont.className} text-white py-2 px-6 rounded-md bg-black font-light gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
-                        >
-                          <p>Sim</p>
-                        </button>{" "}
-                        <button
-                          onClick={() => {
-                            setselectGuest(null);
-                            setIsDeleteModalOpen(false);
-                          }}
-                          className={`${stencilFont.className} text-white  py-2 px-6 rounded-md bg-black font-light gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
-                        >
-                          <p>Nao</p>
-                        </button>
-                      </div>
+                    <div
+                      onClick={() => setIsDeleteModalOpen(true)}
+                      className="absolute right-3 top-3 text-red-900 z-40"
+                    >
+                      <FaRegTrashAlt />
                     </div>
-                  </ModalComponent>
-                )}
-              </>
-              )
-            } 
-             
-            )
+                    <p>{item.name}</p>
+                    <p>{item.email}</p>
+                    <p>{item.rg}</p>
+                  </div>
+                  {isDeleteModalOpen && (
+                    <ModalComponent onClose={() => setIsDeleteModalOpen(false)}>
+                      <div className={`bg-white py-3 px-4 rounded-md mx-2 `}>
+                        <div className="flex justify-center items-center text-[20px] gap-x-1">
+                          <p
+                            className={` ${stencilFont.className} text-center`}
+                          >
+                            Deseja Deletar {selectGuest?.name} da sua lista ?
+                          </p>
+                        </div>
+                        <div className="flex justify-center items-center gap-x-4 mt-4">
+                          <button
+                            onClick={async () => {
+                              if (selectGuest?.id) {
+                                try {
+                                  await deleteGuestActionServer(selectGuest.id);
+                                  toast.success(
+                                    "Convidado deletado com sucesso!"
+                                  );
+                                } catch (error) {
+                                  toast.error(
+                                    "Houve um erro ao deletar o convidado!"
+                                  );
+                                }
+                                const updatedGuestList = guestList.filter(
+                                  (guest: AddPersonFormSchema) =>
+                                    guest.id !== selectGuest?.id
+                                );
+                                setGuestList(updatedGuestList);
+                                setselectGuest(null);
+                                reset();
+                                setIsDeleteModalOpen(false);
+                              } else {
+                                const updatedGuestList = guestList.filter(
+                                  (guest: AddPersonFormSchema) =>
+                                    guest.name !== selectGuest?.name
+                                );
+                                setGuestList(updatedGuestList);
+                                setselectGuest(null);
+                                setIsDeleteModalOpen(false);
+                              }
+                            }}
+                            className={`${stencilFont.className} text-white py-2 px-6 rounded-md bg-black font-light gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
+                          >
+                            <p>Sim</p>
+                          </button>{" "}
+                          <button
+                            onClick={() => {
+                              setselectGuest(null);
+                              setIsDeleteModalOpen(false);
+                            }}
+                            className={`${stencilFont.className} text-white  py-2 px-6 rounded-md bg-black font-light gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
+                          >
+                            <p>Nao</p>
+                          </button>
+                        </div>
+                      </div>
+                    </ModalComponent>
+                  )}
+                </>
+              );
+            })
           ) : (
             <p
               className={`w-full flex justify-center items-center ${stencilFont.className} py-5 text-center`}
