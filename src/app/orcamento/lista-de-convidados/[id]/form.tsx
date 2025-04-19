@@ -38,6 +38,7 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
     resolver: zodResolver(addPersonFormSchema),
     defaultValues: {
       type: "GUEST",
+      rg: "",
       proposalId: proposal?.id,
     },
   });
@@ -119,25 +120,27 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
 
   useEffect(() => {
     if (selectGuest) {
-      reset({
-        name: selectGuest.name,
-        email: selectGuest.email,
-        rg: selectGuest.rg,
-        id: selectGuest.id,
-        type: "GUEST",
-        proposalId: proposal.id,
-      });
+      setValue("name", selectGuest?.name);
+      setValue("email", selectGuest?.email);
+      setValue("rg", selectGuest?.rg || "");
+      if (selectGuest.id) {
+        setValue("id", selectGuest?.id);
+      }
     }
-  }, [selectGuest, reset, proposal.id]);
-
+  }, [selectGuest, setValue]);
   return (
     <div className="w-full bg-transparent px-10 flex flex-col">
       <motion.form
         ref={formRef}
         animate={controlsType}
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col md:flex-row gap-2 md:py-5 max-w-full mx-auto px-5  items-end w-full bg-white text-lg pt-8 rounded-md shadow-lg py-4"
+        className="flex flex-col  gap-2 md:py-5 max-w-full mx-auto px-5  items-end w-full bg-white text-lg pt-8 rounded-md shadow-lg py-4"
       >
+        <h2
+          className={`${stencilFont.className} font-normal text-[25px] text-center w-full mb-3`}
+        >
+          Adicionar Convidado
+        </h2>
         <InputComponent
           title="Nome"
           entity="name"
@@ -146,34 +149,47 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
           errors={!!errors.name}
           errorInPlaceHolder={true}
           errorsMsg={errors?.name?.message}
-          classNameLable={`${stencilFont.className} font-normal text-[14px]`}
+          classNameLable={`text-[14px]`}
         />
         <InputComponent
-          title="Email"
+          title="Email (opcional)"
           entity="email"
           register={register}
           trigger={trigger}
           errorInPlaceHolder={true}
           errors={!!errors.email}
           errorsMsg={errors?.email?.message}
-          classNameLable={`${stencilFont.className} font-normal  text-[14px]`}
+          classNameLable={`font-normal  text-[14px]`}
         />
-        <div className="md:w-[200px]">
+        <div className="md:w-[200px] flex justify-end items-end">
           <button
             onClick={async () => {
               const isValid = await trigger();
               if (!isValid) {
+                console.log(errors);
                 controlsType.start(shakeAnimation);
               }
             }}
             type="submit"
-            className="
-              bg-black text-white rounded-full md:rounded-md h-[3rem] w-[3rem] md:h-[55px] 
-              flex items-center justify-center hover:scale-[1.05] active:scale-[0.90] mt-3 md:mt-0 
-              cursor-pointer transition duration-[350ms] ease-in-out
-              "
+            className=""
           >
-            {selectGuest ? <FaSync /> : <FaPlus />}
+            {selectGuest ? (
+              <div
+                className={`px-4 py-1 rounded-md shadow-md bg-black text-white  md:rounded-md  md:h-[55px] 
+              flex items-center justify-center hover:scale-[1.05] active:scale-[0.90] mt-3 md:mt-0 
+              cursor-pointer transition duration-[350ms] ease-in-out ${stencilFont.className}`}
+              >
+                Atualizar
+              </div>
+            ) : (
+              <div
+                className=" rounded-full h-[3rem] w-[3rem] bg-black text-white  md:rounded-md  md:h-[55px] 
+              flex items-center justify-center hover:scale-[1.05] active:scale-[0.90] mt-3 md:mt-0 
+              cursor-pointer transition duration-[350ms] ease-in-out shadow-md"
+              >
+                <FaPlus />
+              </div>
+            )}
           </button>
         </div>
       </motion.form>
@@ -181,7 +197,9 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
       {/* Lista cresce naturalmente agora */}
       <div className="mt-5 px-5 w-full bg-white rounded-md py-5 shadow-lg mb-10">
         <div className="flex justify-between items-center w-full">
-          <h2 className={`text-[13px] md:text-lg  mb-2 ${stencilFont.className}`}>
+          <h2
+            className={`text-[13px] md:text-lg  mb-2 ${stencilFont.className}`}
+          >
             Lista de Convidados:{" "}
             {`(${guestList.length}/${proposal.guestNumber})`}
           </h2>
@@ -190,13 +208,13 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
             onClick={() => {
               handleSendList();
             }}
-            className={`${stencilFont.className} text-white md:w-[150px] md:h-[40px] py-1 px-3 md:px-6 md:py-2 transition duration-[350ms] ease-in-out rounded-md bg-black font-light  gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
+            className={`${stencilFont.className} text-white md:w-[150px] md:h-[40px] py-1 px-3 md:px-6 md:py-2 transition shadow-lg duration-[350ms] ease-in-out rounded-md bg-green-800 font-light  gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
           >
             {isLoadingCreateGuest ? (
               <BeatLoader color="white" size={3} />
             ) : (
               <>
-                <p className="text-[13px] md:text-[15px]">ENVIAR LISTA</p>
+                <p className={`text-[13px] md:text-[15px] `}>SALVAR LISTA</p>
                 <IoMdSend />
               </>
             )}
@@ -254,7 +272,6 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
                       <FaRegTrashAlt />
                     </div>
                     <p>{item.name}</p>
-                    <p>{item.email}</p>
                   </div>
                   {isDeleteModalOpen && (
                     <ModalComponent onClose={() => setIsDeleteModalOpen(false)}>
@@ -295,6 +312,7 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
                                 );
                                 setGuestList(updatedGuestList);
                                 setselectGuest(null);
+                                reset();
                                 setIsDeleteModalOpen(false);
                               }
                             }}
