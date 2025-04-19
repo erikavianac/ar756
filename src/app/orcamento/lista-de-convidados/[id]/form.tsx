@@ -181,7 +181,7 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
       {/* Lista cresce naturalmente agora */}
       <div className="mt-5 px-5 w-full bg-white rounded-md py-5 shadow-lg mb-10">
         <div className="flex justify-between items-center w-full">
-          <h2 className={`text-lg  mb-2 ${stencilFont.className}`}>
+          <h2 className={`text-[13px] md:text-lg  mb-2 ${stencilFont.className}`}>
             Lista de Convidados:{" "}
             {`(${guestList.length}/${proposal.guestNumber})`}
           </h2>
@@ -190,13 +190,13 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
             onClick={() => {
               handleSendList();
             }}
-            className={`${stencilFont.className} text-white w-[150px] h-[40px] py-1 px-3 md:px-6 md:py-2 transition duration-[350ms] ease-in-out rounded-md bg-black font-light  gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
+            className={`${stencilFont.className} text-white md:w-[150px] md:h-[40px] py-1 px-3 md:px-6 md:py-2 transition duration-[350ms] ease-in-out rounded-md bg-black font-light  gap-x-2 hover:scale-105 active:scale-95 flex justify-center items-center`}
           >
             {isLoadingCreateGuest ? (
               <BeatLoader color="white" size={3} />
             ) : (
               <>
-                <p>ENVIAR LISTA</p>
+                <p className="text-[13px] md:text-[15px]">ENVIAR LISTA</p>
                 <IoMdSend />
               </>
             )}
