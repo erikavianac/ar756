@@ -13,6 +13,7 @@ import AddGUestFormComponent from "./form";
 import { FooterComponent } from "@/components/footer";
 import { HomeHeaderComponent } from "@/components/header";
 import { getProposalById } from "@/util/get-proposal";
+import { getPersonList } from "@/util/get-person-list";
 
 interface ListaDeConvidadosByIDPageProps {
   params: {
@@ -23,12 +24,15 @@ interface ListaDeConvidadosByIDPageProps {
 export async function generateMetadata({
   params,
 }: ListaDeConvidadosByIDPageProps): Promise<Metadata> {
-  const orcamentoByID = await getProposalById(params.id);
+  const {proposal} = await getPersonList({
+    proposalId: params.id,
+    type: "GUEST"
+  });
 
   return {
     title: `Lista de convidados ${
-      orcamentoByID?.completeClientName
-        ? orcamentoByID.completeClientName
+      proposal?.completeClientName
+        ? proposal.completeClientName
         : "não encontrado"
     }`,
   };
@@ -37,7 +41,10 @@ export async function generateMetadata({
 export default async function ListaDeConvidadosByIDPage({
   params,
 }: ListaDeConvidadosByIDPageProps) {
-  const proposal = await getProposalById(params.id);
+  const {proposal,personList} = await getPersonList({
+    proposalId: params.id,
+    type: "GUEST"
+  });
 
   if (!proposal?.id) {
     notFound();
@@ -48,7 +55,7 @@ export default async function ListaDeConvidadosByIDPage({
     <div className="flex flex-col min-h-screen w-full bg-faixada">
       <HomeHeaderComponent />
       <main className="flex-1 w-full">
-        <AddGUestFormComponent proposal={proposal} />
+        <AddGUestFormComponent proposal={proposal} personList={personList} />
       </main>
       <FooterComponent />
     </div>

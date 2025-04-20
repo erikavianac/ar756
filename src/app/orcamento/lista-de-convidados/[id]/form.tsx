@@ -5,7 +5,7 @@ import {
   addPersonFormSchema,
   AddPersonFormSchema,
 } from "@/formhook/schemas/list-guests-form-zod-schema";
-import { ProposalType } from "@/types";
+import { PersonType, ProposalType } from "@/types";
 import { CiSearch } from "react-icons/ci";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
@@ -24,9 +24,10 @@ import { createManyPersonActionServer } from "@/action/create-many-guest";
 
 interface AddGuestFormProps {
   proposal: ProposalType;
+  personList: PersonType[];
 }
 
-export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
+export default function AddGuestFormComponent({ proposal,personList }: AddGuestFormProps) {
   const {
     register,
     trigger,
@@ -49,7 +50,7 @@ export default function AddGuestFormComponent({ proposal }: AddGuestFormProps) {
   const [filterList, setFilterList] = useState<string>("");
 
   const [guestList, setGuestList] = useState<AddPersonFormSchema[]>([
-    ...proposal.personList,
+    ...personList,
   ]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isLoadingCreateGuest, setIsLoadingCreateGuest] =

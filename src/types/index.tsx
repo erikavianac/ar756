@@ -70,6 +70,16 @@ export interface CreatePersonRequestResponse {
   count: number,
   type: string
 }
+export interface ListWebPersonRequestResponse {
+  success: boolean,
+  message: string,
+  data: {
+    proposal: ProposalType,
+    personList: PersonType[]
+  },
+  count: number,
+  type: string
+}
 
 export interface ProposalService {
   id?: string;
