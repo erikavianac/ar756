@@ -50,6 +50,7 @@ export default function InputComponent<T extends FieldValues>({
         {...register(`${entity}` as Path<T>, {
           onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
             if (setValue) {
+              const value = rest.type === "number" ? Number(e.target.value) : e.target.value;
               setValue(`${entity}` as Path<T>, e.target.value as PathValue<T, Path<T>>);
             }
             await trigger(`${entity}` as Path<T>);

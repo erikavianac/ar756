@@ -27,7 +27,10 @@ interface AddGuestFormProps {
   personList: PersonType[];
 }
 
-export default function AddGuestFormComponent({ proposal,personList }: AddGuestFormProps) {
+export default function AddGuestFormComponent({
+  proposal,
+  personList,
+}: AddGuestFormProps) {
   const {
     register,
     trigger,
@@ -260,7 +263,10 @@ export default function AddGuestFormComponent({ proposal,personList }: AddGuestF
                 <>
                   <div
                     key={index}
-                    className="p-3 bg-gray-100 rounded  relative shadow-md hover:scale-[1.005] active:scale-[0.98] cursor-pointer transition duration-[350ms] ease-in-out"
+                    className={`
+                      p-3 bg-gray-100  ${selectGuest?.id && item.id === selectGuest.id && "border-blue-900 border-[2px] bg-blue-100"} rounded
+                        relative shadow-md hover:scale-[1.005] active:scale-[0.98] 
+                        cursor-pointer transition duration-[350ms] ease-in-out`}
                     onClick={() => {
                       setselectGuest(item);
                       scrollToForm();
@@ -268,7 +274,7 @@ export default function AddGuestFormComponent({ proposal,personList }: AddGuestF
                   >
                     <div
                       onClick={() => setIsDeleteModalOpen(true)}
-                      className="absolute right-3 top-3 text-red-900 z-20"
+                      className="absolute right-3 top-3  z-20"
                     >
                       <FaRegTrashAlt />
                     </div>
@@ -289,7 +295,9 @@ export default function AddGuestFormComponent({ proposal,personList }: AddGuestF
                             onClick={async () => {
                               if (selectGuest?.id) {
                                 try {
-                                  await deletePersonActionServer(selectGuest.id);
+                                  await deletePersonActionServer(
+                                    selectGuest.id
+                                  );
                                   toast.success(
                                     "Convidado deletado com sucesso!"
                                   );

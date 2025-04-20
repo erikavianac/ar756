@@ -254,7 +254,10 @@ export default function AddWorkerFormComponent({ proposal,personList }: AddGuest
                 <>
                   <div
                     key={index}
-                    className="p-3 bg-gray-100 rounded  relative shadow-md hover:scale-[1.005] active:scale-[0.98] cursor-pointer transition duration-[350ms] ease-in-out"
+                    className={`
+                      p-3 bg-gray-100  ${selectWorker?.id && item.id === selectWorker.id && "border-blue-900 border-[2px] bg-blue-100"} rounded
+                        relative shadow-md hover:scale-[1.005] active:scale-[0.98] 
+                        cursor-pointer transition duration-[350ms] ease-in-out`}
                     onClick={() => {
                       setselectWorker(item);
                       scrollToForm();
@@ -262,7 +265,7 @@ export default function AddWorkerFormComponent({ proposal,personList }: AddGuest
                   >
                     <div
                       onClick={() => setIsDeleteModalOpen(true)}
-                      className="absolute right-3 top-3 text-red-900 z-20"
+                      className="absolute right-3 top-3  z-20"
                     >
                       <FaRegTrashAlt />
                     </div>

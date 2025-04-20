@@ -31,7 +31,6 @@ import moment from "moment";
 import { SlPeople } from "react-icons/sl";
 import { createScheduleActionServer } from "@/action/create-schedule";
 import { deleteScheduleActionServer } from "@/action/delete-schedule";
-import { updateScheduleActionServer } from "@/action/update-schedule";
 
 interface AddGuestFormProps {
   proposal: ProposalType;
@@ -83,42 +82,7 @@ export default function ScheduleFormComponent({
   const onSubmit = async (data: CreateScheduleFormSchema) => {
     const isValid = await trigger();
 
-    if(!isValid){
-      controlsType.start(shakeAnimation)
-    }
-
-    if (selectSchedule?.id) {
-      try {
-        const updatedSchedule = await updateScheduleActionServer({
-          data: {
-            name: data.name,
-            endHour: data.endHour,
-            startHour:data.startHour,
-            proposalId: data.proposalId,
-            description: data.description,
-            workerNumber: Number(data.workerNumber),
-          },
-          scheduleId: selectSchedule.id,
-        });
-        console.log(updatedSchedule)
-        toast.success("Atracao atualizada com sucesso!");
-        const newScheduleList = scheduleListState.map(
-          (item: Schedule) => {
-            if (item.id === updatedSchedule.data.id) {
-              return (item = { ...updatedSchedule.data });
-            } else {
-              return item;
-            }
-          }
-        );
-        setScheduleListState(newScheduleList);
-        setselectSchedule(null);
-        reset();
-        setIsDeleteModalOpen(false);
-      } catch (error) {
-        toast.error("Houve um erro ao deletar o convidado!");
-      }
-    }else{
+    if (isValid) {
       try {
         const newSchedule = await createScheduleActionServer({
           ...data,
@@ -126,7 +90,6 @@ export default function ScheduleFormComponent({
         });
         toast.success("Atracao criada com sucesso!");
         setScheduleListState((prev) => [...prev, newSchedule.data]);
-        reset()
       } catch (error) {
         toast.error("Houve um erro ao atualizar o convidado!");
       }
@@ -279,11 +242,20 @@ export default function ScheduleFormComponent({
             </div>
           </div>
           <div className="md:w-[200px] flex justify-end items-end">
-            {selectSchedule ? (
-              <button
-                type="submit"
-                className=""
-              >
+            <button
+              onClick={async () => {
+                const isValid = await trigger();
+                if (!isValid) {
+                  console.log(errors);
+                  controlsType.start(shakeAnimation);
+                }
+
+                
+              }}
+              type="submit"
+              className=""
+            >
+              {selectSchedule ? (
                 <div
                   className={`px-4 py-1 rounded-md shadow-md bg-black text-white  md:rounded-md  md:h-[55px] 
                         flex items-center justify-center hover:scale-[1.05] active:scale-[0.90] mt-3 md:mt-0 
@@ -291,17 +263,16 @@ export default function ScheduleFormComponent({
                 >
                   Atualizar
                 </div>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className=" rounded-full h-[3rem] w-[3rem] bg-black text-white  md:rounded-md  md:h-[55px] 
+              ) : (
+                <div
+                  className=" rounded-full h-[3rem] w-[3rem] bg-black text-white  md:rounded-md  md:h-[55px] 
                         flex items-center justify-center hover:scale-[1.05] active:scale-[0.90] mt-3 md:mt-0 
                         cursor-pointer transition duration-[350ms] ease-in-out shadow-md"
-              >
-                <FaPlus />
-              </button>
-            )}
+                >
+                  <FaPlus />
+                </div>
+              )}
+            </button>
           </div>
         </div>
       </motion.form>
@@ -344,7 +315,7 @@ export default function ScheduleFormComponent({
             scheduleListState?.map((item: Schedule, index: number) => {
               if (
                 filterList &&
-                !item?.name.toLowerCase().includes(filterList.toLowerCase())
+                !item.name.toLowerCase().includes(filterList.toLowerCase())
               ) {
                 return null;
               }
@@ -356,10 +327,7 @@ export default function ScheduleFormComponent({
                 <>
                   <div
                     key={index}
-                    className={`
-                      p-3 bg-gray-100  ${selectSchedule?.id && item.id === selectSchedule.id && "border-blue-900 border-[2px] bg-blue-100"} rounded
-                        relative shadow-md hover:scale-[1.005] active:scale-[0.98] 
-                        cursor-pointer transition duration-[350ms] ease-in-out`}
+                    className="p-3 bg-gray-100 rounded  relative shadow-md hover:scale-[1.005] active:scale-[0.98] cursor-pointer transition duration-[350ms] ease-in-out"
                     onClick={() => {
                       setselectSchedule(item);
                       scrollToForm();
@@ -367,12 +335,12 @@ export default function ScheduleFormComponent({
                   >
                     <div
                       onClick={() => setIsDeleteModalOpen(true)}
-                      className="absolute right-3 top-3  z-20"
+                      className="absolute right-3 top-3 text-red-900 z-20"
                     >
                       <FaRegTrashAlt />
                     </div>
                     <h2 className="w-full text-center text-[18px] font-semibold mt-5">
-                      {item?.name}
+                      {item.name}
                     </h2>
                     <div className="mt-3 flex justify-between items-center">
                       <div className="flex items-center justify-center gap-x-2">
@@ -388,12 +356,12 @@ export default function ScheduleFormComponent({
                       <div className="flex items-center justify-center gap-x-2">
                         <SlPeople size={20} />
                         <p className="text-[12px] md:text-sm">
-                          ({item?.workerNumber})
+                          ({item.workerNumber})
                         </p>
                       </div>
                     </div>
                     <div className="text-center mt-4">
-                      <p>{item?.description}</p>
+                      <p>{item.description}</p>
                     </div>
                   </div>
                   {isDeleteModalOpen && (

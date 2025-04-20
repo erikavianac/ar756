@@ -70,6 +70,20 @@ export interface CreatePersonRequestResponse {
   count: number,
   type: string
 }
+export interface CreateScheduleRequestResponse {
+  success: boolean,
+  message: string,
+  data: Schedule,
+  count: number,
+  type: string
+}
+export interface DeleteScheduleRequestResponse {
+  success: boolean,
+  message: string,
+  data: Schedule,
+  count: number,
+  type: string
+}
 export interface ListWebPersonRequestResponse {
   success: boolean,
   message: string,
@@ -90,7 +104,7 @@ export interface ListScheduleRequestResponse {
 }
 
 export interface Schedule {
-  id?:string;
+  id:string;
   name:string;
   workerNumber:number;
   description:string;
@@ -101,7 +115,7 @@ export interface Schedule {
 }
 
 export interface ProposalService {
-  id?: string;
+  id: string;
   serviceId: string;
   proposalId: string;
   service: ServiceType;
