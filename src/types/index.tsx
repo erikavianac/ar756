@@ -74,11 +74,30 @@ export interface ListWebPersonRequestResponse {
   success: boolean,
   message: string,
   data: {
-    proposal: ProposalType,
     personList: PersonType[]
   },
   count: number,
   type: string
+}
+export interface ListScheduleRequestResponse {
+  success: boolean,
+  message: string,
+  data: {
+    scheduleList: Schedule[]
+  },
+  count: number,
+  type: string
+}
+
+export interface Schedule {
+  id?:string;
+  name:string;
+  workerNumber:number;
+  description:string;
+  startHour:Date;
+  endHour:Date;
+
+  proposalId:string;  
 }
 
 export interface ProposalService {

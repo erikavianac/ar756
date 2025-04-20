@@ -14,6 +14,7 @@ import { FooterComponent } from "@/components/footer";
 import { HomeHeaderComponent } from "@/components/header";
 import { getProposalById } from "@/util/get-proposal";
 import { listPersonActionServer } from "@/action/list-persons";
+import AddWorkerFormComponent from "./form";
 
 interface ListaDeConvidadosByIDPageProps {
   params: {
@@ -27,7 +28,7 @@ export async function generateMetadata({
   const orcamentoByID = await getProposalById(params.id);
 
   return {
-    title: `Lista de convidados ${
+    title: `Lista de colaboradores ${
       orcamentoByID?.completeClientName
         ? orcamentoByID.completeClientName
         : "não encontrado"
@@ -35,12 +36,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function ListaDeConvidadosByIDPage({
+export default async function ListaDeColaboradoresByIDPage({
   params,
 }: ListaDeConvidadosByIDPageProps) {
   const [proposal, personList] = await Promise.all([
     getProposalById(params.id),
-    listPersonActionServer({ proposalId: params.id, type: "GUEST" }),
+    listPersonActionServer({ proposalId: params.id, type: "WORKER" }),
   ]);
 
   if (!proposal?.id) {
@@ -51,7 +52,7 @@ export default async function ListaDeConvidadosByIDPage({
     <div className="flex flex-col min-h-screen w-full bg-faixada">
       <HomeHeaderComponent />
       <main className="flex-1 w-full">
-        <AddGUestFormComponent
+        <AddWorkerFormComponent
           proposal={proposal}
           personList={personList.data.personList}
         />

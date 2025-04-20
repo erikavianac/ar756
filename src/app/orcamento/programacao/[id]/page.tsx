@@ -1,19 +1,10 @@
 import { Metadata } from "next";
-import { ProposalRequestResponse, ProposalType } from "@/types";
 import { notFound } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import {
-  addPersonFormSchema,
-  AddPersonFormSchema,
-} from "@/formhook/schemas/list-guests-form-zod-schema";
-import InputComponent from "@/components/utils/input";
-import AddGUestFormComponent from "./form";
+import ScheduleFormComponent from "./form";
 import { FooterComponent } from "@/components/footer";
 import { HomeHeaderComponent } from "@/components/header";
 import { getProposalById } from "@/util/get-proposal";
-import { listPersonActionServer } from "@/action/list-persons";
+import { listScheduleActionServer } from "@/action/list-schedule";
 
 interface ListaDeConvidadosByIDPageProps {
   params: {
@@ -27,7 +18,7 @@ export async function generateMetadata({
   const orcamentoByID = await getProposalById(params.id);
 
   return {
-    title: `Lista de convidados ${
+    title: `Programacao ${
       orcamentoByID?.completeClientName
         ? orcamentoByID.completeClientName
         : "não encontrado"
@@ -35,12 +26,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function ListaDeConvidadosByIDPage({
+export default async function ProgramacaoPage({
   params,
 }: ListaDeConvidadosByIDPageProps) {
-  const [proposal, personList] = await Promise.all([
+  const [proposal, schedule] = await Promise.all([
     getProposalById(params.id),
-    listPersonActionServer({ proposalId: params.id, type: "GUEST" }),
+    listScheduleActionServer({ proposalId: params.id}),
   ]);
 
   if (!proposal?.id) {
@@ -51,9 +42,9 @@ export default async function ListaDeConvidadosByIDPage({
     <div className="flex flex-col min-h-screen w-full bg-faixada">
       <HomeHeaderComponent />
       <main className="flex-1 w-full">
-        <AddGUestFormComponent
+        <ScheduleFormComponent
           proposal={proposal}
-          personList={personList.data.personList}
+          scheduleList={schedule.data.scheduleList}
         />
       </main>
       <FooterComponent />

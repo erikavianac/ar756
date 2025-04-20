@@ -3,8 +3,8 @@
 import { AddPersonFormSchema } from "@/formhook/schemas/list-guests-form-zod-schema";
 import { ProposalType, CreateOrcamentoReqBody } from "@/types";
 
-export  async function updateGuestActionServer( params: {personId:string, data: AddPersonFormSchema}) {
-  const updatedOrcamento = await fetch(
+export  async function updatePersonActionServer( params: {personId:string, data: AddPersonFormSchema}) {
+  const updatedPerson = await fetch(
     `${process.env.SERVER_URL}/person/update`,
     {
       method: "PUT",
@@ -18,5 +18,5 @@ export  async function updateGuestActionServer( params: {personId:string, data: 
     return await resp.json();
   });
 
-  return updatedOrcamento;
+  return updatedPerson;
 }
