@@ -2,6 +2,8 @@ import React from "react";
 import { GaleriaCardComponent } from "@/components/explore/galeria/galeriaCard";
 import { Metadata } from "next";
 import { ImageRequestResponse } from "@/types";
+import { HomeHeaderComponent } from "@/components/header";
+import { FooterComponent } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Galeria",
@@ -17,10 +19,12 @@ export default async function Galeria() {
   });
 
   return (
-    <div className="flex justify-center items-center pt-20">
-      <div className="flex-1 mt-20">
+    <div className="flex flex-col min-h-screen w-full bg-faixada">
+      <HomeHeaderComponent />
+      <main className="flex-1 flex justify-center items-center w-full px-3 py-5">
         <GaleriaCardComponent imageList={imageList} />
-      </div>
+      </main>
+      <FooterComponent />
     </div>
   );
 }

@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import OrcamentoCardComponent from "./orcamentoCard";
-import { ProposalRequestResponse, ProposalType } from "@/types";
+import { HomeHeaderComponent } from "@/components/header";
 import { notFound } from "next/navigation";
 import { getProposalById } from "@/util/get-proposal";
+import { FooterComponent } from "@/components/footer";
 
 interface OrcamentoByiDPageProps {
   params: {
@@ -32,12 +33,12 @@ export default async function OrcamentoPage({
   }
 
   return (
-    <div
-      className={`flex items-center justify-center w-full min-h-screen px-2 bg-faixada flex-1 h-screen pt-20`}
-    >
-      <div className="md:w-[600px]  bg-white text-lg pt-8 rounded-md shadow-lg px-4 flex flex-col overflow-hidden ">
+    <div className="flex flex-col min-h-screen w-full bg-faixada">
+      <HomeHeaderComponent />
+      <main className="flex-1 flex justify-center items-center w-full px-3 py-5">
         <OrcamentoCardComponent orcamentoByid={orcamentoByID} />
-      </div>
+      </main>
+      <FooterComponent />
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import { ConsultarFormComponent } from "@/components/consultar";
+import { FooterComponent } from "@/components/footer";
+import { HomeHeaderComponent } from "@/components/header";
 import { ServiceRequestResponse } from "@/types";
 import { Metadata } from "next";
 
@@ -17,8 +19,12 @@ export default async function ConsultarPage() {
     return response?.data?.serviceList;
   });
   return (
-    <div className="flex justify-center items-center pt-28">
-      <ConsultarFormComponent services={services}/>
+    <div className="flex flex-col min-h-screen w-full bg-faixada">
+      <HomeHeaderComponent />
+      <main className="flex-1 flex justify-center items-center w-full px-3 py-5">
+        <ConsultarFormComponent services={services} />
+      </main>
+      <FooterComponent />
     </div>
   );
 }

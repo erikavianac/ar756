@@ -127,7 +127,7 @@ export function ConsultarFormComponent({
       window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
- 
+
   return (
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
@@ -140,7 +140,7 @@ export function ConsultarFormComponent({
       {handleCloseReservaModal && (
         <CloseButtonComponent handleCloseModal={handleCloseReservaModal} />
       )}
-      <h1 className="md:text-[21px] w-full  text-[18px] text-center py-5 ">
+      <h1 className={`md:text-[21px] w-full  text-[25px] text-center py-5 ${stencilFont.className}`}>
         {isSendMailSuccess ? "" : "CONSULTAR ORCAMENTO"}
       </h1>
       <motion.div
@@ -165,7 +165,7 @@ export function ConsultarFormComponent({
           className="z-50 flex flex-col min-w-full  h-full"
           animate={controlsType}
         >
-          <p className="mx-auto">Que tipo de locação você procura?</p>
+          <p className={`mx-auto font-semibold`}>Que tipo de locação você procura?</p>
           <div className="px-10 flex flex-col  gap-y-4 mt-4">
             <div
               className="opacity-[1.5] h-[4rem] flex justify-center items-center text-[24px]  tracking-[0.25rem] lg:hover:scale-105 duration-300 lg:brightness-75 
@@ -203,63 +203,63 @@ export function ConsultarFormComponent({
               </p>
             </div>
           </div>
-          {!isSmallScreen && (
-            <div className="w-full mt-5">
+          <div className="w-full mt-5">
+            {!isSmallScreen && (
               <p className={`${stencilFont.className} text-[70px] text-center`}>
                 AR756
               </p>
-              <div className="mx-auto flex justify-center items-center gap-x-3">
-                <div>
-                  <AnchorComponent
-                    href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
-                    icon={
-                      <TbBrandWhatsapp
-                        className="cursor-pointer text-white"
-                        size={30}
-                      />
-                    }
-                    bgColor="bg-[#25D366] border-[2px] border-white"
-                  />
-                </div>
-                <div>
-                  <AnchorComponent
-                    href="https://www.facebook.com/profile.php?id=100085832906065"
-                    icon={
-                      <TbBrandFacebook
-                        className="cursor-pointer  text-white"
-                        size={30}
-                      />
-                    }
-                    bgColor=" bg-[#3b5998] border-[2px] border-white"
-                  />
-                </div>
-                <div>
-                  <AnchorComponent
-                    href="https://www.tiktok.com/@ar756_"
-                    icon={
-                      <FaTiktok
-                        className=" cursor-pointer text-white"
-                        size={30}
-                      />
-                    }
-                    bgColor=" bg-black border-[2px] border-white w-[45px]"
-                  />
-                </div>
-                <div>
-                  <AnchorComponent
-                    href="https://www.instagram.com/ar756_/"
-                    icon={
-                      <TbBrandInstagram
-                        className="cursor-pointer text-white "
-                        size={30}
-                      />
-                    }
-                    bgColor="bg-gradient-to-r from-fuchsia-500 to-pink-500 border-[2px] border-white"
-                  />
-                </div>
+            )}
+            <div className="mx-auto flex justify-center items-center gap-x-3">
+              <div>
+                <AnchorComponent
+                  href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+                  icon={
+                    <TbBrandWhatsapp
+                      className="cursor-pointer text-white"
+                      size={30}
+                    />
+                  }
+                  bgColor="bg-[#25D366] border-[2px] border-white"
+                />
+              </div>
+              <div>
+                <AnchorComponent
+                  href="https://www.facebook.com/profile.php?id=100085832906065"
+                  icon={
+                    <TbBrandFacebook
+                      className="cursor-pointer  text-white"
+                      size={30}
+                    />
+                  }
+                  bgColor=" bg-[#3b5998] border-[2px] border-white"
+                />
+              </div>
+              <div>
+                <AnchorComponent
+                  href="https://www.tiktok.com/@ar756_"
+                  icon={
+                    <FaTiktok
+                      className=" cursor-pointer text-white"
+                      size={30}
+                    />
+                  }
+                  bgColor=" bg-black border-[2px] border-white w-[45px]"
+                />
+              </div>
+              <div>
+                <AnchorComponent
+                  href="https://www.instagram.com/ar756_/"
+                  icon={
+                    <TbBrandInstagram
+                      className="cursor-pointer text-white "
+                      size={30}
+                    />
+                  }
+                  bgColor="bg-gradient-to-r from-fuchsia-500 to-pink-500 border-[2px] border-white"
+                />
               </div>
             </div>
-          )}
+          </div>
         </motion.div>
         <motion.div
           initial={{
@@ -327,7 +327,7 @@ export function ConsultarFormComponent({
               errors={!!errors.knowsVenue}
               errorsMsg={errors?.knowsVenue?.message}
             />
-        {/*     <SelectItemsZodComponent
+            {/*     <SelectItemsZodComponent
               title="Onde nos achou?"
               setValue={setValue}
               field={"trafficSource"}
@@ -591,7 +591,8 @@ export function ConsultarFormComponent({
                   services?.map((item: ServiceType) => {
                     const isSelected = watch("serviceIds")?.includes(item.id); // Verifica se o proprietário já foi selecionado
                     const isDisabled = (item: any) => {
-                      if (item.name === "Limpeza" && convidadosWatch >= 30) return true;
+                      if (item.name === "Limpeza" && convidadosWatch >= 30)
+                        return true;
                       if (convidadosWatch >= 70) return true;
                       return false;
                     };

@@ -102,11 +102,11 @@ export default function OrcamentoCardComponent({
   const aprovadoWatch = watch("aprovadoCliente");
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (orcamentoByid?.id) {
       setValue("orcamentoId", orcamentoByid?.id);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   }, [orcamentoByid?.id, setValue]);
 
   useEffect(() => {
@@ -141,102 +141,115 @@ export default function OrcamentoCardComponent({
     }
   }, [orcamentoByid]);
 
-  console.log(orcamentoByid?.proposalServices)
+  console.log(orcamentoByid?.proposalServices);
   return (
-    <motion.div
-      initial={{
-        x: 0,
-      }}
-      animate={{
-        x: decsritivoForm
-          ? 0
-          : documentoForm
-          ? "-100%"
-          : feedbackForm
-          ? "-200%"
-          : "-300%",
-        transition: {
-          duration: feedbackForm ? 0.3 : 0.5,
-        },
-      }}
-      className="flex flex-1"
-    >
+    <div className="md:w-[600px]  bg-white text-lg pt-8 rounded-md shadow-lg px-4 flex flex-col overflow-hidden ">
       <motion.div
         initial={{
           x: 0,
         }}
-        animate={controlsDescritivo}
-        className="flex flex-col w-full min-w-full"
+        animate={{
+          x: decsritivoForm
+            ? 0
+            : documentoForm
+            ? "-100%"
+            : feedbackForm
+            ? "-200%"
+            : "-300%",
+          transition: {
+            duration: feedbackForm ? 0.3 : 0.5,
+          },
+        }}
+        className="flex flex-1"
       >
-        <p className="flex items-center justify-center w-full text-2xl font-semibold">
-          SIMULACAO
-        </p>
-        <div className="flex items-center justify-center w-full mt-10 gap-x-5">
-          <div className="flex items-center justify-center gap-x-2">
-            <SlPeople size={20} />
-            <p className="text-[12px] md:text-sm">
-              ({orcamentoByid?.guestNumber})
-            </p>
+        <motion.div
+          initial={{
+            x: 0,
+          }}
+          animate={controlsDescritivo}
+          className="flex flex-col w-full min-w-full"
+        >
+          <p className="flex items-center justify-center w-full text-2xl font-semibold">
+            SIMULACAO
+          </p>
+          <div className="flex items-center justify-center w-full mt-10 gap-x-5">
+            <div className="flex items-center justify-center gap-x-2">
+              <SlPeople size={20} />
+              <p className="text-[12px] md:text-sm">
+                ({orcamentoByid?.guestNumber})
+              </p>
+            </div>
+            <div className="flex items-center justify-center gap-x-2">
+              <AiOutlineClockCircle size={20} />
+              <p className="text-[12px] md:text-sm">{`${
+                orcamentoByid?.startDate &&
+                moment.utc(orcamentoByid?.startDate).format("HH:mm")
+              } - ${
+                orcamentoByid?.endDate &&
+                moment.utc(orcamentoByid?.endDate).format("HH:mm")
+              } (${duracaoFesta}hrs)`}</p>
+            </div>
+            <div className="flex items-center justify-center gap-x-2">
+              <AiOutlineCalendar size={20} />
+              <p className="text-[12px] md:text-sm">
+                ({moment.utc(orcamentoByid?.startDate).format("DD/MM/YYYY")})
+              </p>
+            </div>
           </div>
-          <div className="flex items-center justify-center gap-x-2">
-            <AiOutlineClockCircle size={20} />
-            <p className="text-[12px] md:text-sm">{`${
-              orcamentoByid?.startDate &&
-              moment.utc(orcamentoByid?.startDate).format("HH:mm")
-            } - ${
-              orcamentoByid?.endDate && moment.utc(orcamentoByid?.endDate).format("HH:mm")
-            } (${duracaoFesta}hrs)`}</p>
-          </div>
-          <div className="flex items-center justify-center gap-x-2">
-            <AiOutlineCalendar size={20} />
-            <p className="text-[12px] md:text-sm">
-              ({moment.utc(orcamentoByid?.startDate).format("DD/MM/YYYY")})
-            </p>
-          </div>
-        </div>
-        {
-          orcamentoByid ? 
-          <InfoOrcamentoinfo services={orcamentoByid.proposalServices} orcamentoById={orcamentoByid} /> :
-          <LoadingOrcamentoComponent />
-        }
-        <div className="flex items-center justify-between w-full mt-10 gap-x-3 ">
-          <p>Total:</p>
-          <div className="flex space-x-1">
-            <CurrencyFormat
-              value={orcamentoByid?.totalAmount}
-              displayType={"text"}
-              thousandSeparator={"."}
-              decimalSeparator={","}
-              decimalScale={2} // Define o número de casas decimais
-              fixedDecimalScale={true}
-              prefix={"R$ "}
-              className="font-semibold text-[25px]"
+          {orcamentoByid ? (
+            <InfoOrcamentoinfo
+              services={orcamentoByid.proposalServices}
+              orcamentoById={orcamentoByid}
             />
-            <p className="text-[30px]">*</p>
+          ) : (
+            <LoadingOrcamentoComponent />
+          )}
+          <div className="flex items-center justify-between w-full mt-10 gap-x-3 ">
+            <p>Total:</p>
+            <div className="flex space-x-1">
+              <CurrencyFormat
+                value={orcamentoByid?.totalAmount}
+                displayType={"text"}
+                thousandSeparator={"."}
+                decimalSeparator={","}
+                decimalScale={2} // Define o número de casas decimais
+                fixedDecimalScale={true}
+                prefix={"R$ "}
+                className="font-semibold text-[25px]"
+              />
+              <p className="text-[30px]">*</p>
+            </div>
           </div>
-        </div>
-        <p className="text-[14px] mb-5">
-          {" "}
-          <span className="text-[12px]">*</span> Valor sujeito a alteração.
-        </p>
-        {orcamentoByid?.approved ? (
-          <div className="text-[12px] md:text-sm">
-            <p className="py-10">
-              Maravilha! Estamos analisando o seu interesse, entraremos em
-              contato.Obrigado!
-            </p>
-          </div>
-        ) : (
-          <>
-          <div className="text-sm flex justify-start items-center gap-x-3 py-10 flex-col gap-y-2">
-           
-            <p>Tem alguma dúvida ou gostaria de conversar com a gente?</p>
-          
+          <p className="text-[14px] mb-5">
+            {" "}
+            <span className="text-[12px]">*</span> Valor sujeito a alteração.
+          </p>
+          {orcamentoByid?.approved ? (
+            <div className="text-[12px] md:text-sm">
+              <p className="py-10">
+                Maravilha! Estamos analisando o seu interesse, entraremos em
+                contato.Obrigado!
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="text-sm flex justify-start items-center gap-x-3 py-10 flex-col gap-y-2">
+                <p>Tem alguma dúvida ou gostaria de conversar com a gente?</p>
 
-          <a href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0" target="_blank" className="rounded-md animate-bounce hover:scale-105 duration-200  text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"> <p>Falar no WhatsApp</p> <FaWhatsapp/></a>
-          <p className="text-[10px] font-bold text-center w-full mt-5">* Este orcamento foi encaminhado para o seu email: {orcamentoByid?.email}</p>
-          </div>
-       {/*      <SelectBooleansItemsCompoenent
+                <a
+                  href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+                  target="_blank"
+                  className="rounded-md animate-bounce hover:scale-105 duration-200  text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"
+                >
+                  {" "}
+                  <p>Falar no WhatsApp</p> <FaWhatsapp />
+                </a>
+                <p className="text-[10px] font-bold text-center w-full mt-5">
+                  * Este orcamento foi encaminhado para o seu email:{" "}
+                  {orcamentoByid?.email}
+                </p>
+              </div>
+              {/*      <SelectBooleansItemsCompoenent
               title="Aprovar?"
               setValue={setValue}
               field={"aprovadoCliente"}
@@ -273,96 +286,96 @@ export default function OrcamentoCardComponent({
                   `}
               />
             </motion.div> */}
-          </>
-        )}
-      </motion.div>
-      <motion.form
-        initial={{
-          x: 0,
-          opacity: 0,
-        }}
-        animate={controlsDocuemntos}
-        className="flex flex-col w-full min-w-full "
-        onSubmit={handleSubmit(handleOnSubmit)}
-      >
-        <div className="flex gap-x-4">
-          <label htmlFor="rgPhotos" className="font-semibold text-[15px]">
-            Documentos (RG):
-          </label>
-        </div>
-        <div className="flex flex-col space-y-2 overflow-y-auto max-h-[550px] relative flex-1">
-          <input
-            type="file"
-            id="rgPhotos"
-            className="absolute opacity-0 cursor-pointer top-4"
-            onChange={handleFileChange}
-            multiple
-          />
-          <div className="h-16 w-full border-gray-400 border-dotted border-spacing-3 border-[2px] flex justify-start items-center px-5 gap-x-5 cursor-pointer hover:bg-gray-100 transition duration-300">
-            <MdOutlineAddPhotoAlternate className="text-gray-600" size={25} />
-            <p className="text-[12px] md:text-sm font-semibold text-gray-600 ">
-              ADICIONE DOCUMENTO
-            </p>
+            </>
+          )}
+        </motion.div>
+        <motion.form
+          initial={{
+            x: 0,
+            opacity: 0,
+          }}
+          animate={controlsDocuemntos}
+          className="flex flex-col w-full min-w-full "
+          onSubmit={handleSubmit(handleOnSubmit)}
+        >
+          <div className="flex gap-x-4">
+            <label htmlFor="rgPhotos" className="font-semibold text-[15px]">
+              Documentos (RG):
+            </label>
           </div>
-          <span className="text-red-700 text-[15px] w-full">
-            {errors && errors.documentos?.message}
-          </span>
-          <div className="max-h-[150px] flex  gap-y-2 flex-col">
-            {uploadedFiles?.map((file: File, index: number) => (
-              <div
-                key={index}
-                className="px-2 py-2 rounded-sm border-gray-400 border-[2px] flex w-full justify-between items-center"
-              >
-                {file.type.startsWith("image/") && ( // Verifica se o arquivo é uma imagem
-                  <ImageComponent
-                    src={URL.createObjectURL(file)}
-                    alt={file.name}
-                    h="h-10"
-                    w="w-10"
-                    containerClassname="mr-2"
+          <div className="flex flex-col space-y-2 overflow-y-auto max-h-[550px] relative flex-1">
+            <input
+              type="file"
+              id="rgPhotos"
+              className="absolute opacity-0 cursor-pointer top-4"
+              onChange={handleFileChange}
+              multiple
+            />
+            <div className="h-16 w-full border-gray-400 border-dotted border-spacing-3 border-[2px] flex justify-start items-center px-5 gap-x-5 cursor-pointer hover:bg-gray-100 transition duration-300">
+              <MdOutlineAddPhotoAlternate className="text-gray-600" size={25} />
+              <p className="text-[12px] md:text-sm font-semibold text-gray-600 ">
+                ADICIONE DOCUMENTO
+              </p>
+            </div>
+            <span className="text-red-700 text-[15px] w-full">
+              {errors && errors.documentos?.message}
+            </span>
+            <div className="max-h-[150px] flex  gap-y-2 flex-col">
+              {uploadedFiles?.map((file: File, index: number) => (
+                <div
+                  key={index}
+                  className="px-2 py-2 rounded-sm border-gray-400 border-[2px] flex w-full justify-between items-center"
+                >
+                  {file.type.startsWith("image/") && ( // Verifica se o arquivo é uma imagem
+                    <ImageComponent
+                      src={URL.createObjectURL(file)}
+                      alt={file.name}
+                      h="h-10"
+                      w="w-10"
+                      containerClassname="mr-2"
+                    />
+                  )}
+                  <p className="tex-sm">{file.name} </p>
+                  <ButtonComponent
+                    icon={<BiTrash className="text-gray-400" />}
+                    type="button"
+                    className="flex items-center justify-center rounded-full hover:bg-gray-200 "
+                    onClick={() => handleFileRemove(index)}
                   />
-                )}
-                <p className="tex-sm">{file.name} </p>
-                <ButtonComponent
-                  icon={<BiTrash className="text-gray-400" />}
-                  type="button"
-                  className="flex items-center justify-center rounded-full hover:bg-gray-200 "
-                  onClick={() => handleFileRemove(index)}
-                />
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        <motion.div className="flex items-end justify-between w-full mb-5">
-          <ButtonComponent
-            icon={<HiArrowLeft size={20} />}
-            onClick={async () => {
-              setformMode("DESCRITIVO");
-              controlsDescritivo.start(opacityShow);
-              controlsDocuemntos.start(opacityHidde);
-            }}
-            type="button"
-            className={`
+          <motion.div className="flex items-end justify-between w-full mb-5">
+            <ButtonComponent
+              icon={<HiArrowLeft size={20} />}
+              onClick={async () => {
+                setformMode("DESCRITIVO");
+                controlsDescritivo.start(opacityShow);
+                controlsDocuemntos.start(opacityHidde);
+              }}
+              type="button"
+              className={`
                         z-30
                         text-[15px]
                         tracking-[3px] text-black
                         transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
                         flex justify-center items-center flex-row-reverse  gap-x-2 mb-5
                         `}
-          />
-          <ButtonComponent
-            title={isLoading ? "ENVIANDO" : "ENVIAR"}
-            icon={<BiMailSend size={20} />}
-            type="submit"
-            onClick={async () => {
-              const isValid = await trigger("documentos");
+            />
+            <ButtonComponent
+              title={isLoading ? "ENVIANDO" : "ENVIAR"}
+              icon={<BiMailSend size={20} />}
+              type="submit"
+              onClick={async () => {
+                const isValid = await trigger("documentos");
 
-              // Dispara a validação dos campos
-              if (!isValid) {
-                controlsDocuemntos.start(shakeAnimation);
-              }
-            }}
-            className={`
+                // Dispara a validação dos campos
+                if (!isValid) {
+                  controlsDocuemntos.start(shakeAnimation);
+                }
+              }}
+              className={`
                        ${isLoading && "animate-pulse"} 
                         z-30
                         w-[200px]
@@ -373,45 +386,45 @@ export default function OrcamentoCardComponent({
                         transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
                         flex justify-center items-center flex-row-reverse  gap-x-2
                       `}
-          />
-        </motion.div>
-      </motion.form>
-      <motion.form
-        initial={{
-          x: 0,
-          opacity: 0,
-        }}
-        animate={controlsFeedback}
-        className="flex flex-col w-full min-w-full"
-        onSubmit={handleSubmit(handleOnSubmit)}
-      >
-        <div className="flex flex-col flex-1 mt-3 gap-y-2">
-          <label htmlFor="nome" className="font-semibold text-[15px]">
-            Deixe-nos seu feedback :
-          </label>
-          <textarea
-            className={`bg-gray-50 outline-none rounded-md w-full h-[350px] p-2 ${
-              errors.feedback && "border-[1px] border-red-700"
-            }`}
-            {...register("feedback", {
-              onChange: () => trigger("feedback"),
-            })}
-          ></textarea>
-          <span className="text-red-700 text-[15px] w-full">
-            {errors.feedback && errors.feedback.message}
-          </span>
-        </div>
-        <motion.div className="flex items-end justify-between w-full mb-5">
-          <ButtonComponent
-            icon={<HiArrowLeft size={20} />}
-            onClick={async () => {
-              setValue("feedback", undefined);
-              setformMode("DESCRITIVO");
-              controlsDescritivo.start(opacityShow);
-              controlsFeedback.start(opacityHidde);
-            }}
-            type="button"
-            className={`
+            />
+          </motion.div>
+        </motion.form>
+        <motion.form
+          initial={{
+            x: 0,
+            opacity: 0,
+          }}
+          animate={controlsFeedback}
+          className="flex flex-col w-full min-w-full"
+          onSubmit={handleSubmit(handleOnSubmit)}
+        >
+          <div className="flex flex-col flex-1 mt-3 gap-y-2">
+            <label htmlFor="nome" className="font-semibold text-[15px]">
+              Deixe-nos seu feedback :
+            </label>
+            <textarea
+              className={`bg-gray-50 outline-none rounded-md w-full h-[350px] p-2 ${
+                errors.feedback && "border-[1px] border-red-700"
+              }`}
+              {...register("feedback", {
+                onChange: () => trigger("feedback"),
+              })}
+            ></textarea>
+            <span className="text-red-700 text-[15px] w-full">
+              {errors.feedback && errors.feedback.message}
+            </span>
+          </div>
+          <motion.div className="flex items-end justify-between w-full mb-5">
+            <ButtonComponent
+              icon={<HiArrowLeft size={20} />}
+              onClick={async () => {
+                setValue("feedback", undefined);
+                setformMode("DESCRITIVO");
+                controlsDescritivo.start(opacityShow);
+                controlsFeedback.start(opacityHidde);
+              }}
+              type="button"
+              className={`
             ${isLoading && "animate-pulse"}
                     z-30
                     text-[15px]
@@ -419,19 +432,19 @@ export default function OrcamentoCardComponent({
                     transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
                     flex justify-center items-center flex-row-reverse  gap-x-2 mb-5
                     `}
-          />
-          <ButtonComponent
-            title={isLoading ? "ENVIANDO" : "ENVIAR"}
-            icon={<BiMailSend size={20} />}
-            type="submit"
-            onClick={async () => {
-              const isValid = await trigger("feedback");
-              // Dispara a validação dos campos
-              if (!isValid) {
-                controlsFeedback.start(shakeAnimation);
-              }
-            }}
-            className={`
+            />
+            <ButtonComponent
+              title={isLoading ? "ENVIANDO" : "ENVIAR"}
+              icon={<BiMailSend size={20} />}
+              type="submit"
+              onClick={async () => {
+                const isValid = await trigger("feedback");
+                // Dispara a validação dos campos
+                if (!isValid) {
+                  controlsFeedback.start(shakeAnimation);
+                }
+              }}
+              className={`
                    ${isLoading && "animate-pulse"}
                     z-30
                     w-[200px]
@@ -442,41 +455,42 @@ export default function OrcamentoCardComponent({
                     transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
                     flex justify-center items-center flex-row-reverse  gap-x-2
                   `}
-          />
-        </motion.div>
-      </motion.form>
-      <motion.div
-        initial={{
-          x: 0,
-          opacity: 0,
-        }}
-        animate={controlsSuccess}
-        className="relative flex flex-col items-center justify-center min-w-full gap-y-2"
-      >
-        <Link
-          href={"/"}
-          className="absolute transition duration-300 rounded-full cursor-pointer top-3 left-3"
+            />
+          </motion.div>
+        </motion.form>
+        <motion.div
+          initial={{
+            x: 0,
+            opacity: 0,
+          }}
+          animate={controlsSuccess}
+          className="relative flex flex-col items-center justify-center min-w-full gap-y-2"
         >
-          <HiArrowLeft size={20} />
-        </Link>
-        <ImageComponent
-          alt={"logo"}
-          h={"h-[130px] md:h-[300px] "}
-          w={"w-[180px] md:w-[400px]"}
-          src={
-            "https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958372/file_2_gjm6nx_sfgf81_ptlh6x.jpg"
-          }
-          containerClassname={"z-20"}
-        />
-        <p className="text-[14px] md:text-[20px] font-semibold text-center w-[430px] ">
-          Obrigado {orcamentoByid?.completeClientName} !
-        </p>
-        <p className="text-[14px] md:text-[16px] font-semibold text-center w-[430px]">
-          {isSendEmailOrcamentoAprovadoClienteSuccess
-            ? " Em breve nossa equipe entrara em contato."
-            : " Agradecemos pelo feedback."}
-        </p>
+          <Link
+            href={"/"}
+            className="absolute transition duration-300 rounded-full cursor-pointer top-3 left-3"
+          >
+            <HiArrowLeft size={20} />
+          </Link>
+          <ImageComponent
+            alt={"logo"}
+            h={"h-[130px] md:h-[300px] "}
+            w={"w-[180px] md:w-[400px]"}
+            src={
+              "https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958372/file_2_gjm6nx_sfgf81_ptlh6x.jpg"
+            }
+            containerClassname={"z-20"}
+          />
+          <p className="text-[14px] md:text-[20px] font-semibold text-center w-[430px] ">
+            Obrigado {orcamentoByid?.completeClientName} !
+          </p>
+          <p className="text-[14px] md:text-[16px] font-semibold text-center w-[430px]">
+            {isSendEmailOrcamentoAprovadoClienteSuccess
+              ? " Em breve nossa equipe entrara em contato."
+              : " Agradecemos pelo feedback."}
+          </p>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
