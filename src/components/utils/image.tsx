@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ImagePlaceholder } from './imagePlaceholder';
 
 interface ImageComponentProps {
@@ -26,13 +26,8 @@ export function ImageComponent({
   containerClassname,
   isLargeImage,
 }: ImageComponentProps) {
-  const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   // Validação do alt
   const validatedAlt = alt.trim() || 'Imagem sem descrição';
@@ -94,26 +89,24 @@ export function ImageComponent({
           aria-hidden="true"
         />
       )}
-      {isClient && (
-        <Image
-          src={src}
-          priority={priority}
-          alt={validatedAlt}
-          fill
-          style={{ objectFit: 'cover' }}
-          className={`h-full w-full ${imageClassname} 
-            ${isLoading ? 'opacity-0 scale-95 blur-sm' : 'opacity-100 scale-100 blur-0'} 
-            transition-all duration-500 ease-out`}
-          onClick={onClick}
-          quality={isLargeImage ? 100 : 75}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding={priority ? 'sync' : 'async'}
-          fetchPriority={priority ? "high" : "low"}
-          onLoad={() => setIsLoading(false)}
-          onError={() => setHasError(true)}
-          aria-hidden={isLoading}
-        />
-      )}
+      <Image
+        src={src}
+        priority={priority}
+        alt={validatedAlt}
+        fill
+        style={{ objectFit: 'cover' }}
+        className={`h-full w-full ${imageClassname} 
+          ${isLoading ? 'opacity-0 scale-95 blur-sm' : 'opacity-100 scale-100 blur-0'} 
+          transition-all duration-500 ease-out`}
+        onClick={onClick}
+        quality={isLargeImage ? 100 : 75}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding={priority ? 'sync' : 'async'}
+        fetchPriority={priority ? "high" : "low"}
+        onLoad={() => setIsLoading(false)}
+        onError={() => setHasError(true)}
+        aria-hidden={isLoading}
+      />
     </div>
   );
 }
