@@ -17,6 +17,7 @@ import { ConsultarFormComponent } from "../consultar";
 import { useState } from "react";
 import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
+import { ConsultarFormLazy } from "../consultar/consultar.lazy";
 
 interface ServicosComponentsProps {
   services: ServiceType[];
@@ -38,6 +39,7 @@ export function ServicosComponents({ services }: ServicosComponentsProps) {
           alt={"logo-branco"}
           h={"h-[613px]"}
           w={"w-[100%]"}
+          isLargeImage={true}
           src={
             "https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958364/IMG_7103_oc7ak7_h4ao4c_qevwdd.jpg"
           }
@@ -102,7 +104,7 @@ rounded-md shadow-lg lg:bottom-[14rem]  2xl:bottom-[10.5rem] inset-x-0 "
           />
           {isModalOpen && (
             <ModalComponent onClose={() => setisModalOpen(false)}>
-              <ConsultarFormComponent
+              <ConsultarFormLazy
                 services={services}
                 handleCloseReservaModal={() => setisModalOpen(false)}
               />

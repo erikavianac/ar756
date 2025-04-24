@@ -39,14 +39,19 @@ export default function InputComponent<T extends FieldValues>({
   return (
     <div className="flex flex-col w-full gap-y-2">
       <label
-        htmlFor="nome"
-        className={`font-semibold  text-[12px] md:text-[15px] ${classNameLable}`}
+        htmlFor={entity}
+        className={`font-semibold text-[12px] md:text-[15px] ${classNameLable}`}
+        id={`${entity}-label`}
       >
         {capitalize(title)}
       </label>
       <input
         {...rest}
-        placeholder={errors && errorInPlaceHolder ? errorsMsg :capitalize(title)}
+        id={entity}
+        aria-labelledby={`${entity}-label`}
+        aria-invalid={errors}
+        aria-describedby={errors ? `${entity}-error` : undefined}
+        placeholder={errors && errorInPlaceHolder ? errorsMsg : capitalize(title)}
         {...register(`${entity}` as Path<T>, {
           onChange: async (e: React.ChangeEvent<HTMLInputElement>) => {
             if (setValue) {
@@ -69,7 +74,7 @@ export default function InputComponent<T extends FieldValues>({
                 text-[12px] md:text-[15px]
                 ${errors && 'border-[1px] border-red-700 '}`}
       />
-      {!errorInPlaceHolder && <span className="text-red-700 text-[11px] md:text-[15px] w-full">{errors && errorsMsg}</span>}
+      {!errorInPlaceHolder && <span className="text-red-700 text-[11px] md:text-[15px] w-full" role="alert">{errors && errorsMsg}</span>}
     </div>
   );
 }

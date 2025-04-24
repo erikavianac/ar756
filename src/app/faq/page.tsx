@@ -5,7 +5,20 @@ import { QuestionRequestResponse } from "@/types";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "FAQ",
+  title: "Perguntas Frequentes - AR756",
+  description: "Encontre respostas para as principais dúvidas sobre eventos, filmagens e produções no AR756. Tudo que você precisa saber sobre nosso espaço.",
+  openGraph: {
+    title: 'Perguntas Frequentes - AR756',
+    description: 'Encontre respostas para as principais dúvidas sobre eventos, filmagens e produções no AR756. Tudo que você precisa saber sobre nosso espaço.',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958372/file_2_gjm6nx_sfgf81_ptlh6x.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AR756 - Perguntas Frequentes',
+      }
+    ],
+  }
 };
 
 export default async function Faq() {

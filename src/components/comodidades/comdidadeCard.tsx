@@ -1,21 +1,21 @@
 "use client";
 
 import { BiBeer, BiDumbbell } from "react-icons/bi";
-import { BsCarFrontFill, BsFlower1 } from "react-icons/bs";
+import { BsCarFrontFill, BsFlower1, BsCalendar2EventFill } from "react-icons/bs";
 import { FaSwimmingPool, FaWifi } from "react-icons/fa";
 import { GiBarbecue, GiDress, GiPartyPopper } from "react-icons/gi";
 import { MdSoupKitchen } from "react-icons/md";
 import { ImageComponent } from "@/components/utils/image";
 import { motion } from "framer-motion";
-import { CardComponent } from "../card";
 import { ItemCardComponent } from "../card/itemCard";
 import { ButtonComponent } from "../utils/button";
 import { ModalComponent } from "../utils/modal";
-import { ConsultarFormComponent } from "../consultar";
+import { ConsultarFormLazy } from "../consultar/consultar.lazy";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
+import { CardComponent } from "../card";
 
 interface ComodidadeCardProps {
   services: ServiceType[];
@@ -49,10 +49,15 @@ export function ComodidadeCardComponent({ services }: ComodidadeCardProps) {
       className={`md:absolute  text-black   min-w-full
               rounded-md shadow-lg md:bottom-[6.5rem] md:right-[18%] mb-5 md:mb-10 
               `}
+      aria-label="Comodidades disponíveis"
     >
       <div className="relative flex items-center justify-end w-full space-x-3">
         <div className="flex items-center justify-end w-[14.375rem] ">
-          <p className={`${stencilFont.className} text-[40px] text-black`}>
+          <p 
+            className={`${stencilFont.className} text-[40px] text-black`}
+            role="img"
+            aria-label="AR756 - Logo"
+          >
             AR756
           </p>
         </div>
@@ -69,9 +74,16 @@ export function ComodidadeCardComponent({ services }: ComodidadeCardProps) {
           COMODIDADES
         </h1>
       </div>
-      <div className="flex mt-8 gap-x-5 flex-1">
+      <div 
+        className="flex mt-8 gap-x-5 flex-1"
+        role="list"
+        aria-label="Lista de comodidades"
+      >
         <div className="space-y-3">
-          <ItemCardComponent title="Wifi" icon={<FaWifi size={20} />} />
+          <ItemCardComponent 
+            title="Wifi" 
+            icon={<FaWifi size={20} />} 
+          />
           <ItemCardComponent
             title="Piscina"
             icon={<FaSwimmingPool size={20} />}
@@ -87,9 +99,18 @@ export function ComodidadeCardComponent({ services }: ComodidadeCardProps) {
           />
         </div>
         <div className="space-y-3">
-          <ItemCardComponent title="Bar" icon={<BiBeer size={20} />} />
-          <ItemCardComponent title="Jardim" icon={<BsFlower1 size={20} />} />
-          <ItemCardComponent title="Camarim" icon={<GiDress size={20} />} />
+          <ItemCardComponent 
+            title="Bar" 
+            icon={<BiBeer size={20} />} 
+          />
+          <ItemCardComponent 
+            title="Jardim" 
+            icon={<BsFlower1 size={20} />} 
+          />
+          <ItemCardComponent 
+            title="Camarim" 
+            icon={<GiDress size={20} />} 
+          />
           <ItemCardComponent
             title="Salao de Festa"
             icon={<GiPartyPopper size={20} />}
@@ -116,7 +137,7 @@ export function ComodidadeCardComponent({ services }: ComodidadeCardProps) {
       />
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
-          <ConsultarFormComponent
+          <ConsultarFormLazy
             services={services}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />

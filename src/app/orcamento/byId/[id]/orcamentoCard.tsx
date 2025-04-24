@@ -143,7 +143,11 @@ export default function OrcamentoCardComponent({
 
   console.log(orcamentoByid?.proposalServices);
   return (
-    <div className="md:w-[600px]  bg-white text-lg pt-8 rounded-md shadow-lg px-4 flex flex-col overflow-hidden ">
+    <div 
+      className="md:w-[600px]  bg-white text-lg pt-8 rounded-md shadow-lg px-4 flex flex-col overflow-hidden"
+      role="region"
+      aria-label="Detalhes do orçamento"
+    >
       <motion.div
         initial={{
           x: 0,
@@ -161,6 +165,8 @@ export default function OrcamentoCardComponent({
           },
         }}
         className="flex flex-1"
+        role="tabpanel"
+        aria-label={formMode === "DESCRITIVO" ? "Detalhes descritivos" : formMode === "DOCUMENTO" ? "Documentos" : "Feedback"}
       >
         <motion.div
           initial={{
@@ -169,18 +175,34 @@ export default function OrcamentoCardComponent({
           animate={controlsDescritivo}
           className="flex flex-col w-full min-w-full"
         >
-          <p className="flex items-center justify-center w-full text-2xl font-semibold">
+          <p 
+            className="flex items-center justify-center w-full text-2xl font-semibold"
+            role="heading"
+            aria-level={1}
+          >
             SIMULACAO
           </p>
-          <div className="flex items-center justify-center w-full mt-10 gap-x-5">
-            <div className="flex items-center justify-center gap-x-2">
-              <SlPeople size={20} />
+          <div 
+            className="flex items-center justify-center w-full mt-10 gap-x-5"
+            role="list"
+            aria-label="Informações do evento"
+          >
+            <div 
+              className="flex items-center justify-center gap-x-2"
+              role="listitem"
+              aria-label="Número de convidados"
+            >
+              <SlPeople size={20} aria-hidden="true" />
               <p className="text-[12px] md:text-sm">
                 ({orcamentoByid?.guestNumber})
               </p>
             </div>
-            <div className="flex items-center justify-center gap-x-2">
-              <AiOutlineClockCircle size={20} />
+            <div 
+              className="flex items-center justify-center gap-x-2"
+              role="listitem"
+              aria-label="Horário do evento"
+            >
+              <AiOutlineClockCircle size={20} aria-hidden="true" />
               <p className="text-[12px] md:text-sm">{`${
                 orcamentoByid?.startDate &&
                 moment.utc(orcamentoByid?.startDate).format("HH:mm")
@@ -189,8 +211,12 @@ export default function OrcamentoCardComponent({
                 moment.utc(orcamentoByid?.endDate).format("HH:mm")
               } (${duracaoFesta}hrs)`}</p>
             </div>
-            <div className="flex items-center justify-center gap-x-2">
-              <AiOutlineCalendar size={20} />
+            <div 
+              className="flex items-center justify-center gap-x-2"
+              role="listitem"
+              aria-label="Data do evento"
+            >
+              <AiOutlineCalendar size={20} aria-hidden="true" />
               <p className="text-[12px] md:text-sm">
                 ({moment.utc(orcamentoByid?.startDate).format("DD/MM/YYYY")})
               </p>
@@ -204,88 +230,65 @@ export default function OrcamentoCardComponent({
           ) : (
             <LoadingOrcamentoComponent />
           )}
-          <div className="flex items-center justify-between w-full mt-10 gap-x-3 ">
-            <p>Total:</p>
-            <div className="flex space-x-1">
+          <div className="flex items-center justify-between w-full mt-10 gap-x-3">
+            <p role="heading" aria-level={2}>Total:</p>
+            <div 
+              className="flex space-x-1"
+              aria-label="Valor total do orçamento"
+            >
               <CurrencyFormat
                 value={orcamentoByid?.totalAmount}
                 displayType={"text"}
                 thousandSeparator={"."}
                 decimalSeparator={","}
-                decimalScale={2} // Define o número de casas decimais
+                decimalScale={2}
                 fixedDecimalScale={true}
                 prefix={"R$ "}
                 className="font-semibold text-[25px]"
+                aria-label={`Total: R$ ${orcamentoByid?.totalAmount}`}
               />
-              <p className="text-[30px]">*</p>
+              <p className="text-[30px]" aria-hidden="true">*</p>
             </div>
           </div>
           <p className="text-[14px] mb-5">
-            {" "}
-            <span className="text-[12px]">*</span> Valor sujeito a alteração.
+            <span className="text-[12px]" aria-hidden="true">*</span> Valor sujeito a alteração.
           </p>
           {orcamentoByid?.approved ? (
-            <div className="text-[12px] md:text-sm">
+            <div 
+              className="text-[12px] md:text-sm"
+              role="status"
+              aria-live="polite"
+            >
               <p className="py-10">
                 Maravilha! Estamos analisando o seu interesse, entraremos em
-                contato.Obrigado!
+                contato. Obrigado!
               </p>
             </div>
           ) : (
             <>
-              <div className="text-sm flex justify-start items-center gap-x-3 py-10 flex-col gap-y-2">
+              <div 
+                className="text-sm flex justify-start items-center gap-x-3 py-10 flex-col gap-y-2"
+                role="region"
+                aria-label="Opções de contato"
+              >
                 <p>Tem alguma dúvida ou gostaria de conversar com a gente?</p>
 
                 <a
                   href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
                   target="_blank"
                   className="rounded-md animate-bounce hover:scale-105 duration-200  text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"
+                  aria-label="Falar no WhatsApp"
                 >
-                  {" "}
-                  <p>Falar no WhatsApp</p> <FaWhatsapp />
+                  <p>Falar no WhatsApp</p> <FaWhatsapp aria-hidden="true" />
                 </a>
-                <p className="text-[10px] font-bold text-center w-full mt-5">
+                <p 
+                  className="text-[10px] font-bold text-center w-full mt-5"
+                  role="note"
+                >
                   * Este orcamento foi encaminhado para o seu email:{" "}
                   {orcamentoByid?.email}
                 </p>
               </div>
-              {/*      <SelectBooleansItemsCompoenent
-              title="Aprovar?"
-              setValue={setValue}
-              field={"aprovadoCliente"}
-              trigger={trigger}
-              watch={watch}
-              listOptions={["Sim", "Nao"]}
-              errors={!!errors.aprovadoCliente}
-              errorsMsg={errors?.aprovadoCliente?.message}
-            />
-            <motion.div className="flex items-center justify-end">
-              <ButtonComponent
-                icon={<HiArrowRight size={20} />}
-                onClick={async () => {
-                  const isAprovadoValid = await trigger("aprovadoCliente");
-                  if (isAprovadoValid && aprovadoWatch === true) {
-                    setformMode("DOCUMENTO");
-                    controlsDescritivo.start(opacityHidde);
-                    controlsDocuemntos.start(opacityShow);
-                  } else if (isAprovadoValid && aprovadoWatch === false) {
-                    setformMode("FEEDBACK");
-                    controlsDescritivo.start(opacityHidde);
-                    controlsFeedback.start(opacityShow);
-                  } else {
-                    controlsDescritivo.start(shakeAnimation);
-                  }
-                }}
-                type="button"
-                className={`
-                  z-30
-                  text-[15px]
-                  tracking-[3px] text-black
-                  transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
-                  flex justify-center items-center flex-row-reverse  gap-x-2 mb-5
-                  `}
-              />
-            </motion.div> */}
             </>
           )}
         </motion.div>
@@ -295,38 +298,64 @@ export default function OrcamentoCardComponent({
             opacity: 0,
           }}
           animate={controlsDocuemntos}
-          className="flex flex-col w-full min-w-full "
+          className="flex flex-col w-full min-w-full"
           onSubmit={handleSubmit(handleOnSubmit)}
+          role="form"
+          aria-label="Formulário de documentos"
         >
           <div className="flex gap-x-4">
-            <label htmlFor="rgPhotos" className="font-semibold text-[15px]">
+            <label 
+              htmlFor="rgPhotos" 
+              className="font-semibold text-[15px]"
+              id="rgPhotos-label"
+            >
               Documentos (RG):
             </label>
           </div>
-          <div className="flex flex-col space-y-2 overflow-y-auto max-h-[550px] relative flex-1">
+          <div 
+            className="flex flex-col space-y-2 overflow-y-auto max-h-[550px] relative flex-1"
+            role="region"
+            aria-labelledby="rgPhotos-label"
+          >
             <input
               type="file"
               id="rgPhotos"
               className="absolute opacity-0 cursor-pointer top-4"
               onChange={handleFileChange}
               multiple
+              aria-label="Selecionar documentos"
+              aria-required="true"
+              aria-describedby="rgPhotos-error"
             />
-            <div className="h-16 w-full border-gray-400 border-dotted border-spacing-3 border-[2px] flex justify-start items-center px-5 gap-x-5 cursor-pointer hover:bg-gray-100 transition duration-300">
-              <MdOutlineAddPhotoAlternate className="text-gray-600" size={25} />
-              <p className="text-[12px] md:text-sm font-semibold text-gray-600 ">
+            <div 
+              className="h-16 w-full border-gray-400 border-dotted border-spacing-3 border-[2px] flex justify-start items-center px-5 gap-x-5 cursor-pointer hover:bg-gray-100 transition duration-300"
+              role="button"
+              aria-label="Adicionar documento"
+            >
+              <MdOutlineAddPhotoAlternate className="text-gray-600" size={25} aria-hidden="true" />
+              <p className="text-[12px] md:text-sm font-semibold text-gray-600">
                 ADICIONE DOCUMENTO
               </p>
             </div>
-            <span className="text-red-700 text-[15px] w-full">
+            <span 
+              className="text-red-700 text-[15px] w-full"
+              role="alert"
+              id="rgPhotos-error"
+            >
               {errors && errors.documentos?.message}
             </span>
-            <div className="max-h-[150px] flex  gap-y-2 flex-col">
+            <div 
+              className="max-h-[150px] flex gap-y-2 flex-col"
+              role="list"
+              aria-label="Lista de documentos"
+            >
               {uploadedFiles?.map((file: File, index: number) => (
                 <div
                   key={index}
                   className="px-2 py-2 rounded-sm border-gray-400 border-[2px] flex w-full justify-between items-center"
+                  role="listitem"
                 >
-                  {file.type.startsWith("image/") && ( // Verifica se o arquivo é uma imagem
+                  {file.type.startsWith("image/") && (
                     <ImageComponent
                       src={URL.createObjectURL(file)}
                       alt={file.name}
@@ -335,12 +364,13 @@ export default function OrcamentoCardComponent({
                       containerClassname="mr-2"
                     />
                   )}
-                  <p className="tex-sm">{file.name} </p>
+                  <p className="tex-sm">{file.name}</p>
                   <ButtonComponent
-                    icon={<BiTrash className="text-gray-400" />}
+                    icon={<BiTrash className="text-gray-400" aria-hidden="true" />}
                     type="button"
-                    className="flex items-center justify-center rounded-full hover:bg-gray-200 "
+                    className="flex items-center justify-center rounded-full hover:bg-gray-200"
                     onClick={() => handleFileRemove(index)}
+                    aria-label={`Remover documento ${file.name}`}
                   />
                 </div>
               ))}
@@ -348,7 +378,7 @@ export default function OrcamentoCardComponent({
           </div>
           <motion.div className="flex items-end justify-between w-full mb-5">
             <ButtonComponent
-              icon={<HiArrowLeft size={20} />}
+              icon={<HiArrowLeft size={20} aria-hidden="true" />}
               onClick={async () => {
                 setformMode("DESCRITIVO");
                 controlsDescritivo.start(opacityShow);
@@ -356,36 +386,34 @@ export default function OrcamentoCardComponent({
               }}
               type="button"
               className={`
-                        z-30
-                        text-[15px]
-                        tracking-[3px] text-black
-                        transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
-                        flex justify-center items-center flex-row-reverse  gap-x-2 mb-5
-                        `}
+                z-30
+                text-[15px]
+                tracking-[3px] text-black
+                transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
+                flex justify-center items-center flex-row-reverse  gap-x-2 mb-5
+              `}
+              aria-label="Voltar para descrição"
             />
             <ButtonComponent
               title={isLoading ? "ENVIANDO" : "ENVIAR"}
-              icon={<BiMailSend size={20} />}
+              icon={<BiMailSend size={20} aria-hidden="true" />}
               type="submit"
               onClick={async () => {
                 const isValid = await trigger("documentos");
-
-                // Dispara a validação dos campos
                 if (!isValid) {
                   controlsDocuemntos.start(shakeAnimation);
                 }
               }}
               className={`
-                       ${isLoading && "animate-pulse"} 
-                        z-30
-                        w-[200px]
-                        h-[55px]
-                        text-[15px]
-                        tracking-[3px] text-white rounded-md bg-black
-                        mt-6
-                        transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
-                        flex justify-center items-center flex-row-reverse  gap-x-2
-                      `}
+                z-30
+                px-10 py-4
+                text-[15px]  md:text-[20px]
+                hover:bg-zinc-900
+                tracking-[0.30rem] text-white rounded-md bg-black
+                transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
+              `}
+              aria-label={isLoading ? "Enviando documentos..." : "Enviar documentos"}
+              aria-busy={isLoading}
             />
           </motion.div>
         </motion.form>

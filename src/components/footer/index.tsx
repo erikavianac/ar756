@@ -19,21 +19,31 @@ export function FooterComponent() {
   }
 
   return (
-    <footer className="flex flex-col items-center justify-center w-full pb-10 md:pb-0 bg-zinc-900 md:items-start gap-y-4">
-      <div className="flex flex-col items-center justify-center w-full md:h-[138px]  text-white  md:flex-row md:justify-between overflow-hidden  relative">
-        <div className="relative ">
-          <p className={`${stencilFont.className} text-[100px]  text-white z-30 md:absolute md:-mt-[70px]  md:ml-[80px]`}>AR756</p>
+    <footer 
+      className="flex flex-col items-center justify-center w-full pb-10 md:pb-0 bg-zinc-900 md:items-start gap-y-4"
+      role="contentinfo"
+      aria-label="Rodapé do site AR756"
+    >
+      <div className="flex flex-col items-center justify-center w-full md:h-[138px] text-white md:flex-row md:justify-between overflow-hidden relative">
+        <div className="relative">
+          <p 
+            className={`${stencilFont.className} text-[100px] text-white z-30 md:absolute md:-mt-[70px] md:ml-[80px]`}
+            role="img"
+            aria-label="AR756 - Logo"
+          >
+            AR756
+          </p>
           <div className="hidden md:flex md:absolute md:-mt-[70px]">
             <ImageComponent
-              alt={'logo-branco'}
-              h={'h-[138px]'}
-              w={'w-full md:w-[499px]'}
-              src={'/assets/images/faixadaImage.png'}
+              alt="Fachada do espaço AR756"
+              h="h-[138px]"
+              w="w-full md:w-[499px]"
+              src="/assets/images/faixadaImage.png"
               containerClassname="z-20"
             />
           </div>
         </div>
-        <div className="flex mt-10 mr-5 gap-x-2 md:mt-0 ">
+        <div className="flex mt-10 mr-5 gap-x-2 md:mt-0">
           <AnchorComponent
             href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
             icon={
@@ -42,7 +52,7 @@ export function FooterComponent() {
                 size={30}
               />
             }
-            /* bgColor="bg-[#FF5A5F]" */
+            aria-label="WhatsApp da AR756"
           />
           <AnchorComponent
             href="https://www.facebook.com/profile.php?id=100085832906065"
@@ -52,7 +62,7 @@ export function FooterComponent() {
                 size={30}
               />
             }
-            /*    bgColor=" bg-[#3b5998]" */
+            aria-label="Facebook da AR756"
           />
           <AnchorComponent
             href="https://www.tiktok.com/@ar756_"
@@ -62,7 +72,7 @@ export function FooterComponent() {
                 size={30}
               />
             }
-            /*    bgColor=" bg-[#3b5998]" */
+            aria-label="TikTok da AR756"
           />
           <AnchorComponent
             href="https://www.instagram.com/ar756_/"
@@ -72,10 +82,10 @@ export function FooterComponent() {
                 size={30}
               />
             }
-            /* bgColor="bg-insta-gradient" */
+            aria-label="Instagram da AR756"
           />
         </div>
-        </div>
+      </div>
     </footer>
   );
 }

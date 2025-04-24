@@ -4,7 +4,7 @@ import { CldVideoPlayer } from "next-cloudinary";
 import { ButtonComponent } from "../utils/button";
 import { SectionComponent } from "../utils/section";
 import { ModalComponent } from "../utils/modal";
-import { ConsultarFormComponent } from "../consultar";
+import { ConsultarFormLazy } from "../consultar/consultar.lazy";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { ShowOnlyOnWebComponent } from "../utils/showOnlyOnWeb";
 import { useRouter } from "next/navigation";
@@ -43,18 +43,23 @@ export function VideobgComponent({mobileCarroucelmageList,services}:VideobgProps
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
-      <MainCarroucel mobileCarroucelmageList={mobileCarroucelmageList} />
+        <MainCarroucel 
+          mobileCarroucelmageList={mobileCarroucelmageList} 
+          aria-label="Carrossel de imagens para dispositivos móveis"
+        />
       </ShowOnlyOnMobileComponent>
       <ShowOnlyOnWebComponent>
         {
           !isSmallScreen && screenSizeChecked &&
-       <video
-          className=" min-h-screen min-w-screen object-fill z-0"
-          src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_v01 (1).mp4"}
-          autoPlay
-          loop
-          muted
-        /> 
+          <video
+            className="min-h-screen min-w-screen object-fill z-0"
+            src={"https://d2tb61r1ltgmn5.cloudfront.net/casa01_v01 (1).mp4"}
+            autoPlay
+            loop
+            muted
+            aria-label="Vídeo de fundo mostrando o espaço AR756"
+            role="presentation"
+          /> 
         }
       </ShowOnlyOnWebComponent>
       <ButtonComponent
@@ -77,10 +82,11 @@ export function VideobgComponent({mobileCarroucelmageList,services}:VideobgProps
             setisModalOpen(true);
           }
         }}
+        aria-label="Abrir formulário de consulta"
       />
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
-          <ConsultarFormComponent
+          <ConsultarFormLazy
             services={services}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />

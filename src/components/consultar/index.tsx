@@ -133,7 +133,7 @@ export function ConsultarFormComponent({
       onSubmit={handleSubmit(handleOnSubmit)}
       encType="multipart/form-data"
       className=" rounded-md lg:max-w-[500px] lg:max-h-[650px] max-w-[390px] w-full  my-10  
-        relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:shadow-lg md:mt-2 
+        relative md:rounded-md py-5 px-5 flex flex-col gap-y-5 md:mt-2 
         bg-white z-30 overflow-y-auto overflow-x-hidden scrollbar-thumb-rounded-full 
         scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
     >
@@ -276,7 +276,15 @@ export function ConsultarFormComponent({
               trigger={trigger}
               errors={!!errors.completeClientName}
               errorsMsg={errors?.completeClientName?.message}
+              aria-required="true"
+              aria-invalid={!!errors.completeClientName}
+              aria-describedby={errors.completeClientName ? "completeClientName-error" : undefined}
             />
+            {errors.completeClientName && (
+              <div role="alert" aria-live="polite">
+                <span id="completeClientName-error">{errors.completeClientName.message}</span>
+              </div>
+            )}
             <InputComponent<ConsultarFormData>
               title="email"
               entity="email"
@@ -284,7 +292,15 @@ export function ConsultarFormComponent({
               trigger={trigger}
               errors={!!errors.email}
               errorsMsg={errors?.email?.message}
+              aria-required="true"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? "email-error" : undefined}
             />
+            {errors.email && (
+              <div role="alert" aria-live="polite">
+                <span id="email-error">{errors.email.message}</span>
+              </div>
+            )}
 
             <div className="flex flex-col gap-y-2">
               <label
@@ -743,6 +759,9 @@ export function ConsultarFormComponent({
                     transition duration-300 ease-in-out transform  active:scale-90 active:transition-none active:duration-500
                     flex justify-center items-center flex-row-reverse  gap-x-2
                   `}
+                aria-label="Enviar formulário"
+                aria-disabled={isSendMailLoading}
+                aria-busy={isSendMailLoading}
               />
             </div>
           </div>

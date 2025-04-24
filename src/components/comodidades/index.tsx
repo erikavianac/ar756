@@ -30,6 +30,7 @@ export function ComodidadeComponent({
           alt={"logo-branco"}
           h={"lg:h-[65%] 2xl:h-[85%]"}
           w={"w-[80%] 2xl:w-[70%]"}
+          isLargeImage={true}
           src={
             "https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958372/file_2_gjm6nx_sfgf81_ptlh6x.jpg"
           }
