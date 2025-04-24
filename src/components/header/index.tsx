@@ -17,6 +17,7 @@ import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { stencilFont } from "@/fonts/constants";
 import { AnimatedTitleComponent } from "../utils/animatedTitle";
 import { AnimatedSubTitleComponent } from "../utils/animatedText";
+import { BsWhatsapp, BsFacebook, BsTiktok, BsInstagram } from "react-icons/bs";
 
 export function HomeHeaderComponent() {
   const { replace } = useRouter();
@@ -178,64 +179,60 @@ export function HomeHeaderComponent() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: 1.4 }}
                   >
-                    <AnchorComponent
+                    <a
                       href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
-                      icon={
-                        <TbBrandWhatsapp
-                          className="cursor-pointer text-white"
-                          size={30}
-                        />
-                      }
-                      bgColor="bg-[#25D366] border-[2px] border-white"
-                    />
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Entre em contato via WhatsApp"
+                      className="text-white hover:text-green-500 transition-colors"
+                    >
+                      <BsWhatsapp size={20} />
+                    </a>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, y: 200 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: 1.5 }}
                   >
-                    <AnchorComponent
+                    <a
                       href="https://www.facebook.com/profile.php?id=100085832906065"
-                      icon={
-                        <TbBrandFacebook
-                          className="cursor-pointer  text-white"
-                          size={30}
-                        />
-                      }
-                      bgColor=" bg-[#3b5998] border-[2px] border-white"
-                    />
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Siga-nos no Facebook"
+                      className="text-white hover:text-blue-500 transition-colors"
+                    >
+                      <BsFacebook size={20} />
+                    </a>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, y: 200 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: 1.6 }}
                   >
-                    <AnchorComponent
+                    <a
                       href="https://www.tiktok.com/@ar756_"
-                      icon={
-                        <FaTiktok
-                          className=" cursor-pointer text-white"
-                          size={25}
-                        />
-                      }
-                      bgColor=" bg-black border-[2px] border-white w-[45px]"
-                    />
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Siga-nos no TikTok"
+                      className="text-white hover:text-pink-500 transition-colors"
+                    >
+                      <BsTiktok size={20} />
+                    </a>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, y: 200 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2, delay: 1.7 }}
                   >
-                    <AnchorComponent
+                    <a
                       href="https://www.instagram.com/ar756_/"
-                      icon={
-                        <TbBrandInstagram
-                          className="cursor-pointer text-white "
-                          size={30}
-                        />
-                      }
-                      bgColor="bg-gradient-to-r from-fuchsia-500 to-pink-500 border-[2px] border-white"
-                    />
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Siga-nos no Instagram"
+                      className="text-white hover:text-purple-500 transition-colors"
+                    >
+                      <BsInstagram size={20} />
+                    </a>
                   </motion.div>
                 </div>
               </motion.div>

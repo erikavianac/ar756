@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"
@@ -7,18 +7,27 @@ import { FooterComponent } from "@/components/footer";
 import Script from 'next/script';
 import LoadingPage from "@/components/utils/loadingPage";
 import { ToastProvider } from "@/components/toat-provider/toast-provider";
+import { GTM_ID } from "@/utils/gtm";
 
 const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
+  weight: ["100", "300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: {
-    default: "AR756",
-    template: "%s - AR756"
-  },
-  description: "Um oásis em São Paulo. Espaço para eventos, filmagens e produções com piscina, jardim, churrasqueira e muito mais.",
+  title: "AR756 - Casa para eventos em São Paulo",
+  description:
+    "Alugue a AR756 para seus eventos em São Paulo. Espaço versátil com piscina, churrasqueira e ambiente moderno para festas, casamentos e eventos corporativos.",
+  keywords: [
+    "casa para eventos",
+    "aluguel de espaço",
+    "eventos em São Paulo",
+    "festas",
+    "casamentos",
+    "eventos corporativos",
+    "AR756",
+  ],
   metadataBase: new URL('https://ar756.com'),
   openGraph: {
     type: 'website',
@@ -46,36 +55,41 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent  overflow-y-scroll">
-      <body suppressHydrationWarning={true} className={`${roboto.className} w-full min-h-screen relative`}>
-        <LoadingPage />
-        <ToastProvider />
-        <div id="modal-root" />
-        {children}
+    <html lang="pt-BR" className={roboto.className}>
+      <head>
+        <Script id="gtm-script" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GTM_ID}');
+          `}
+        </Script>
+      </head>
+      <body className="overflow-x-hidden">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        <ToastProvider>
+          <LoadingPage />
+          <div id="modal-root" />
+          {children}
+        </ToastProvider>
       </body>
       <Script
         src="https://va.tawk.to/analytics.js"
         strategy="lazyOnload"
       />
     
-      <Script
-        id="gtm-script"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');
-          `,
-        }}
-      />
-
       <Script
         id="schema-org-script"
         type="application/ld+json"
