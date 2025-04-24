@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'app-house-keeper-bucket.s3.eu-north-1.amazonaws.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: '**',
+        pathname: '**',
+      }
     ],
     minimumCacheTTL: 3600, // 1 hora
     deviceSizes: [640, 750, 1080, 1200, 1920],
