@@ -23,7 +23,7 @@ const GaleriaLoading = () => (
 
 // Importação dinâmica do componente
 export const GaleriaCardLazy = dynamic(
-  () => import('./galeriaCard').then(mod => mod.GaleriaCardComponent),
+  () => import('./galeriaCard'),
   {
     loading: GaleriaLoading,
     ssr: false

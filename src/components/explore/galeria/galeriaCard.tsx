@@ -11,10 +11,10 @@ interface GaleriaCardProps {
   handleCloseGaleriaModa?: () => void;
 }
 
-export function GaleriaCardComponent({
+const GaleriaCardComponent = ({
   handleCloseGaleriaModa,
   imageList,
-}: GaleriaCardProps) {
+}: GaleriaCardProps) => {
   const [galeriaModalMode, setGaleriaModalMode] = useState<
     "TODAS" | "AREA EXTERNA" | "SALAO INTERNO" | "SALAO EXTERNO"
   >("TODAS");
@@ -80,3 +80,5 @@ export function GaleriaCardComponent({
     </div>
   );
 }
+
+export default GaleriaCardComponent;
