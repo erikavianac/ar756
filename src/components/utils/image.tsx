@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { ImagePlaceholder } from './imagePlaceholder';
 
 interface ImageComponentProps {
@@ -15,7 +15,7 @@ interface ImageComponentProps {
   isLargeImage?: boolean;
 }
 
-export function ImageComponent({
+const ImageComponent = memo(function ImageComponent({
   w,
   h,
   src,
@@ -95,10 +95,13 @@ export function ImageComponent({
         alt={validatedAlt}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        style={{ objectFit: 'cover' }}
-        className={`h-full w-full ${imageClassname} 
-          ${isLoading ? 'opacity-0 scale-95 blur-sm' : 'opacity-100 scale-100 blur-0'} 
-          transition-all duration-500 ease-out`}
+        style={{ 
+          objectFit: 'cover',
+          transform: isLoading ? 'scale(0.95)' : 'scale(1)',
+          opacity: isLoading ? 0 : 1,
+          transition: 'transform 0.5s ease-out, opacity 0.5s ease-out'
+        }}
+        className={`h-full w-full ${imageClassname}`}
         onClick={onClick}
         quality={isLargeImage ? 75 : 60}
         loading={priority ? 'eager' : 'lazy'}
@@ -110,4 +113,6 @@ export function ImageComponent({
       />
     </div>
   );
-}
+});
+
+export { ImageComponent };
