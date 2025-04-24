@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ImagePlaceholder } from './imagePlaceholder';
 
 interface ImageComponentProps {
@@ -29,6 +29,10 @@ export function ImageComponent({
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Validação do alt
   const validatedAlt = alt.trim() || 'Imagem sem descrição';
