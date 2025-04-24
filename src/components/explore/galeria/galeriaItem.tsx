@@ -26,11 +26,12 @@ export default function GaleriaItemComponent({item,index,imageList}:GaleriaItemP
         onClick={() => setIsModalOpen(true)}
       >
         <ImageComponent
-          alt={""}
+          alt={item.description || "Imagem da galeria"}
           h={"h-[200px] md:h-[180px]"}
           w={"w-[395px] md:w-[250px]"}
-          src={`${item.imageUrl}`}
-          containerClassname={" rounded-lg "}
+          src={item.imageUrl}
+          containerClassname={"rounded-lg"}
+          priority={index < 6}
         />
       </motion.div>
       {isModalOpen && (
