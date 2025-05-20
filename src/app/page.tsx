@@ -14,6 +14,7 @@ import { stencilFont } from "@/fonts/constants";
 import { data } from "@/hooks/data";
 import { TbBrandWhatsapp } from "react-icons/tb";
 
+
 export default async function Home() {
   const {
     services,

@@ -5,7 +5,20 @@ import { ServiceRequestResponse } from "@/types";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Consultar Orcamento",
+  title: "Consultar Orçamento - AR756",
+  description: "Solicite um orçamento para seu evento ou produção no AR756. Espaço completo com piscina, jardim e muito mais em São Paulo.",
+  openGraph: {
+    title: 'Consultar Orçamento - AR756',
+    description: 'Solicite um orçamento para seu evento ou produção no AR756. Espaço completo com piscina, jardim e muito mais em São Paulo.',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dio4rp1nb/image/upload/v1739958372/file_2_gjm6nx_sfgf81_ptlh6x.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AR756 - Consultar Orçamento',
+      }
+    ],
+  }
 };
 
 export default async function ConsultarPage() {

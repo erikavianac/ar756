@@ -5,9 +5,9 @@ import { ExploreCardComponent } from "./card";
 
 import { AnimatedVerticalComponent } from "@/components/utils/animatedVertical";
 import { ModalComponent } from "../utils/modal";
-import { GaleriaCardComponent } from "./galeria/galeriaCard";
-import FaqComponent from "./faq";
-import { RegrasCardComponent } from "./regras/regrasCard";
+import { GaleriaCardLazy } from "./galeria/galeriaCard.lazy";
+import { FaqLazy } from "./faq/faq.lazy";
+import { RegrasCardLazy } from "./regras/regrasCard.lazy";
 import { useRouter } from "next/navigation";
 import { stencilFont } from "@/fonts/constants";
 
@@ -146,9 +146,9 @@ export function ExploreComponent({
             onClose={handleCloseGaleriaModa}
             styleInternal="max-w-[90%] min-w-[90%]  max-h-[90%] min-h-[90%]  md:max-w-[600px]  md:min-w-[600px]   relative bg-white"
           >
-            <GaleriaCardComponent
-              handleCloseGaleriaModa={handleCloseGaleriaModa}
+            <GaleriaCardLazy
               imageList={imageList}
+              handleCloseGaleriaModa={handleCloseGaleriaModa}
             />
           </ModalComponent>
         )}
@@ -157,7 +157,7 @@ export function ExploreComponent({
             onClose={handleCloseFaqModal}
             styleInternal="max-w-[90%] min-w-[90%]  max-h-[90%] min-h-[90%]  md:max-w-[600px]  md:min-w-[600px]   relative"
           >
-            <FaqComponent
+            <FaqLazy
               handleCloseFaqModal={handleCloseFaqModal}
               questionList={questionList}
             />
@@ -168,7 +168,7 @@ export function ExploreComponent({
             onClose={handleCloseRegrasModal}
             styleInternal="max-w-[90%] min-w-[90%]  max-h-[90%] min-h-[90%]  md:max-w-[600px]  md:min-w-[600px]   relative"
           >
-            <RegrasCardComponent
+            <RegrasCardLazy
               handleCloseRegrasModal={handleCloseRegrasModal}
               textSobreList={textSobreList}
               imageSobreList={imageSobreList}

@@ -5,7 +5,24 @@ import { motion } from "framer-motion";
 
 export default function LoadingPage() {
   return (
-    <motion.div initial={{x:0}} animate={{x:"-100%"}} transition={{duration:0.5, delay:3}} className="bg-black absolute z-50 flex flex-col justify-center items-center min-h-screen  max-h-screen w-full ">
+    <motion.div 
+      role="status"
+      aria-label="Carregando página"
+      aria-live="polite"
+      aria-busy="true"
+      initial={{x:0}} 
+      animate={{x:"-100%"}} 
+      transition={{duration:0.5, delay:3}} 
+      className="bg-black fixed inset-0 z-50 flex flex-col justify-center items-center overflow-hidden"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        overflow: 'hidden'
+      }}
+    >
       <div className="animate-pulse flex flex-col gap-y-2 justify-center items-center">
         <p className={`${stencilFont.className} text-[70px] text-white`}>AR756</p>
         

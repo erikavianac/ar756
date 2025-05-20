@@ -1,7 +1,7 @@
+'use client';
 import { ImageType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { ImageComponent } from "./image";
 import Image from "next/image";
 
 interface MainCarroucelProps {
@@ -10,24 +10,36 @@ interface MainCarroucelProps {
 
 export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
   const [curr, setCurr] = useState(0);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (mobileCarroucelmageList) {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (mobileCarroucelmageList?.length) {
       const intervalId = setInterval(() => {
         setCurr((curr) => (curr + 1) % mobileCarroucelmageList.length);
-      }, 3000); // intervalo de 4 segundos
+      }, 3000);
       return () => clearInterval(intervalId);
     }
   }, [mobileCarroucelmageList]);
+
+  if (!isClient || !mobileCarroucelmageList?.length) {
+    return null;
+  }
+
+  const currentImage = mobileCarroucelmageList[curr];
+  if (!currentImage?.imageUrl) {
+    return null;
+  }
 
   return (
     <div className="flex">
       <AnimatePresence mode="popLayout">
         <motion.div
           className="max-h-screen min-h-screen h-full w-full relative"
-          key={
-            mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
-          }
+          key={currentImage.imageUrl}
           initial={{
             x: "100vh",
           }}
@@ -47,15 +59,12 @@ export function MainCarroucel({ mobileCarroucelmageList }: MainCarroucelProps) {
           }}
         >
           <Image
-           src={
-            mobileCarroucelmageList && mobileCarroucelmageList[curr]?.imageUrl
-          }
-          alt="foto"
-          fill
-          priority
-          quality={50}
+            src={currentImage.imageUrl}
+            alt={currentImage.description || "Imagem do carrossel"}
+            fill
+            priority
+            quality={50}
           />
-          
         </motion.div>
       </AnimatePresence>
     </div>

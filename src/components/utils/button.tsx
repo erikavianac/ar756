@@ -8,13 +8,26 @@ interface Props extends ButtonHTMLAttributes<any> {
   className?: string;
   icon?: ReactNode;
   titleClassname?: string;
+  isLoading?: boolean;
 }
 
-export function ButtonComponent({ title, className, icon, titleClassname, ...rest }: Props) {
+export function ButtonComponent({ 
+  title, 
+  className, 
+  icon, 
+  titleClassname, 
+  isLoading,
+  disabled,
+  ...rest 
+}: Props) {
   return (
     <button
       {...rest}
       className={`${className} ${kumbh_sans}`}
+      aria-label={!title && icon ? "Botão" : undefined}
+      aria-disabled={disabled}
+      aria-busy={isLoading}
+      disabled={disabled}
     >
       {icon ? icon : null}
       <p className={titleClassname}>{title}</p>

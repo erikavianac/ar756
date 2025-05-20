@@ -16,6 +16,7 @@ import { ConsultarFormComponent } from "../consultar";
 import { useRouter } from "next/navigation";
 import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
+import { ConsultarFormLazy } from "../consultar/consultar.lazy";
 
 interface ServicoCardProps {
   services: ServiceType[];
@@ -50,11 +51,16 @@ export function ServicoCardComponent({ services }: ServicoCardProps) {
         rounded-md shadow-lg md:bottom-[6.5rem] md:right-[18%] mb-5 md:mb-10 
         min-w-full
         `}
+      aria-label="Serviços extras disponíveis"
     >
       <div className="relative flex items-center justify-end w-full space-x-3">
         <div className="border-[1px] border-black flex-1 h-0 " />
         <div className="flex items-center justify-start w-[140px]  ">
-          <p className={`${stencilFont.className} text-[40px] text-black`}>
+          <p 
+            className={`${stencilFont.className} text-[40px] text-black`}
+            role="img"
+            aria-label="AR756 - Logo"
+          >
             AR756
           </p>
         </div>
@@ -62,10 +68,20 @@ export function ServicoCardComponent({ services }: ServicoCardProps) {
           SERVICOS EXTRAS
         </h1>
       </div>
-      <div className="flex justify-center flex-1 mt-8 gap-x-10 ">
+      <div 
+        className="flex justify-center flex-1 mt-8 gap-x-10"
+        role="list"
+        aria-label="Lista de serviços"
+      >
         <div className="flex flex-col w-full gap-y-3">
-          <ItemCardComponent title="DJ" icon={<IoMdMusicalNotes size={20} />} />
-          <ItemCardComponent title="Som" icon={<BsSpeaker size={20} />} />
+          <ItemCardComponent 
+            title="DJ" 
+            icon={<IoMdMusicalNotes size={20} />} 
+          />
+          <ItemCardComponent 
+            title="Som" 
+            icon={<BsSpeaker size={20} />} 
+          />
           <ItemCardComponent
             title="Comida"
             icon={<MdOutlineLunchDining size={20} />}
@@ -106,7 +122,7 @@ export function ServicoCardComponent({ services }: ServicoCardProps) {
       />
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
-          <ConsultarFormComponent
+        <ConsultarFormLazy
             services={services}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />

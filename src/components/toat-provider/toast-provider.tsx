@@ -1,7 +1,17 @@
 'use client'
 
 import { Toaster } from 'react-hot-toast'
+import { ReactNode } from 'react'
 
-export function ToastProvider() {
-  return <Toaster position="top-center" />
+interface ToastProviderProps {
+  children: ReactNode
+}
+
+export function ToastProvider({ children }: ToastProviderProps) {
+  return (
+    <>
+      <Toaster position="top-center" />
+      {children}
+    </>
+  )
 }
