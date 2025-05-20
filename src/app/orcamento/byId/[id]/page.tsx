@@ -26,9 +26,10 @@ export async function generateMetadata({
 export default async function OrcamentoPage({
   params,
 }: OrcamentoByiDPageProps) {
-  const orcamentoByID = await getProposalById(params.id);;
-
-  if (!orcamentoByID?.id) {
+  let orcamentoByID = null;
+  try {
+    orcamentoByID = await getProposalById(params.id);
+  } catch (error) {
     notFound();
   }
 

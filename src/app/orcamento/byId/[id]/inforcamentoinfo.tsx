@@ -44,7 +44,7 @@ export default function InfoOrcamentoinfo({
           />
         </div>
       ) : null}
-      {services.map((item: ProposalService) => {
+      {services && services?.map((item: ProposalService) => {
         return (
           <div
             key={item.id}
