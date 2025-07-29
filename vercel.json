@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "app/**/*.ts": {
-      "runtime": "@vercel/node@22"
-    }
-  },
   "build": {
     "env": {
       "NODE_VERSION": "22"
