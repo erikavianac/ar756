@@ -28,8 +28,9 @@ export const VenueProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    api.get("/venue/getWebData?venueId=42b9e0f2-3d50-4aff-a0a4-f7a4d9553708")
-      .then(res => setVenue(res.data.data))
+    fetch("/venue/getWebData?venueId=42b9e0f2-3d50-4aff-a0a4-f7a4d9553708")
+      .then((res: Response) => res.json())
+      .then((data: { data: VenueWithRelations }) => setVenue(data.data))
       .catch(() => setError("Erro ao carregar dados do espaço"))
       .finally(() => setLoading(false));
   }, []);
