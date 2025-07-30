@@ -65,7 +65,7 @@ export function GridModalComponent({
         transition={{ duration: 0.5 }}
       >
         {imageList &&
-          imageList?.map((image: ImageType) => {
+          imageList?.map((image: Image) => {
             return (
               <ImageComponent
                 key={image.id}
