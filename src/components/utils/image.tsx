@@ -43,7 +43,7 @@ const ImageComponent = memo(function ImageComponent({
   };
 
   // Se a URL for inválida, mostra o placeholder diretamente
-  if (!isValidUrl(src) && !src.startsWith('/')) {
+  if (!src || (!isValidUrl(src) && !src.startsWith('/'))) {
     return (
       <div 
         className={`${w} ${h} relative ${containerClassname}`}

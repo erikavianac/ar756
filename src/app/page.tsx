@@ -16,16 +16,7 @@ import { TbBrandWhatsapp } from "react-icons/tb";
 
 
 export default async function Home() {
-  const {
-    services,
-    questions,
-    imageList,
-    cardImageList,
-    textSobreList,
-    imageSobreList,
-    mobileCarroucelmageList,
-  } = await data();
-  console.log("FODASE")
+
   return (
     <>
       <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
@@ -57,11 +48,6 @@ export default async function Home() {
           <ServicosComponents  />
         </ShowOnlyOnWebComponent>
         <ExploreComponent
-          cardImageList={cardImageList}
-          imageList={imageList}
-          questionList={questions}
-          textSobreList={textSobreList}
-          imageSobreList={imageSobreList}
         />
       </main>
       <FooterComponent />

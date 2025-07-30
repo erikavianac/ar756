@@ -12,20 +12,7 @@ import { useRouter } from "next/navigation";
 import { stencilFont } from "@/fonts/constants";
 import { useVenueContext } from "@/app/context/VenueContext";
 
-interface ExploreProps {
-  imageList: ImageType[];
-  textSobreList: TextType[];
-  cardImageList: ImageType[];
-  imageSobreList: ImageType[];
-  questionList: QuestionType[];
-}
-
-export function ExploreComponent({
-  imageList,
-  questionList,
-  textSobreList,
-  imageSobreList,
-}: ExploreProps) {
+export function ExploreComponent() {
   const [galeriaModal, setGaleriaModal] = useState(false);
   const [regrasModal, setRegrasModal] = useState(false);
   const [FAQModal, setFAQModal] = useState(false);
