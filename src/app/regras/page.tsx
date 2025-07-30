@@ -24,10 +24,7 @@ export default async function Regras() {
     <div className="flex flex-col min-h-screen w-full bg-faixada">
       <HomeHeaderComponent />
       <main className="flex-1 flex justify-center items-center w-full px-3 py-5">
-        <RegrasCardComponent
-          textSobreList={textSobreList}
-          imageSobreList={imageSobreList}
-        />
+        <RegrasCardComponent/>
       </main>
       <FooterComponent />
     </div>
