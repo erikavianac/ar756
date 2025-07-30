@@ -22,19 +22,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Faq() {
-  const questionList = await fetch(
-    `${process.env.SERVER_URL}/question/list?venueId=8159e209-0057-4df3-ae72-855363c3b84e`
-  ).then(async (resp) => {
-    const response: QuestionRequestResponse = await resp.json();
-    console.log(response);
-    return response?.data?.questionList;
-  });
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-faixada">
       <HomeHeaderComponent />
       <main className="flex-1 flex justify-center items-center w-full px-3 py-5">
-        <FaqComponent questionList={questionList} />
+        <FaqComponent  />
       </main>
       <FooterComponent />
     </div>
