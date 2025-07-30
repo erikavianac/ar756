@@ -18,7 +18,7 @@ export async function WelcomeComponent() {
         <WelcomeTextsComponent />
       </div>
       <ShowOnlyOnMobileComponent>
-        <WelcomeCarroucelComponent />
+        <WelcomeCarroucelComponent  />
       </ShowOnlyOnMobileComponent>
       {/*<ShowOnlyOnWebComponent>
         <WelcomeGridComponent imageList={welcomeWebImageList} />

@@ -1,21 +1,16 @@
+'use client';
+import { useVenueContext } from "@/app/context/VenueContext";
 import { AnimatedVerticalComponent } from "@/components/utils/animatedVertical";
 import { TextRequestResponse, TextType } from "@/types";
+import { Text } from "@/types/venue";
 
-export async function WelcomeTextsComponent() {
-  const welcomeTexts: TextRequestResponse = await fetch(
-    `${process.env.SERVER_URL}/text/list?venueId=8159e209-0057-4df3-ae72-855363c3b84e&area=Intro`,
-    {
-      method: "GET",
-    }
-  ).then((resp) => {
-    const response: any = resp.json();
-
-    return response;
-  });
+export function WelcomeTextsComponent() {
+  const { venue, getTextsByArea } = useVenueContext();
+  const welcomeTexts = getTextsByArea("Intro");
 
   return (
     <div className="flex flex-col gap-y-2 mt-10 xl:mt-5">
-      {welcomeTexts?.data.textList.map((text: TextType) => {
+      {welcomeTexts?.map((text: Text) => {
         return (
           <AnimatedVerticalComponent
             key={text.id}

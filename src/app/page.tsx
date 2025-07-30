@@ -28,7 +28,7 @@ export default async function Home() {
         </div>
         <div className="fixed z-50 bottom-4 right-4">
           <AnchorComponent
-            href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+            href="https://api.whatsapp.com/send/?phone=351938324447&text=Olá! Vi o site da AR756 e gostaria de saber mais informações.&type=phone_number&app_absent=0"
             icon={
               <TbBrandWhatsapp
                 className="cursor-pointer text-white"

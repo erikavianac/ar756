@@ -23,12 +23,6 @@ export const metadata: Metadata = {
 };
 
 export default async function GaleriaPage() {
-  const imageList = await fetch(
-    `${process.env.SERVER_URL}/image/getByTag?venueId=8159e209-0057-4df3-ae72-855363c3b84e`
-  ).then(async (resp) => {
-    const response: ImageRequestResponse = await resp.json();
-    return response.data.imagesByTag;
-  });
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-faixada">

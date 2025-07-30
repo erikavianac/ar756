@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { ImageType, ServiceType } from "@/types";
 import { MainCarroucel } from "../utils/mainCarroucel";
 import { useVenueContext } from "@/app/context/VenueContext";
+import { AnimatedArrowComponent } from "../utils/animatedArrow";
 
 
 export function VideobgComponent() {
@@ -38,8 +39,7 @@ export function VideobgComponent() {
       window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
-  console.log(venue)
-  console.log(mobileCarroucelmageList)
+
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
@@ -84,6 +84,7 @@ export function VideobgComponent() {
         }}
         aria-label="Abrir formulário de consulta"
       />
+      <AnimatedArrowComponent />
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
           <ConsultarFormLazy
