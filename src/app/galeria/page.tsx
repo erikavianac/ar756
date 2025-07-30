@@ -34,7 +34,7 @@ export default async function GaleriaPage() {
     <div className="flex flex-col min-h-screen w-full bg-faixada">
       <HomeHeaderComponent />
       <main className="flex-1 flex justify-center items-center w-full px-3 py-5">
-        <GaleriaCardLazy imageList={imageList} />
+        <GaleriaCardLazy />
       </main>
       <FooterComponent />
     </div>
