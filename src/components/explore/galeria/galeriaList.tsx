@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Scrollbars from "react-custom-scrollbars";
-import { ImageType } from "@/types";
+import { Image } from "@/types/venue";
 import GaleriaItemComponent from "./galeriaItem";
 
 interface GaleriaListProps {
   galeriaModalMode: string;
-  imageList: ImageType[] | undefined;
+  imageList: Image[];
 }
 
 export default function GaleriaListComponent({
@@ -48,11 +48,11 @@ export default function GaleriaListComponent({
     >
       <div className="flex flex-wrap items-center justify-center w-full gap-2 md:gap-1 pb-5 md:pb-0 ">
         {imageList && imageList?.length > 0 &&
-          imageList.map((item: ImageType, index: number) => {
+          imageList.map((item: Image, index: number) => {
             if (
               !galeriaModalMode
                 .toLocaleLowerCase()
-                .includes(item.description.toLocaleLowerCase()) &&
+                .includes(item.description?.toLocaleLowerCase() || "") &&
               !galeriaModalMode.includes("TODAS")
             ) {
               return;

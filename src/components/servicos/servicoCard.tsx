@@ -18,11 +18,8 @@ import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
 import { ConsultarFormLazy } from "../consultar/consultar.lazy";
 
-interface ServicoCardProps {
-  services: ServiceType[];
-}
 
-export function ServicoCardComponent({ services }: ServicoCardProps) {
+export function ServicoCardComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { push } = useRouter();
@@ -123,7 +120,6 @@ export function ServicoCardComponent({ services }: ServicoCardProps) {
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
         <ConsultarFormLazy
-            services={services}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />
         </ModalComponent>

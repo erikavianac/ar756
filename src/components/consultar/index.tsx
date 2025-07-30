@@ -27,16 +27,16 @@ import {
 } from "react-icons/tb";
 import { FaTiktok } from "react-icons/fa";
 import CarouselComponent from "../utils/carroucelv2";
+import { useVenueContext } from "@/app/context/VenueContext";
 
 interface ConsultarFromProps {
-  services: ServiceType[];
   handleCloseReservaModal?: () => void;
 }
 
 export function ConsultarFormComponent({
-  services,
   handleCloseReservaModal,
 }: ConsultarFromProps) {
+  const { venue } = useVenueContext();
   const {
     watch,
     reset,
@@ -54,7 +54,7 @@ export function ConsultarFormComponent({
     horarioInicioWatch,
     handleEndHourChange,
     handleStartHourChange,
-  } = UseConsultaFormHooks(services);
+  } = UseConsultaFormHooks(venue?.services || []);
 
   const [formMode, setformMode] = useState<
     "Pessoais" | "Evento" | "Success" | "Tipo"
@@ -65,7 +65,7 @@ export function ConsultarFormComponent({
   const typeForm = formMode.includes("Tipo");
   const pessoaisForm = formMode.includes("Pessoais");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+ 
   const controlsType = useAnimation();
   const controlsEventos = useAnimation();
   const controlsSuccess = useAnimation();
@@ -599,12 +599,12 @@ export function ConsultarFormComponent({
                 Servicos
               </p>
               <div className="flex flex-row gap-x-1 justify-start items-start  flex-wrap">
-                {services?.length === 0 ? (
+                { venue?.services?.length === 0 ? (
                   <p className="text-sm text-center font-light text-gray-400">
                     Nao ha servicos cadastrados nessa organizacao
                   </p>
                 ) : (
-                  services?.map((item: ServiceType) => {
+                  venue?.services?.map((item: ServiceType) => {
                     const isSelected = watch("serviceIds")?.includes(item.id); // Verifica se o proprietário já foi selecionado
                     const isDisabled = (item: any) => {
                       if (item.name === "Limpeza" && convidadosWatch >= 30)

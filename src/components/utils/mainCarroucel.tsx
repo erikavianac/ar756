@@ -1,8 +1,8 @@
 'use client';
-import { ImageType } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { Image as ImageType } from "@/types/venue";
 
 interface MainCarroucelProps {
   mobileCarroucelmageList: ImageType[];

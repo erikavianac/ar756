@@ -7,17 +7,18 @@ import Scrollbars from "react-custom-scrollbars";
 import { ImageComponent } from "@/components/utils/image";
 import CloseButtonComponent from "@/components/utils/closeButton";
 import { stencilFont } from "@/fonts/constants";
+import { useVenueContext } from "@/app/context/VenueContext";
 
 interface FaqProps {
-  questionList: QuestionType[];
   handleCloseFaqModal?: () => void;
 }
 
 export default function FaqComponent({
   handleCloseFaqModal,
-  questionList,
 }: FaqProps) {
   const [questionFIlter, setQuestionFIlter] = useState<string>("");
+  const { venue } = useVenueContext();
+
   return (
     <div 
       className="bg-white  max-w-[97%] min-w-[97%] min-h-[97%]   overflow-y-auto   relative  rounded-md   md:rounded-md py-2 px-5 flex flex-col gap-y-3  z-30  md:mt-2"
@@ -61,7 +62,7 @@ export default function FaqComponent({
           role="list"
           aria-label="Lista de perguntas frequentes"
         >
-          {questionList?.map((item: QuestionType) => {
+          {venue?.questions?.map((item: QuestionType) => {
             if (
               !item?.question
                 .toLocaleLowerCase()

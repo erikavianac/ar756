@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ImageType } from "@/types";
+import { Image } from "@/types/venue";
 import { AnimatePresence, motion } from "framer-motion";
 import { ImageComponent } from "@/components/utils/image";
 import { ModalComponent } from "@/components/utils/modal";
@@ -7,7 +7,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 interface GridModalProps {
   isModalOpen: boolean;
-  imageList: ImageType[] | undefined;
+  imageList: Image[];
   imageId: string | undefined;
   setIsModalOpen: (value: boolean) => void;
 }
@@ -20,7 +20,7 @@ export function GridModalComponent({
 }: GridModalProps) {
   const [searchIndex, setSearchIndex] = useState<number>(
     imageList
-      ? imageList?.findIndex((item: ImageType) => item.id === imageId)
+      ? imageList?.findIndex((item: Image) => item.id === imageId)
       : 0
   );
 
@@ -65,7 +65,7 @@ export function GridModalComponent({
         transition={{ duration: 0.5 }}
       >
         {imageList &&
-          imageList?.map((image: ImageType) => {
+          imageList?.map((image: Image) => {
             return (
               <ImageComponent
                 key={image.id}

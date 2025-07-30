@@ -19,11 +19,7 @@ import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
 import { ConsultarFormLazy } from "../consultar/consultar.lazy";
 
-interface ServicosComponentsProps {
-  services: ServiceType[];
-}
-
-export function ServicosComponents({ services }: ServicosComponentsProps) {
+export function ServicosComponents() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   return (
     <SectionComponent>
@@ -105,7 +101,6 @@ rounded-md shadow-lg lg:bottom-[14rem]  2xl:bottom-[10.5rem] inset-x-0 "
           {isModalOpen && (
             <ModalComponent onClose={() => setisModalOpen(false)}>
               <ConsultarFormLazy
-                services={services}
                 handleCloseReservaModal={() => setisModalOpen(false)}
               />
             </ModalComponent>

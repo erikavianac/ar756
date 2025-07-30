@@ -5,16 +5,17 @@ import { ImageComponent } from "@/components/utils/image";
 import CloseButtonComponent from "@/components/utils/closeButton";
 import { ImageType } from "@/types";
 import { stencilFont } from "@/fonts/constants";
-
+import { useVenueContext } from "@/app/context/VenueContext";
 interface GaleriaCardProps {
-  imageList: ImageType[] | undefined;
   handleCloseGaleriaModa?: () => void;
 }
 
 const GaleriaCardComponent = ({
   handleCloseGaleriaModa,
-  imageList,
 }: GaleriaCardProps) => {
+  const { getImagesByTag, venue } = useVenueContext();
+  const galleryImageList = getImagesByTag("Gallery");
+
   const [galeriaModalMode, setGaleriaModalMode] = useState<
     "TODAS" | "AREA EXTERNA" | "SALAO INTERNO" | "SALAO EXTERNO"
   >("TODAS");
@@ -75,7 +76,7 @@ const GaleriaCardComponent = ({
       </div>
       <GaleriaListComponent
         galeriaModalMode={galeriaModalMode}
-        imageList={imageList}
+        imageList={galleryImageList}
       />
     </div>
   );

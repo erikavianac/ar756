@@ -6,21 +6,23 @@ import { ImageComponent } from "@/components/utils/image";
 import { ImageType, TextType } from "@/types";
 import Scrollbars from "react-custom-scrollbars";
 import { stencilFont } from "@/fonts/constants";
+import { useVenueContext } from "@/app/context/VenueContext";
+import { Text } from "@/types/venue";
 
 interface RegrasProps {
   handleCloseRegrasModal?: () => void;
-  textSobreList: TextType[];
-  imageSobreList: ImageType[];
 }
 
 export function RegrasCardComponent({
   handleCloseRegrasModal,
-  textSobreList,
-  imageSobreList,
 }: RegrasProps) {
   const [ar756ModalMode, setAr756ModalMode] = useState<"SOBRE" | "REGRAS">(
     "SOBRE"
   );
+  const { venue, getImagesByTag, getTextsByArea } = useVenueContext();
+  
+  const textSobreList = getTextsByArea("Sobre");
+  const imageSobreList = getImagesByTag("Sobre");
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -93,7 +95,7 @@ export function RegrasCardComponent({
           >
               <div className="pr-2 md:pr-0">
                 {textSobreList &&
-                  textSobreList.map((item: TextType) => {
+                  textSobreList.map((item: Text) => {
                     return (
                       <div key={item?.id} className="flex flex-col gap-y-2">
                         <p

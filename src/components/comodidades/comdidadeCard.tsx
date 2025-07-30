@@ -16,12 +16,11 @@ import { useRouter } from "next/navigation";
 import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
 import { CardComponent } from "../card";
+import { useVenueContext } from "@/app/context/VenueContext";
 
-interface ComodidadeCardProps {
-  services: ServiceType[];
-}
 
-export function ComodidadeCardComponent({ services }: ComodidadeCardProps) {
+export function ComodidadeCardComponent() {
+  const { venue } = useVenueContext();
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { push } = useRouter();
@@ -138,7 +137,7 @@ export function ComodidadeCardComponent({ services }: ComodidadeCardProps) {
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
           <ConsultarFormLazy
-            services={services}
+            services={venue?.services || []}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />
         </ModalComponent>

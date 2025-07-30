@@ -25,7 +25,7 @@ export default async function Home() {
     imageSobreList,
     mobileCarroucelmageList,
   } = await data();
-
+  console.log("FODASE")
   return (
     <>
       <main className="bg-faixada flex flex-col flex-1 bg-gray-300 overflow-hidden">
@@ -47,17 +47,14 @@ export default async function Home() {
             bgColor="bg-[#25D366] border-[2px] border-white"
           />
         </div>
-        <VideobgComponent
-          mobileCarroucelmageList={mobileCarroucelmageList}
-          services={services}
-        />
+        <VideobgComponent />
         <WelcomeComponent />
         <ShowOnlyOnMobileComponent>
-          <MobileCarroucelComopnent services={services} />
+          <MobileCarroucelComopnent />
         </ShowOnlyOnMobileComponent>
         <ShowOnlyOnWebComponent>
-          <ComodidadeComponent services={services} />
-          <ServicosComponents services={services} />
+          <ComodidadeComponent />
+          <ServicosComponents  />
         </ShowOnlyOnWebComponent>
         <ExploreComponent
           cardImageList={cardImageList}

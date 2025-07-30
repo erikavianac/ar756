@@ -28,7 +28,7 @@ export const VenueProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/venue/getWebData?venueId=42b9e0f2-3d50-4aff-a0a4-f7a4d9553708")
+    fetch("https://art56-server-v3.vercel.app/venue/getWebData?venueId=8159e209-0057-4df3-ae72-855363c3b84e")
       .then((res: Response) => res.json())
       .then((data: { data: VenueWithRelations }) => setVenue(data.data))
       .catch(() => setError("Erro ao carregar dados do espaço"))

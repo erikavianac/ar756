@@ -8,6 +8,7 @@ import Script from 'next/script';
 import LoadingPage from "@/components/utils/loadingPage";
 import { ToastProvider } from "@/components/toat-provider/toast-provider";
 import { GTM_ID } from "@/utils/gtm";
+import { VenueProviderWrapper } from "@/app/context/VenueProviderWrapper";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -71,19 +72,13 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="overflow-x-hidden">
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-        <ToastProvider>
-          <LoadingPage />
-          <div id="modal-root" />
-          {children}
-        </ToastProvider>
+        <VenueProviderWrapper>
+          <ToastProvider>
+            <LoadingPage />
+            <div id="modal-root" />
+            {children}
+          </ToastProvider>
+        </VenueProviderWrapper>
       </body>
       <Script
         src="https://va.tawk.to/analytics.js"

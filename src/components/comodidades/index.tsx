@@ -15,13 +15,7 @@ import { ConsultarFormComponent } from "../consultar";
 import { useState } from "react";
 import { stencilFont } from "@/fonts/constants";
 
-interface ComodidadeCardComponentProps {
-  services: ServiceType[];
-}
-
-export function ComodidadeComponent({
-  services,
-}: ComodidadeCardComponentProps) {
+export function ComodidadeComponent() {
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   return (
     <SectionComponent>
@@ -99,7 +93,6 @@ export function ComodidadeComponent({
           {isModalOpen && (
             <ModalComponent onClose={() => setisModalOpen(false)}>
               <ConsultarFormComponent
-                services={services}
                 handleCloseReservaModal={() => setisModalOpen(false)}
               />
             </ModalComponent>

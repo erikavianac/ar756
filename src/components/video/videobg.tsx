@@ -10,13 +10,12 @@ import { ShowOnlyOnWebComponent } from "../utils/showOnlyOnWeb";
 import { useRouter } from "next/navigation";
 import { ImageType, ServiceType } from "@/types";
 import { MainCarroucel } from "../utils/mainCarroucel";
+import { useVenueContext } from "@/app/context/VenueContext";
 
-interface VideobgProps{
-  services: ServiceType[];
-  mobileCarroucelmageList: ImageType[]
-}
 
-export function VideobgComponent({mobileCarroucelmageList,services}:VideobgProps) {
+export function VideobgComponent() {
+  const { getImagesByTag, venue } = useVenueContext();
+  const mobileCarroucelmageList = getImagesByTag("HeroSection");
   const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [screenSizeChecked, setScreenSizeChecked] = useState(false);
@@ -39,7 +38,8 @@ export function VideobgComponent({mobileCarroucelmageList,services}:VideobgProps
       window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
-  
+  console.log(venue)
+  console.log(mobileCarroucelmageList)
   return (
     <SectionComponent classname="object-cover">
       <ShowOnlyOnMobileComponent>
@@ -87,7 +87,6 @@ export function VideobgComponent({mobileCarroucelmageList,services}:VideobgProps
       {isModalOpen && (
         <ModalComponent onClose={() => setisModalOpen(false)}>
           <ConsultarFormLazy
-            services={services}
             handleCloseReservaModal={() => setisModalOpen(false)}
           />
         </ModalComponent>

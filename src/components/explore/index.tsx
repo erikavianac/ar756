@@ -10,6 +10,7 @@ import { FaqLazy } from "./faq/faq.lazy";
 import { RegrasCardLazy } from "./regras/regrasCard.lazy";
 import { useRouter } from "next/navigation";
 import { stencilFont } from "@/fonts/constants";
+import { useVenueContext } from "@/app/context/VenueContext";
 
 interface ExploreProps {
   imageList: ImageType[];
@@ -20,7 +21,6 @@ interface ExploreProps {
 }
 
 export function ExploreComponent({
-  cardImageList,
   imageList,
   questionList,
   textSobreList,
@@ -29,6 +29,9 @@ export function ExploreComponent({
   const [galeriaModal, setGaleriaModal] = useState(false);
   const [regrasModal, setRegrasModal] = useState(false);
   const [FAQModal, setFAQModal] = useState(false);
+
+  const { getImagesByTag, venue } = useVenueContext();
+  const cardImageList = getImagesByTag("Card");
 
   function handleCloseGaleriaModa() {
     setGaleriaModal(false);
@@ -147,7 +150,6 @@ export function ExploreComponent({
             styleInternal="max-w-[90%] min-w-[90%]  max-h-[90%] min-h-[90%]  md:max-w-[600px]  md:min-w-[600px]   relative bg-white"
           >
             <GaleriaCardLazy
-              imageList={imageList}
               handleCloseGaleriaModa={handleCloseGaleriaModa}
             />
           </ModalComponent>
@@ -159,7 +161,6 @@ export function ExploreComponent({
           >
             <FaqLazy
               handleCloseFaqModal={handleCloseFaqModal}
-              questionList={questionList}
             />
           </ModalComponent>
         )}
@@ -170,8 +171,6 @@ export function ExploreComponent({
           >
             <RegrasCardLazy
               handleCloseRegrasModal={handleCloseRegrasModal}
-              textSobreList={textSobreList}
-              imageSobreList={imageSobreList}
             />
           </ModalComponent>
         )}

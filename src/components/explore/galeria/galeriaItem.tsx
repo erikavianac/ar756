@@ -1,13 +1,13 @@
 import { ImageComponent } from "@/components/utils/image";
 import { GridModalComponent } from "@/components/welcome/grid/gridModal";
-import { ImageType } from "@/types";
+import { Image } from "@/types/venue";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 
 interface GaleriaItemProps{
     index: number;
-    item: ImageType;
-    imageList: ImageType[] | undefined;
+    item: Image;
+    imageList: Image[];
 }
 
 export default function GaleriaItemComponent({item,index,imageList}:GaleriaItemProps) {

@@ -7,11 +7,7 @@ import { ServicoCardComponent } from "../servicos/servicoCard";
 import { motion } from "framer-motion";
 import { ServiceType } from "@/types";
 
-interface MobileCarroucelProps{
-  services: ServiceType[];
-}
-
-export function MobileCarroucelComopnent({services}:MobileCarroucelProps) {
+export function MobileCarroucelComopnent() {
   const caroucel: any = useRef();
   const [width, setWidth] = useState(0);
   const [cardOption, setcardOption] = useState<'COMODIDADES' | 'SERVICOS'>('COMODIDADES');
@@ -43,8 +39,8 @@ export function MobileCarroucelComopnent({services}:MobileCarroucelProps) {
         transition={{ duration: 2 }}
         className="flex items-start justify-start px-2 md:hidden h-[600px] w-full gap-x-4  inset-0"
       >
-        <ComodidadeCardComponent services={services}/>
-        <ServicoCardComponent  services={services}/>
+        <ComodidadeCardComponent />
+        <ServicoCardComponent  />
       </motion.div>
       <div className="flex items-center justify-center w-full gap-x-4">
           <div

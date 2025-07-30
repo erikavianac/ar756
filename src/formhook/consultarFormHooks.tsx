@@ -6,8 +6,9 @@ import { ConsultarFormData } from "./types/consultarFormZodType";
 import { consultarFormSchema } from "./schemas/consultarFormZodSchema";
 import { useRouter } from 'next/navigation';
 import { ServiceType } from "@/types";
+import { Service } from "@/types/venue";
 
-export default function UseConsultaFormHooks(services: ServiceType[]) {
+export default function UseConsultaFormHooks(services: Service[]) {
   const [isSendMailSuccess, setIsSendMailSucess] = useState(false);
   const [isSendMailLoading, setIsSendMailLoading] = useState(false);
   const {
