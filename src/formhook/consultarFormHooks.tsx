@@ -5,7 +5,6 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { ConsultarFormData } from "./types/consultarFormZodType";
 import { consultarFormSchema } from "./schemas/consultarFormZodSchema";
 import { useRouter } from 'next/navigation';
-import { ServiceType } from "@/types";
 import { Service } from "@/types/venue";
 
 export default function UseConsultaFormHooks(services: Service[]) {
@@ -84,7 +83,7 @@ export default function UseConsultaFormHooks(services: Service[]) {
   };
 
   useEffect(() => {
-    const limpeza = services.find((item: ServiceType) => item.name === "Limpeza")
+    const limpeza = services.find((item: Service) => item.name === "Limpeza")
 
     const currentServices = watch("serviceIds") || [];
 
@@ -96,8 +95,8 @@ export default function UseConsultaFormHooks(services: Service[]) {
   }, [convidadosWatch, setValue]);
 
   useEffect(() => {
-    const seguranca = services.find((item: ServiceType) => item.name === "Seguranca")
-    const recepcionista = services.find((item: ServiceType) => item.name === "Recepcionista")
+      const seguranca = services.find((item: Service) => item.name === "Seguranca")
+    const recepcionista = services.find((item: Service) => item.name === "Recepcionista")
 
     const currentServices = watch("serviceIds") || [];
 
