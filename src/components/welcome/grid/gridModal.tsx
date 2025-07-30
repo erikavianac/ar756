@@ -7,7 +7,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 interface GridModalProps {
   isModalOpen: boolean;
-  imageList: Image[];
+        imageList: Image[];
   imageId: string | undefined;
   setIsModalOpen: (value: boolean) => void;
 }
@@ -65,7 +65,7 @@ export function GridModalComponent({
         transition={{ duration: 0.5 }}
       >
         {imageList &&
-          imageList?.map((image: Image) => {
+          imageList?.map((image: ImageType) => {
             return (
               <ImageComponent
                 key={image.id}

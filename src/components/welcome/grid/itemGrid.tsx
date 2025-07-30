@@ -1,12 +1,12 @@
 "use client"
 
 import { useState } from "react";
-import { ImageType } from "@/types";
+import { Image } from "@/types/venue";
 import { GridModalComponent } from "./gridModal";
 import { ImageComponent } from "@/components/utils/image";
 interface GridItemProps {
   index: number;
-  gridItem: ImageType;
+  gridItem: Image;
   setIsModalOpen: (value: boolean) => void;
   setSelectedImageId: (value : string | undefined) => void;
 }
@@ -33,7 +33,7 @@ export function GridItemComponent({ gridItem, index,setIsModalOpen,setSelectedIm
       }}
     >
       <ImageComponent
-        alt={gridItem.description}
+        alt={gridItem.description || "Imagem do grid"}
         h={"h-full "}
         w={"w-full"}
         src={gridItem?.imageUrl}

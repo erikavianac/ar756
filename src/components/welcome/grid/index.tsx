@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react";
-import { ImageType } from "@/types";
+import { Image } from "@/types/venue";
 import { GridItemComponent } from "./itemGrid";
 import { GridModalComponent } from "./gridModal";
 interface WelcomeGridProps {
-  imageList: ImageType[];
+  imageList: Image[];
 }
 
 export function WelcomeGridComponent({ imageList }: WelcomeGridProps) {
@@ -15,7 +15,7 @@ export function WelcomeGridComponent({ imageList }: WelcomeGridProps) {
     <div
       className={`relative w-full grid grid-cols-14 grid-rows-8 gap-2 overflow-hidden  h-[20.125rem]  min-[2300px]:h-[25rem]`}
     >
-      {imageList?.map((gridItem: ImageType, index: number) => {
+      {imageList?.map((gridItem: Image, index: number) => {
         return (
           <>
             <GridItemComponent
