@@ -20,9 +20,9 @@ export async function WelcomeComponent() {
       <ShowOnlyOnMobileComponent>
         <WelcomeCarroucelComponent  />
       </ShowOnlyOnMobileComponent>
-      {/*<ShowOnlyOnWebComponent>
-        <WelcomeGridComponent imageList={welcomeWebImageList} />
-      </ShowOnlyOnWebComponent> */}
+      <ShowOnlyOnWebComponent>
+        <WelcomeGridComponent  />
+      </ShowOnlyOnWebComponent>
     </SectionComponent>
   );
 }

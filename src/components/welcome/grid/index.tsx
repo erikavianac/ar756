@@ -4,13 +4,14 @@ import { useState } from "react";
 import { Image } from "@/types/venue";
 import { GridItemComponent } from "./itemGrid";
 import { GridModalComponent } from "./gridModal";
-interface WelcomeGridProps {
-  imageList: Image[];
-}
+import { useVenueContext } from "@/app/context/VenueContext";
 
-export function WelcomeGridComponent({ imageList }: WelcomeGridProps) {
+export function WelcomeGridComponent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImageId, setSelectedImageId] = useState<string | undefined>("")
+  const { getImagesByTag } = useVenueContext();
+  const imageList = getImagesByTag("Welcome-carroucel");
+
   return (
     <div
       className={`relative w-full grid grid-cols-14 grid-rows-8 gap-2 overflow-hidden  h-[20.125rem]  min-[2300px]:h-[25rem]`}
