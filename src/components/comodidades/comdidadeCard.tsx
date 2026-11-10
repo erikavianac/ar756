@@ -9,38 +9,13 @@ import { ImageComponent } from "@/components/utils/image";
 import { motion } from "framer-motion";
 import { ItemCardComponent } from "../card/itemCard";
 import { ButtonComponent } from "../utils/button";
-import { ModalComponent } from "../utils/modal";
-import { ConsultarFormLazy } from "../consultar/consultar.lazy";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
 import { CardComponent } from "../card";
-import { useVenueContext } from "@/app/context/VenueContext";
+import { EVENTHUB_FORM_URL } from "@/constants";
 
 
 export function ComodidadeCardComponent() {
-  const { venue } = useVenueContext();
-  const [isModalOpen, setisModalOpen] = useState<boolean>(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const { push } = useRouter();
-  // Função para verificar se a tela é pequena ou grande
-  const checkScreenSize = () => {
-    setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
-  };
-
-  // Executa a função ao montar o componente
-  useEffect(() => {
-    checkScreenSize();
-
-    // Adiciona um listener para verificar quando a tela for redimensionada
-    window.addEventListener("resize", checkScreenSize);
-
-    // Remove o listener ao desmontar o componente para evitar vazamentos de memória
-    return () => {
-      window.removeEventListener("resize", checkScreenSize);
-    };
-  }, []);
   return (
     <CardComponent
       h=" h-full md:h-[500px]"
@@ -126,22 +101,10 @@ export function ComodidadeCardComponent() {
            tracking-[0.30rem] text-white rounded-md bg-black
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
           `}
-        onClick={() => {
-          if (isSmallScreen) {
-            push("/consultar");
-          } else {
-            setisModalOpen(true);
-          }
-        }}
+        onClick={() =>
+          window.open(EVENTHUB_FORM_URL, "_blank", "noopener,noreferrer")
+        }
       />
-      {isModalOpen && (
-        <ModalComponent onClose={() => setisModalOpen(false)}>
-          <ConsultarFormLazy
-            services={venue?.services || []}
-            handleCloseReservaModal={() => setisModalOpen(false)}
-          />
-        </ModalComponent>
-      )}
     </CardComponent>
   );
 }

@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import { CldVideoPlayer } from "next-cloudinary";
 import { ButtonComponent } from "../utils/button";
 import { SectionComponent } from "../utils/section";
-import { ModalComponent } from "../utils/modal";
-import { ConsultarFormLazy } from "../consultar/consultar.lazy";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { ShowOnlyOnWebComponent } from "../utils/showOnlyOnWeb";
-import { useRouter } from "next/navigation";
+import { EVENTHUB_FORM_URL } from "@/constants";
 import { ImageType, ServiceType } from "@/types";
 import { MainCarroucel } from "../utils/mainCarroucel";
 import { useVenueContext } from "@/app/context/VenueContext";
@@ -17,10 +15,8 @@ import { AnimatedArrowComponent } from "../utils/animatedArrow";
 export function VideobgComponent() {
   const { getImagesByTag, venue } = useVenueContext();
   const mobileCarroucelmageList = getImagesByTag("HeroSection");
-  const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [screenSizeChecked, setScreenSizeChecked] = useState(false);
-  const { replace, push } = useRouter();
   // Função para verificar se a tela é pequena ou grande
   const checkScreenSize = () => {
     setIsSmallScreen(window.innerWidth <= 768); // Por exemplo, consideramos 768px como o ponto de corte para ser uma tela pequena
@@ -75,23 +71,12 @@ export function VideobgComponent() {
            tracking-[0.30rem] text-white rounded-md bg-black/50
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
           `}
-        onClick={() => {
-          if (isSmallScreen) {
-            push("/consultar");
-          } else {
-            setisModalOpen(true);
-          }
-        }}
-        aria-label="Abrir formulário de consulta"
+        onClick={() =>
+          window.open(EVENTHUB_FORM_URL, "_blank", "noopener,noreferrer")
+        }
+        aria-label="Abrir formulário de orçamento em nova aba"
       />
       <AnimatedArrowComponent />
-      {isModalOpen && (
-        <ModalComponent onClose={() => setisModalOpen(false)}>
-          <ConsultarFormLazy
-            handleCloseReservaModal={() => setisModalOpen(false)}
-          />
-        </ModalComponent>
-      )}
     </SectionComponent>
   );
 }

@@ -12,15 +12,11 @@ import { SectionComponent } from "@/components/utils/section";
 import { CardComponent } from "../card";
 import { ItemCardComponent } from "../card/itemCard";
 import { ButtonComponent } from "../utils/button";
-import { ModalComponent } from "../utils/modal";
-import { ConsultarFormComponent } from "../consultar";
-import { useState } from "react";
 import { stencilFont } from "@/fonts/constants";
 import { ServiceType } from "@/types";
-import { ConsultarFormLazy } from "../consultar/consultar.lazy";
+import { EVENTHUB_FORM_URL } from "@/constants";
 
 export function ServicosComponents() {
-  const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   return (
     <SectionComponent>
       <div className="hidden md:flex absolute left-10   -mt-[150px]">
@@ -96,15 +92,10 @@ rounded-md shadow-lg lg:bottom-[14rem]  2xl:bottom-[10.5rem] inset-x-0 "
            tracking-[0.30rem] text-white rounded-md bg-black
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
           `}
-            onClick={() => setisModalOpen(true)}
+            onClick={() =>
+              window.open(EVENTHUB_FORM_URL, "_blank", "noopener,noreferrer")
+            }
           />
-          {isModalOpen && (
-            <ModalComponent onClose={() => setisModalOpen(false)}>
-              <ConsultarFormLazy
-                handleCloseReservaModal={() => setisModalOpen(false)}
-              />
-            </ModalComponent>
-          )}
         </CardComponent>
       </div>
     </SectionComponent>

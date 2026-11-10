@@ -14,8 +14,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${process.env.BASE_URL}/galeria`,
     },
-    {
-      url: `${process.env.BASE_URL}/consultar`,
-    },
   ];
 }

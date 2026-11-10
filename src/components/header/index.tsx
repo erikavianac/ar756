@@ -15,6 +15,7 @@ import { FaTiktok } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ShowOnlyOnMobileComponent } from "../utils/showOnlyOnMobile";
 import { stencilFont } from "@/fonts/constants";
+import { EVENTHUB_FORM_URL } from "@/constants";
 import { AnimatedTitleComponent } from "../utils/animatedTitle";
 import { AnimatedSubTitleComponent } from "../utils/animatedText";
 import { BsWhatsapp, BsFacebook, BsTiktok, BsInstagram } from "react-icons/bs";
@@ -143,7 +144,7 @@ export function HomeHeaderComponent() {
                   delay={0.8}
                   onclick={() => {
                     handleCloseModal();
-                    replace("/consultar");
+                    window.open(EVENTHUB_FORM_URL, "_blank", "noopener,noreferrer");
                   }}
                 />
               </motion.div>

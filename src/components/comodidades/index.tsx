@@ -10,13 +10,10 @@ import { ImageComponent } from "../utils/image";
 import { CardComponent } from "../card";
 import { ItemCardComponent } from "../card/itemCard";
 import { ButtonComponent } from "../utils/button";
-import { ModalComponent } from "../utils/modal";
-import { ConsultarFormComponent } from "../consultar";
-import { useState } from "react";
 import { stencilFont } from "@/fonts/constants";
+import { EVENTHUB_FORM_URL } from "@/constants";
 
 export function ComodidadeComponent() {
-  const [isModalOpen, setisModalOpen] = useState<boolean>(false);
   return (
     <SectionComponent>
       <div className="w-screen h-screen relative ">
@@ -88,15 +85,10 @@ export function ComodidadeComponent() {
            tracking-[0.30rem] text-white rounded-md bg-black
           transition duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95] active:transition-none active:duration-700
           `}
-            onClick={() => setisModalOpen(true)}
+            onClick={() =>
+              window.open(EVENTHUB_FORM_URL, "_blank", "noopener,noreferrer")
+            }
           />
-          {isModalOpen && (
-            <ModalComponent onClose={() => setisModalOpen(false)}>
-              <ConsultarFormComponent
-                handleCloseReservaModal={() => setisModalOpen(false)}
-              />
-            </ModalComponent>
-          )}
         </CardComponent>
       </div>
     </SectionComponent>

@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ModalMenuComponent } from "../utils/modalMenu";
 import {motion} from "framer-motion"
 import { stencilFont } from "@/fonts/constants";
+import { EVENTHUB_FORM_URL } from "@/constants";
 import { AnimatedSubTitleComponent } from "../utils/animatedText";
 import AnchorComponent from "../utils/anchor";
 import { TbBrandFacebook, TbBrandInstagram, TbBrandWhatsapp } from "react-icons/tb";
@@ -104,7 +105,7 @@ export default function HomeMenuComponent() {
                 delay={0.8}
                 onclick={() => {
                   handleCloseModal();
-                  replace("/consultar");
+                  window.open(EVENTHUB_FORM_URL, "_blank", "noopener,noreferrer");
                 }}
               />
             </motion.div>
