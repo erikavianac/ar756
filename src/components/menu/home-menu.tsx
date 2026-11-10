@@ -11,9 +11,11 @@ import { AnimatedSubTitleComponent } from "../utils/animatedText";
 import AnchorComponent from "../utils/anchor";
 import { TbBrandFacebook, TbBrandInstagram, TbBrandWhatsapp } from "react-icons/tb";
 import { FaTiktok } from "react-icons/fa6";
+import { useVenueContext } from "@/app/context/VenueContext";
 
 export default function HomeMenuComponent() {
   const { replace } = useRouter();
+  const { socialLinks } = useVenueContext();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   function handleCloseModal() {
     setMenuIsOpen(false);
@@ -142,7 +144,7 @@ export default function HomeMenuComponent() {
                   transition={{ duration: 0.2, delay: 1.4 }}
                 >
                   <AnchorComponent
-                    href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+                    href={socialLinks.whatsapp}
                     icon={
                       <TbBrandWhatsapp
                         className="cursor-pointer text-white"
@@ -158,7 +160,7 @@ export default function HomeMenuComponent() {
                   transition={{ duration: 0.2, delay: 1.5 }}
                 >
                   <AnchorComponent
-                    href="https://www.facebook.com/profile.php?id=100085832906065"
+                    href={socialLinks.facebook}
                     icon={
                       <TbBrandFacebook
                         className="cursor-pointer  text-white"
@@ -174,7 +176,7 @@ export default function HomeMenuComponent() {
                   transition={{ duration: 0.2, delay: 1.6 }}
                 >
                   <AnchorComponent
-                    href="https://www.tiktok.com/@ar756_"
+                    href={socialLinks.tiktok}
                     icon={
                       <FaTiktok
                         className=" cursor-pointer text-white"
@@ -190,7 +192,7 @@ export default function HomeMenuComponent() {
                   transition={{ duration: 0.2, delay: 1.7 }}
                 >
                   <AnchorComponent
-                    href="https://www.instagram.com/ar756_/"
+                    href={socialLinks.instagram}
                     icon={
                       <TbBrandInstagram
                         className="cursor-pointer text-white "

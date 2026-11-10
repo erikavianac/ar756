@@ -9,6 +9,7 @@ import LoadingPage from "@/components/utils/loadingPage";
 import { ToastProvider } from "@/components/toat-provider/toast-provider";
 import { GTM_ID } from "@/utils/gtm";
 import { VenueProviderWrapper } from "@/app/context/VenueProviderWrapper";
+import { getVenueSocial } from "@/util/get-venue-social";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -54,11 +55,13 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const social = await getVenueSocial();
+
   return (
     <html lang="pt-BR" className={roboto.className}>
       <head>
@@ -109,7 +112,8 @@ export default function RootLayout({
               "longitude": -46.5613551
             },
             "url": "https://ar756.com",
-            "telephone": "+351938324447",
+            "telephone": `+${social.whatsappNumber.replace(/\D/g, "")}`,
+            "sameAs": [social.facebookUrl, social.instagramUrl, social.tiktokUrl],
             "openingHoursSpecification": {
               "@type": "OpeningHoursSpecification",
               "dayOfWeek": [

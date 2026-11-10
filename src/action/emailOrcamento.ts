@@ -1,6 +1,7 @@
 "use server";
 import nodemailer from "nodemailer";
 import { CreateOrcamentoReqBody, ProposalRequestResponse } from "@/types";
+import { getVenueSocial } from "@/util/get-venue-social";
 
 export default async function sendOrcamentoEmail(
   values: CreateOrcamentoReqBody
@@ -20,6 +21,8 @@ export default async function sendOrcamentoEmail(
       const response: ProposalRequestResponse = await resp.json();
       return response?.data;
     });
+
+    const social = await getVenueSocial();
 
     const transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
@@ -53,9 +56,9 @@ export default async function sendOrcamentoEmail(
                                   </div>
                                   <h2 style="font-size: 14px; width: 60%; margin: 10px auto; text-align: center; margin-top: 40px;">SIGA-NOS</h2>
                                   <div style="text-align: center;">
-                                  <a href="https://www.tiktok.com/@ar756_" style="text-decoration: none; margin-right: 10px;"><img src="https://app-house-keeper-bucket.s3.eu-north-1.amazonaws.com/icons8-tiktok-48.png" alt="Logo TiTok" /></a>
-                                  <a href="https://www.instagram.com/ar756_/" style="text-decoration: none; margin-right: 10px;"><img src="https://app-house-keeper-bucket.s3.eu-north-1.amazonaws.com/icons8-instagram-48.png" alt="Logo Instagram" /></a>
-                                  <a href="https://www.facebook.com/profile.php?id=100085832906065" style="text-decoration: none;"><img src="https://res.cloudinary.com/dzvyh5r33/image/upload/v1729510932/icons8-facebook-48_x31mos.png" alt="Logo Facebook" /></a>
+                                  <a href="${social.tiktokUrl}" style="text-decoration: none; margin-right: 10px;"><img src="https://app-house-keeper-bucket.s3.eu-north-1.amazonaws.com/icons8-tiktok-48.png" alt="Logo TiTok" /></a>
+                                  <a href="${social.instagramUrl}" style="text-decoration: none; margin-right: 10px;"><img src="https://app-house-keeper-bucket.s3.eu-north-1.amazonaws.com/icons8-instagram-48.png" alt="Logo Instagram" /></a>
+                                  <a href="${social.facebookUrl}" style="text-decoration: none;"><img src="https://res.cloudinary.com/dzvyh5r33/image/upload/v1729510932/icons8-facebook-48_x31mos.png" alt="Logo Facebook" /></a>
                                   </div>
                               </td>
                               </tr>

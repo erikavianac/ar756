@@ -19,10 +19,12 @@ import { EVENTHUB_FORM_URL } from "@/constants";
 import { AnimatedTitleComponent } from "../utils/animatedTitle";
 import { AnimatedSubTitleComponent } from "../utils/animatedText";
 import { BsWhatsapp, BsFacebook, BsTiktok, BsInstagram } from "react-icons/bs";
+import { useVenueContext } from "@/app/context/VenueContext";
 
 export function HomeHeaderComponent() {
   const { replace } = useRouter();
   const pathname = usePathname();
+  const { socialLinks } = useVenueContext();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   
   function handleCloseModal() {
@@ -181,7 +183,7 @@ export function HomeHeaderComponent() {
                     transition={{ duration: 0.2, delay: 1.4 }}
                   >
                     <a
-                      href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+                      href={socialLinks.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Entre em contato via WhatsApp"
@@ -196,7 +198,7 @@ export function HomeHeaderComponent() {
                     transition={{ duration: 0.2, delay: 1.5 }}
                   >
                     <a
-                      href="https://www.facebook.com/profile.php?id=100085832906065"
+                      href={socialLinks.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Siga-nos no Facebook"
@@ -211,7 +213,7 @@ export function HomeHeaderComponent() {
                     transition={{ duration: 0.2, delay: 1.6 }}
                   >
                     <a
-                      href="https://www.tiktok.com/@ar756_"
+                      href={socialLinks.tiktok}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Siga-nos no TikTok"
@@ -226,7 +228,7 @@ export function HomeHeaderComponent() {
                     transition={{ duration: 0.2, delay: 1.7 }}
                   >
                     <a
-                      href="https://www.instagram.com/ar756_/"
+                      href={socialLinks.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Siga-nos no Instagram"

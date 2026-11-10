@@ -25,6 +25,7 @@ import Link from "next/link";
 import { updateOrcamentoActionServer } from "@/action/updateOrcamento";
 import InfoOrcamentoinfo from "./inforcamentoinfo";
 import LoadingOrcamentoComponent from "./loadingOrcamento";
+import { useVenueContext } from "@/app/context/VenueContext";
 
 interface OrcamentoCardProps {
   orcamentoByid: ProposalType | undefined;
@@ -33,6 +34,7 @@ interface OrcamentoCardProps {
 export default function OrcamentoCardComponent({
   orcamentoByid,
 }: OrcamentoCardProps) {
+  const { socialLinks } = useVenueContext();
   const [duracaoFesta, setduracaoFesta] = useState<number>(0);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -274,7 +276,7 @@ export default function OrcamentoCardComponent({
                 <p>Tem alguma dúvida ou gostaria de conversar com a gente?</p>
 
                 <a
-                  href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+                  href={socialLinks.whatsapp}
                   target="_blank"
                   className="rounded-md animate-bounce hover:scale-105 duration-200  text-[#128C7E] font-semibold flex justify-start items-center gap-x-1"
                   aria-label="Falar no WhatsApp"

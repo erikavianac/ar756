@@ -9,10 +9,12 @@ import AnchorComponent from '@/components/utils/anchor';
 import { ImageComponent } from '@/components/utils/image';
 import { AnimatedVerticalComponent } from '../utils/animatedVertical';
 import { stencilFont } from '@/fonts/constants';
+import { useVenueContext } from '@/app/context/VenueContext';
 
 export function FooterComponent() {
   const { push } = useRouter();
   const pathName = usePathname();
+  const { socialLinks } = useVenueContext();
 
   if (pathName.includes('dashboard')) {
     return <> </>;
@@ -45,7 +47,7 @@ export function FooterComponent() {
         </div>
         <div className="flex mt-10 mr-5 gap-x-2 md:mt-0">
           <AnchorComponent
-            href="https://api.whatsapp.com/send/?phone=351938324447&text&type=phone_number&app_absent=0"
+            href={socialLinks.whatsapp}
             icon={
               <TbBrandWhatsapp
                 className="text-white cursor-pointer"
@@ -55,7 +57,7 @@ export function FooterComponent() {
             aria-label="WhatsApp da AR756"
           />
           <AnchorComponent
-            href="https://www.facebook.com/profile.php?id=100085832906065"
+            href={socialLinks.facebook}
             icon={
               <TbBrandFacebook
                 className="text-white cursor-pointer"
@@ -65,7 +67,7 @@ export function FooterComponent() {
             aria-label="Facebook da AR756"
           />
           <AnchorComponent
-            href="https://www.tiktok.com/@ar756_"
+            href={socialLinks.tiktok}
             icon={
               <FaTiktok
                 className="text-white cursor-pointer"
@@ -75,7 +77,7 @@ export function FooterComponent() {
             aria-label="TikTok da AR756"
           />
           <AnchorComponent
-            href="https://www.instagram.com/ar756_/"
+            href={socialLinks.instagram}
             icon={
               <TbBrandInstagram
                 className="text-white cursor-pointer"
